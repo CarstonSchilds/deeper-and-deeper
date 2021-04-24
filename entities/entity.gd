@@ -1,16 +1,16 @@
 extends KinematicBody2D
 
 onready var sprite = $SpritePosition/Sprite
-var bouyancy = 85 
+var bouyancy = 89.5
 var thrust = 0
 var weight = 10
 var acceleration = Vector2()
 var velocity = Vector2()
 var facing = Vector2(1, 0)
 var max_speed = 1000
-var drag = 0.9
+var drag = 0.98
 var gravity = 9
-var thrust_to_weight = 200
+var thrust_to_weight = 2.5
 
 func _ready():
 	pass
