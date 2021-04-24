@@ -1,11 +1,10 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://entities/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/Water.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/pirannah/pirannah.png" type="Texture" id=4]
 [ext_resource path="res://assets/shark/shark.png" type="Texture" id=5]
-[ext_resource path="res://assets/bigshark/bigshark.png" type="Texture" id=6]
 [ext_resource path="res://assets/demo_tileset.tres" type="TileSet" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -56,30 +55,6 @@ animations = [ {
 "speed": 4.0
 } ]
 
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 6 )
-region = Rect2( 64, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 6 )
-region = Rect2( 128, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 6 )
-region = Rect2( 192, 0, 64, 32 )
-
-[sub_resource type="SpriteFrames" id=15]
-animations = [ {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
-"loop": true,
-"name": "idle",
-"speed": 2.0
-} ]
-
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -91,55 +66,48 @@ script = ExtResource( 1 )
 position = Vector2( 62.2847, -21.8517 )
 frames = SubResource( 5 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="PirannahDemo" type="AnimatedSprite" parent="."]
 position = Vector2( 54.4677, 12.3024 )
 frames = SubResource( 10 )
 animation = "idle"
-frame = 2
+frame = 3
 playing = true
 
 [node name="PirannahDemo2" type="AnimatedSprite" parent="."]
 position = Vector2( 55.3709, 38.0895 )
 frames = SubResource( 10 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="PirannahDemo3" type="AnimatedSprite" parent="."]
 position = Vector2( 92.7622, 48.4603 )
 frames = SubResource( 10 )
 animation = "idle"
-frame = 2
+frame = 3
 playing = true
 
 [node name="PirannahDemo4" type="AnimatedSprite" parent="."]
 position = Vector2( 97.4112, 10.1948 )
 frames = SubResource( 10 )
 animation = "idle"
-frame = 1
+frame = 3
 playing = true
 
 [node name="PirannahDemo5" type="AnimatedSprite" parent="."]
 position = Vector2( 98.689, 26.9921 )
 frames = SubResource( 10 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 
 [node name="PirannahDemo6" type="AnimatedSprite" parent="."]
 position = Vector2( 77.9996, 20.8003 )
 frames = SubResource( 10 )
 animation = "idle"
-frame = 3
-playing = true
-
-[node name="BigsharkDemo" type="AnimatedSprite" parent="."]
-position = Vector2( -67.0677, -30.5575 )
-scale = Vector2( -1, 1 )
-frames = SubResource( 15 )
-animation = "idle"
-frame = 3
 playing = true
 
 [node name="TileMap" type="TileMap" parent="."]
