@@ -1,18 +1,16 @@
 extends KinematicBody2D
 
-
 onready var sprite = $SpritePosition/Sprite
-var bouyancy = 2000
+var bouyancy = 85 
 var thrust = 0
-var max_thrust = 5
-var min_thrust = -2
-var weight = 100
+var weight = 10
 var acceleration = Vector2()
 var velocity = Vector2()
-var facing = Vector2(1,0)
-var max_speed = 200
-var drag = 0.1
-var gravity = 10
+var facing = Vector2(1, 0)
+var max_speed = 1000
+var drag = 0.9
+var gravity = 9
+var thrust_to_weight = 200
 
 func _ready():
 	pass
@@ -20,30 +18,26 @@ func _ready():
 func _process(delta):
 	var input_vector = get_inputs()
 	adjust_facing(input_vector.x, delta)
-	adjust_thrust(input_vector.y, delta)
+	self.thrust = input_vector.y
 	calculate_forces()
 	move()
 
 func adjust_facing(direction, delta):
-	facing = facing.rotated(direction * PI * delta)
-	sprite.rotation = (facing * -1).angle()
-
-func adjust_thrust(direction, delta):
-	thrust += (direction * 3 * delta)
-	thrust = max(thrust, min_thrust)
-	thrust = min(thrust, max_thrust)
+	self.facing = self.facing.rotated(direction * PI * delta)
+	self.sprite.rotation = self.facing.angle()
 
 func calculate_forces():
-	self.acceleration += Vector2(0, bouyancy - (weight * gravity))
-	var thrust_vector = facing.normalized() * thrust
-	self.acceleration += thrust_vector
+	var environment_vector = Vector2(0, (self.weight * self.gravity) - self.bouyancy)
+	var thrust_vector = self.facing.normalized() * self.thrust * self.thrust_to_weight
+	self.acceleration += (thrust_vector + environment_vector)
 	
 func get_inputs():
 	return Vector2()
 	
 func move():
-	self.velocity += self.acceleration * drag
+	self.velocity += self.acceleration
+	self.velocity *= self.drag
 	self.velocity = self.velocity.clamped(self.max_speed)
-	self.rotation = self.velocity.angle() + PI / 2
 	self.move_and_slide(self.velocity)
 	self.acceleration = Vector2()
+	self.thrust = 0
