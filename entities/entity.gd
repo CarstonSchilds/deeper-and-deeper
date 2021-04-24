@@ -11,6 +11,8 @@ var drag = 0.99
 var gravity = 9
 var thrust_to_weight = 2
 
+onready var sprite = $SpritePosition/AnimatedSprite
+
 func _ready():
 	pass
 

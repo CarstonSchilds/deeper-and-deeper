@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://entities/Entity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/pirannah/Pirannah_AS.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://entities/Fish.gd" type="Script" id=3]
+
+[node name="Fish" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, -1.5 )
+
+[node name="AnimatedSprite" parent="SpritePosition" index="0"]
+frames = ExtResource( 2 )
+animation = "idle"
+
+[node name="Timer" type="Timer" parent="." index="2"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

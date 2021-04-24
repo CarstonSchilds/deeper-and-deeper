@@ -9,7 +9,7 @@ func _ready():
 	
 func _process(delta):
 	pass
-	
+
 func get_background():
 	return background
 	
