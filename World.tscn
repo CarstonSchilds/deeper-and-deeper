@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://entities/Player.tscn" type="PackedScene" id=2]
@@ -8,25 +8,49 @@
 [ext_resource path="res://assets/bigshark/bigshark.png" type="Texture" id=6]
 [ext_resource path="res://entities/TestLevel.tscn" type="PackedScene" id=7]
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=21]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 4 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 4 )
 region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 4 )
 region = Rect2( 48, 0, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=24]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 4.0
+} ]
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=33]
+animations = [ {
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
 "loop": true,
 "name": "idle",
 "speed": 4.0
@@ -48,7 +72,7 @@ region = Rect2( 64, 0, 32, 16 )
 atlas = ExtResource( 5 )
 region = Rect2( 96, 0, 32, 16 )
 
-[sub_resource type="SpriteFrames" id=29]
+[sub_resource type="SpriteFrames" id=34]
 animations = [ {
 "frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
 "loop": true,
@@ -56,25 +80,25 @@ animations = [ {
 "speed": 4.0
 } ]
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=35]
 atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=36]
 atlas = ExtResource( 6 )
 region = Rect2( 64, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=37]
 atlas = ExtResource( 6 )
 region = Rect2( 128, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=38]
 atlas = ExtResource( 6 )
 region = Rect2( 192, 0, 64, 32 )
 
-[sub_resource type="SpriteFrames" id=30]
+[sub_resource type="SpriteFrames" id=39]
 animations = [ {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"frames": [ SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
 "loop": true,
 "name": "idle",
 "speed": 2.0
@@ -99,39 +123,39 @@ playing = true
 
 [node name="PirannahDemo" type="AnimatedSprite" parent="."]
 position = Vector2( 54.4677, 12.3024 )
-frames = SubResource( 24 )
+frames = SubResource( 33 )
 animation = "idle"
 playing = true
 
 [node name="PirannahDemo2" type="AnimatedSprite" parent="."]
 position = Vector2( 55.3709, 38.0895 )
-frames = SubResource( 24 )
+frames = SubResource( 33 )
 animation = "idle"
 frame = 2
 playing = true
 
 [node name="PirannahDemo3" type="AnimatedSprite" parent="."]
 position = Vector2( 92.7622, 48.4603 )
-frames = SubResource( 24 )
+frames = SubResource( 33 )
 animation = "idle"
 playing = true
 
 [node name="PirannahDemo4" type="AnimatedSprite" parent="."]
 position = Vector2( 97.4112, 10.1948 )
-frames = SubResource( 24 )
+frames = SubResource( 33 )
 animation = "idle"
 playing = true
 
 [node name="PirannahDemo5" type="AnimatedSprite" parent="."]
 position = Vector2( 98.689, 26.9921 )
-frames = SubResource( 24 )
+frames = SubResource( 33 )
 animation = "idle"
 frame = 3
 playing = true
 
 [node name="PirannahDemo6" type="AnimatedSprite" parent="."]
 position = Vector2( 77.9996, 20.8003 )
-frames = SubResource( 24 )
+frames = SubResource( 33 )
 animation = "idle"
 frame = 1
 playing = true
@@ -140,19 +164,19 @@ playing = true
 
 [node name="SharkDemo" type="AnimatedSprite" parent="."]
 position = Vector2( 72.1305, -24.5685 )
-frames = SubResource( 29 )
+frames = SubResource( 34 )
 animation = "idle"
 frame = 1
 playing = true
 
 [node name="BigSharkDemo" type="AnimatedSprite" parent="."]
 position = Vector2( -76.5402, -33.0729 )
-frames = SubResource( 30 )
+frames = SubResource( 39 )
 animation = "idle"
 playing = true
 flip_h = true
+
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource( 6 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 196599, 0, 0, 131078, 0, 0, 262135, 0, 0, 196614, 0, 0, 327671, 0, 0, 262150, 0, 0, 393207, 0, 0, 393208, 0, 0, 393209, 0, 0, 393210, 0, 0, 393211, 0, 0, 393212, 0, 0, 393213, 0, 0, 393214, 0, 0, 393215, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0 )
