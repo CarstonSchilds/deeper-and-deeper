@@ -2,12 +2,14 @@ extends "res://entities/Entity.gd"
 
 onready var sprite = $SpritePosition/AnimatedSprite
 onready var sonar = $SonarParticle
+onready var light = $Light2D
 var sonar_range = 300
 var sonar_delta = 0
 var sonar_active = false
+var background_light = null
 
 func _ready():
-	pass # Replace with function body.
+	pass
 
 func _process(delta):
 	pass
@@ -25,7 +27,7 @@ func _physics_process(delta):
 	
 func draw_sonar_hit(ray_cast_result):
 	var particle = sonar.duplicate()
-	self.get_parent().add_child(particle)
+	self.get_parent().get_sonar_layer().add_child(particle)
 	particle.global_position = ray_cast_result.position
 	particle.emitting = true
 	

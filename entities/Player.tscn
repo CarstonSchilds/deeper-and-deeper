@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sub/sub.png" type="Texture" id=2]
 [ext_resource path="res://assets/demo_sonar.png" type="Texture" id=3]
+[ext_resource path="res://assets/light.png" type="Texture" id=4]
+[ext_resource path="res://assets/sub/sub_light.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.15743
@@ -67,7 +69,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
 frames = SubResource( 7 )
 animation = "move"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -75,9 +77,26 @@ current = true
 zoom = Vector2( 0.25, 0.25 )
 
 [node name="SonarParticle" type="Particles2D" parent="."]
+light_mask = -2147483647
 emitting = false
 amount = 3
 lifetime = 3.0
 one_shot = true
 process_material = SubResource( 10 )
 texture = ExtResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 13, 5 )
+z_index = -1
+texture = ExtResource( 4 )
+texture_scale = 0.31
+color = Color( 1, 0.945098, 0.694118, 1 )
+mode = 2
+range_layer_min = -101
+shadow_enabled = true
+
+[node name="Light2D2" type="Light2D" parent="."]
+texture = ExtResource( 5 )
+color = Color( 1, 0.945098, 0.694118, 1 )
+mode = 2
+range_layer_min = -101
