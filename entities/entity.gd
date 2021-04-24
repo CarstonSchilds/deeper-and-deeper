@@ -1,16 +1,15 @@
 extends KinematicBody2D
 
-onready var sprite = $SpritePosition/Sprite
 var bouyancy = 89.5
 var thrust = 0
 var weight = 10
 var acceleration = Vector2()
 var velocity = Vector2()
 var facing = Vector2(1, 0)
-var max_speed = 1000
-var drag = 0.98
+var max_speed = 100
+var drag = 0.99
 var gravity = 9
-var thrust_to_weight = 2.5
+var thrust_to_weight = 2
 
 func _ready():
 	pass
@@ -24,7 +23,7 @@ func _process(delta):
 
 func adjust_facing(direction, delta):
 	self.facing = self.facing.rotated(direction * PI * delta)
-	self.sprite.rotation = self.facing.angle()
+	self.rotation = self.facing.angle()
 
 func calculate_forces():
 	var environment_vector = Vector2(0, (self.weight * self.gravity) - self.bouyancy)
@@ -33,7 +32,7 @@ func calculate_forces():
 	
 func get_inputs():
 	return Vector2()
-	
+
 func move():
 	self.velocity += self.acceleration
 	self.velocity *= self.drag
