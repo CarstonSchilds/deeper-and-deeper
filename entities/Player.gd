@@ -1,4 +1,4 @@
-extends "res://entities/entity.gd"
+extends "res://entities/Entity.gd"
 
 func _ready():
 	pass # Replace with function body.
