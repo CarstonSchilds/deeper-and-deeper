@@ -3,6 +3,7 @@ extends "res://entities/Entity.gd"
 onready var sonar = $SonarParticle
 onready var light = $Spotlight
 onready var sun = $Sun
+onready var glow = $Glow
 var sonar_range = 300
 var sonar_delta = 0
 var sonar_active = false
@@ -12,7 +13,8 @@ func _ready():
 	pass
 
 func _process(delta):
-	sun.energy = map(self.global_position.y, 0, 1000, 1, 0)
+	sun.energy = map(self.global_position.y, 0, 3000, 1, 0)
+	glow.energy = map(self.global_position.y, 0, 3000, 0, 1)
 
 func map(x, input_start, input_end, output_start, output_end):
 	return (x - input_start)/(input_end - input_start) * (output_end - output_start) + output_start
