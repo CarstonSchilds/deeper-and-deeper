@@ -25,9 +25,11 @@ var control_throttle = 0.0
 var control_vector = Vector2.ZERO
 
 const SUB_BUOYANCY = 10.0
-const SUB_DRAG = 0.001
+const SUB_DRAG = 0.0001
+const SUB_THRUST = 0.25
 
 func _init():
+	self.thrust_scalar = SUB_THRUST
 	self.buoyancy = SUB_BUOYANCY
 	self.drag_coefficient = SUB_DRAG
 
@@ -154,7 +156,7 @@ func handle_input():
 		last_throttle_control = 0
 	
 	control_vector.x = input_vector.x
-	control_vector.y = control_throttle / 100
+	control_vector.y = control_throttle / 100.0
 	
 	# BUOYANCY CONTROLS
 	var buoyancy_input = Input.get_action_strength("buoyancy_up") - Input.get_action_strength("buoyancy_down")
@@ -172,7 +174,7 @@ func handle_input():
 	if buoyancy_input == 0 && last_buoyancy_control != 0:
 		last_buoyancy_control = 0
 	
-	self.buoyancy = ( control_buoyancy / 100.0 ) * ( SUB_BUOYANCY * 0.2 ) + ( SUB_BUOYANCY * 0.8 )
+	self.buoyancy = ( control_buoyancy / 100.0 ) * ( SUB_BUOYANCY * 0.1 ) + ( SUB_BUOYANCY * 0.85 )
 	
 	# SONAR AND SPOTLIGHT CONTROLS
 	if Input.is_action_just_released("sonar_toggle"):

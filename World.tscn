@@ -99,7 +99,7 @@ position = Vector2( -73.6168, 27.4228 )
 position = Vector2( 75.5207, 48.6036 )
 frames = SubResource( 5 )
 animation = "idle"
-frame = 3
+frame = 2
 playing = true
 
 [node name="TestLevel" parent="." instance=ExtResource( 7 )]
@@ -108,14 +108,14 @@ playing = true
 position = Vector2( 68.1701, 78.4532 )
 frames = SubResource( 10 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="BigSharkDemo" type="AnimatedSprite" parent="."]
 position = Vector2( -170.04, 86.9271 )
 frames = SubResource( 15 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 flip_h = true
 
