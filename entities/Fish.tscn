@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://entities/Entity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/pirannah/Pirannah_AS.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://entities/Fish.gd" type="Script" id=3]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( -5, -2, -4, -2, -4, -3, -3, -3, -3, -4, 2, -4, 2, -3, 3, -3, 3, -2, 4, -2, 4, -1, 5, -1, 5, -2, 6, -2, 6, 1, 5, 1, 5, 0, 3, 0, 3, 1, -4, 1, -4, 0, -5, 0, -5, -2 )
 
 [node name="Fish" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -15,4 +18,7 @@ frames = ExtResource( 2 )
 animation = "idle"
 
 [node name="Timer" type="Timer" parent="." index="2"]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." index="3"]
+occluder = SubResource( 1 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
