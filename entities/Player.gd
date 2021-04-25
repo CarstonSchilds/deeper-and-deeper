@@ -6,6 +6,9 @@ onready var sun = $Sun
 onready var glow = $Glow
 onready var depth_label = $UI/Depth
 onready var sonar_cooldown_timer = $SonarCooldown
+onready var propellor_pos = $PropAnchor
+onready var water = $"../Water"
+
 var depth_scale = 1500 # set this based on the max depth of the level
 var sonar_available = true
 var sonar_range = 300
@@ -24,6 +27,18 @@ func _process(delta):
 	self.glow.scale = Vector2(1, 1) * bound(map(depth, 0, depth_scale, 5, 1), 1, 5)
 	if depth > self.max_depth:
 		self.max_depth = depth
+		
+	# Enable water BG mirroring so we don't reach the end of it
+	if depth > 2048:
+		water.set_parralax_mirroring(true)
+	else:
+		water.set_parralax_mirroring(false)
+		
+	if self.propellor_pos.global_position.y < 0:
+		self.current_thrust_scalar = 0
+	else:
+		self.current_thrust_scalar = thrust_scalar
+		
 	self.depth_label.text = "Current %0.0f\nMax %0.0f" % [depth, self.max_depth]
 	
 

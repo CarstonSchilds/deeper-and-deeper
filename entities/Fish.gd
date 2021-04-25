@@ -2,10 +2,12 @@ extends "res://entities/Entity.gd"
 
 onready var timer = $Timer
 
-func _ready():
-	self.sprite.animation = "idle"
+func _init():
 	self.bouyancy = 0
 	self.weight = 0
+
+func _ready():
+	self.sprite.animation = "idle"
 	self.init(2)
 	self.sprite.set_flip_h(true)
 
@@ -17,6 +19,6 @@ func get_inputs():
 	return Vector2(0, 1)
 
 func _on_Timer_timeout():
-	self.facing *= -1
-	self.sprite.set_flip_v(self.facing.x < 0)
+	self.current_facing *= -1
+	self.sprite.set_flip_v(self.current_facing.x < 0)
 

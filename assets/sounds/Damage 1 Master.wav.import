@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Damage 1 Master.wav-a9153bb1636cf7cafb81addab17c5299.sample"
+
+[deps]
+
+source_file="res://assets/sounds/Damage 1 Master.wav"
+dest_files=[ "res://.import/Damage 1 Master.wav-a9153bb1636cf7cafb81addab17c5299.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

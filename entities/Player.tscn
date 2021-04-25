@@ -71,12 +71,18 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
 frames = SubResource( 7 )
 animation = "move"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.25, 0.25 )
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
 
 [node name="SonarParticle" type="Particles2D" parent="."]
 light_mask = -2147483647
@@ -107,12 +113,25 @@ shadow_enabled = true
 shadow_gradient_length = 0.1
 
 [node name="Sun" type="Light2D" parent="."]
+position = Vector2( 0.445465, 0 )
 texture = ExtResource( 6 )
 mode = 3
 range_layer_min = -101
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
+
+[node name="Stats" type="Label" parent="UI"]
+margin_left = 2990.0
+margin_top = 1780.0
+margin_right = 3389.0
+margin_bottom = 1966.0
+grow_horizontal = 0
+theme = ExtResource( 7 )
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Depth" type="Label" parent="UI"]
 margin_left = 1495.0
@@ -133,4 +152,8 @@ one_shot = true
 
 [node name="SonarAnchor" type="Position2D" parent="."]
 position = Vector2( 0, -12 )
+
+[node name="PropAnchor" type="Position2D" parent="."]
+position = Vector2( -20, 0 )
+
 [connection signal="timeout" from="SonarCooldown" to="." method="_on_SonarCooldown_timeout"]

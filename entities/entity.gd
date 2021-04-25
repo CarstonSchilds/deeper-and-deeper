@@ -1,15 +1,22 @@
 extends KinematicBody2D
 
-var bouyancy = 89.5
-var thrust = 0
+var bouyancy = 8.5
+var thrust = 1
 var weight = 10
-var acceleration = Vector2()
-var velocity = Vector2()
-var facing = Vector2(1, 0)
 var max_speed = 100
+var gravity = 0.9
 var drag = 0.99
-var gravity = 9
-var thrust_to_weight = 2
+var thrust_scalar = 2
+var torque_scalar = 0.5
+
+onready var current_bouyancy = bouyancy
+onready var current_thrust = thrust
+onready var current_weight = weight
+onready var current_drag = drag
+onready var current_thrust_scalar = thrust_scalar
+onready var current_acceleration = Vector2()
+onready var current_velocity = Vector2()
+onready var current_facing = Vector2(1, 0)
 
 onready var sprite = $SpritePosition/AnimatedSprite
 
@@ -19,26 +26,33 @@ func _ready():
 func _process(delta):
 	var input_vector = get_inputs()
 	adjust_facing(input_vector.x, delta)
-	self.thrust = input_vector.y
+	self.current_thrust = input_vector.y
 	calculate_forces()
 	move()
 
 func adjust_facing(direction, delta):
-	self.facing = self.facing.rotated(direction * PI * delta)
-	self.rotation = self.facing.angle()
+	self.current_facing = self.current_facing.rotated(direction * PI * delta * torque_scalar)
+	self.rotation = self.current_facing.angle()
 
 func calculate_forces():
-	var environment_vector = Vector2(0, (self.weight * self.gravity) - self.bouyancy)
-	var thrust_vector = self.facing.normalized() * self.thrust * self.thrust_to_weight
-	self.acceleration += (thrust_vector + environment_vector)
+	var depth = self.global_position.y
+	# Disable bouyancy above water
+	if depth < 0:
+		current_bouyancy = max(bouyancy + depth, 0);
+	else:
+		current_bouyancy = bouyancy;
+	
+	var environment_vector = Vector2(0, (self.current_weight * self.gravity) - self.current_bouyancy)
+	var thrust_vector = self.current_facing.normalized() * self.current_thrust * self.current_thrust_scalar
+	self.current_acceleration += (thrust_vector + environment_vector)
 	
 func get_inputs():
 	return Vector2()
 
 func move():
-	self.velocity += self.acceleration
-	self.velocity *= self.drag
-	self.velocity = self.velocity.clamped(self.max_speed)
-	self.move_and_slide(self.velocity)
-	self.acceleration = Vector2()
-	self.thrust = 0
+	self.current_velocity += self.current_acceleration
+	self.current_velocity *= self.current_drag
+	self.current_velocity = self.current_velocity.clamped(self.max_speed)
+	self.move_and_slide(self.current_velocity)
+	self.current_acceleration = Vector2()
+	self.current_thrust = 0
