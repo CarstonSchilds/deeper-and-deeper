@@ -90,11 +90,13 @@ script = ExtResource( 1 )
 follow_viewport_enable = true
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1.14685, -0.5 )
 
 [node name="SharkDemo" type="AnimatedSprite" parent="."]
 position = Vector2( 62.5207, -16.8964 )
 frames = SubResource( 5 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="TestLevel" parent="." instance=ExtResource( 7 )]
@@ -103,21 +105,15 @@ playing = true
 position = Vector2( 75.6701, -37.5468 )
 frames = SubResource( 10 )
 animation = "idle"
-frame = 3
+frame = 2
 playing = true
 
 [node name="BigSharkDemo" type="AnimatedSprite" parent="."]
 position = Vector2( -76.5402, -33.0729 )
 frames = SubResource( 15 )
 animation = "idle"
-frame = 2
 playing = true
 flip_h = true
-
-[node name="TileMap" type="TileMap" parent="."]
-cell_size = Vector2( 32, 32 )
-format = 1
-tile_data = PoolIntArray( 196599, 0, 0, 131078, 0, 0, 262135, 0, 0, 196614, 0, 0, 327671, 0, 0, 262150, 0, 0, 393207, 0, 0, 393208, 0, 0, 393209, 0, 0, 393210, 0, 0, 393211, 0, 0, 393212, 0, 0, 393213, 0, 0, 393214, 0, 0, 393215, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0 )
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0, 0.901961 )
