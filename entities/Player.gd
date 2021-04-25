@@ -20,11 +20,11 @@ var sonar_active = false
 var background_light = null
 var max_depth = -INF
 
-var control_buoyancy = 100
-var control_throttle = 0
+var control_buoyancy = 100.0
+var control_throttle = 0.0
 var control_vector = Vector2.ZERO
 
-const SUB_BUOYANCY = 10
+const SUB_BUOYANCY = 10.0
 const SUB_DRAG = 0.001
 
 func _init():
@@ -36,6 +36,7 @@ func _ready():
 
 func _process(delta):
 	handle_input()
+	handle_depth()
 	
 	self.stats_label.text = "Hull %0.0f\nBuoyancy %0.0f\nThrottle %s" % [self.health, control_buoyancy, throttle_state_names[current_throttle_state]]
 	self.depth_label.text = "Current %0.0f\nMax %0.0f" % [depth, self.max_depth]
@@ -110,13 +111,25 @@ var throttle_values = [
 	100
 ]
 
+var last_buoyancy_control = 0
+var current_buoyancy_state = 4
+
+var buoyancy_values = [
+	0,
+	25,
+	50,
+	75,
+	100
+]
+
+
 func handle_input():
 	
+	# THROTTLE CONTROLS
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("rotate_right") - Input.get_action_strength("rotate_left")
 	input_vector.y = Input.get_action_strength("forward_thrust") - Input.get_action_strength("reverse_thrust")
-	var buoyancy_input = Input.get_action_strength("buoyancy_up") - Input.get_action_strength("buoyancy_down")
-	
+		
 	if input_vector.y > 0 && last_throttle_control <= 0 && current_throttle_state < 4:
 		last_throttle_control = 1
 		current_throttle_state += 1
@@ -136,25 +149,37 @@ func handle_input():
 			sprite.animation = "move"
 		else:
 			sprite.animation = "idle"
-	
+		
 	if input_vector.y == 0 && last_throttle_control != 0:
 		last_throttle_control = 0
 	
-	control_buoyancy = control_buoyancy + buoyancy_input
-	if control_buoyancy > 100:
-		control_buoyancy = 100
-	elif control_buoyancy < 0:
-		control_buoyancy = 0
+	control_vector.x = input_vector.x
+	control_vector.y = control_throttle / 100
 	
-	self.buoyancy = ( control_buoyancy / 100 ) * SUB_BUOYANCY * 0.2 + SUB_BUOYANCY * 0.8
+	# BUOYANCY CONTROLS
+	var buoyancy_input = Input.get_action_strength("buoyancy_up") - Input.get_action_strength("buoyancy_down")
 	
+	if buoyancy_input > 0 && last_buoyancy_control <= 0 && current_buoyancy_state < 4:
+		last_buoyancy_control = 1
+		current_buoyancy_state += 1
+		control_buoyancy = buoyancy_values[current_buoyancy_state]
+
+	if buoyancy_input < 0 && last_buoyancy_control >= 0 && current_buoyancy_state > 0:
+		last_buoyancy_control = -1
+		current_buoyancy_state -= 1
+		control_buoyancy = buoyancy_values[current_buoyancy_state]
+	
+	if buoyancy_input == 0 && last_buoyancy_control != 0:
+		last_buoyancy_control = 0
+	
+	self.buoyancy = ( control_buoyancy / 100.0 ) * ( SUB_BUOYANCY * 0.2 ) + ( SUB_BUOYANCY * 0.8 )
+	
+	# SONAR AND SPOTLIGHT CONTROLS
 	if Input.is_action_just_released("sonar_toggle"):
 		self.sonar_active = true
 	if Input.is_action_just_released("spotlight_toggle"):
 		self.spotlight.enabled = !self.spotlight.enabled
 
-	control_vector.x = input_vector.x
-	control_vector.y = control_throttle / 100
 
 func handle_depth():
 	depth = self.global_position.y
@@ -170,11 +195,6 @@ func handle_depth():
 		water.set_parralax_mirroring(true)
 	else:
 		water.set_parralax_mirroring(false)
-	
-	if self.propellor_pos.global_position.y < 0:
-		self.current_thrust_scalar = 0
-	else:
-		self.current_thrust_scalar = thrust_scalar
 
 
 func get_control_vector():
