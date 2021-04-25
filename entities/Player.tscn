@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sub/sub.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/light.png" type="Texture" id=4]
 [ext_resource path="res://assets/sub/sub_light.png" type="Texture" id=5]
 [ext_resource path="res://assets/global_light.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/ui_theme.tres" type="Theme" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.15743
@@ -86,10 +87,10 @@ process_material = SubResource( 10 )
 texture = ExtResource( 3 )
 
 [node name="Spotlight" type="Light2D" parent="."]
-position = Vector2( 0, 180 )
 scale = Vector2( 3, 4 )
 z_index = -1
 texture = ExtResource( 4 )
+offset = Vector2( 0, 45 )
 texture_scale = 0.31
 color = Color( 1, 0.945098, 0.694118, 1 )
 range_layer_min = -101
@@ -105,3 +106,27 @@ range_layer_min = -101
 texture = ExtResource( 6 )
 mode = 3
 range_layer_min = -101
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Depth" type="Label" parent="UI"]
+margin_left = 1495.0
+margin_top = 890.0
+margin_right = 1894.0
+margin_bottom = 1076.0
+grow_horizontal = 0
+theme = ExtResource( 7 )
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SonarCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="SonarAnchor" type="Position2D" parent="."]
+position = Vector2( 0, -12 )
+[connection signal="timeout" from="SonarCooldown" to="." method="_on_SonarCooldown_timeout"]
