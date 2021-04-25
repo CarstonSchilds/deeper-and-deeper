@@ -39,7 +39,7 @@ func _ready():
 func _process(delta):
 	handle_input()
 	handle_depth()
-	self.stats_label.text = "Hull %0.0f\nBuoyancy %0.0f\nThrottle %0.0f" % [self.health, control_buoyancy, control_throttle]
+	self.stats_label.text = "Hull %0.0f\nBuoyancy %0.0f\nThrottle %s" % [self.health, control_buoyancy, throttle_state_names[current_throttle_state]]
 	self.depth_label.text = "Current %0.0f\nMax %0.0f" % [depth, self.max_depth]
 	
 

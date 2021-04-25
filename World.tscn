@@ -1,59 +1,9 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://entities/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/Water.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/shark/shark.png" type="Texture" id=5]
-[ext_resource path="res://assets/bigshark/bigshark.png" type="Texture" id=6]
 [ext_resource path="res://entities/TestLevel.tscn" type="PackedScene" id=7]
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 32, 16 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 5 )
-region = Rect2( 32, 0, 32, 16 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 5 )
-region = Rect2( 64, 0, 32, 16 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 5 )
-region = Rect2( 96, 0, 32, 16 )
-
-[sub_resource type="SpriteFrames" id=5]
-animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
-"loop": true,
-"name": "idle",
-"speed": 4.0
-} ]
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 6 )
-region = Rect2( 64, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 6 )
-region = Rect2( 128, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 6 )
-region = Rect2( 192, 0, 64, 32 )
-
-[sub_resource type="SpriteFrames" id=10]
-animations = [ {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
-"loop": true,
-"name": "idle",
-"speed": 2.0
-} ]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -64,22 +14,9 @@ script = ExtResource( 1 )
 follow_viewport_enable = true
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( -73.6168, 27.4228 )
 
 [node name="TestLevel" parent="." instance=ExtResource( 7 )]
-
-[node name="SharkDemo" type="AnimatedSprite" parent="."]
-position = Vector2( 75.6701, -37.5468 )
-frames = SubResource( 5 )
-animation = "idle"
-playing = true
-
-[node name="BigSharkDemo" type="AnimatedSprite" parent="."]
-position = Vector2( -76.5402, -33.0729 )
-frames = SubResource( 10 )
-animation = "idle"
-frame = 2
-playing = true
-flip_h = true
 
 [node name="TileMap" type="TileMap" parent="."]
 cell_size = Vector2( 32, 32 )
