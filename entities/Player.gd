@@ -37,7 +37,7 @@ func _ready():
 func _process(delta):
 	handle_input()
 	
-	self.stats_label.text = "Hull %0.0f\nBuoyancy %0.0f\nThrottle %0.0f" % [self.health, control_buoyancy, control_throttle]
+	self.stats_label.text = "Hull %0.0f\nBuoyancy %0.0f\nThrottle %s" % [self.health, control_buoyancy, throttle_state_names[current_throttle_state]]
 	self.depth_label.text = "Current %0.0f\nMax %0.0f" % [depth, self.max_depth]
 	
 
@@ -75,7 +75,41 @@ func draw_sonar_hit(ray_cast_result):
 	self.get_parent().get_sonar_layer().add_child(particle)
 	particle.global_position = ray_cast_result.position
 	particle.emitting = true
-	
+
+
+signal astern
+signal stop
+signal ahead_slow
+signal ahead_fast
+signal ahead_flank
+
+var last_throttle_control = 0
+var current_throttle_state = 1
+
+var throttle_states = [
+	"astern",
+	"stop",
+	"ahead_slow",
+	"ahead_fast",
+	"ahead_flank"
+]
+
+var throttle_state_names = [
+	"Astern",
+	"Stop",
+	"Ahead Slow",
+	"Ahead Fast",
+	"Ahead Flank"
+]
+
+var throttle_values = [
+	-33,
+	0,
+	33,
+	66,
+	100
+]
+
 func handle_input():
 	
 	var input_vector = Vector2.ZERO
@@ -83,19 +117,29 @@ func handle_input():
 	input_vector.y = Input.get_action_strength("forward_thrust") - Input.get_action_strength("reverse_thrust")
 	var buoyancy_input = Input.get_action_strength("buoyancy_up") - Input.get_action_strength("buoyancy_down")
 	
-	control_throttle = control_throttle + input_vector.y
-	if control_throttle > 100:
-		control_throttle = 100
-	elif control_throttle < -25:
-		control_throttle = -25
+	if input_vector.y > 0 && last_throttle_control <= 0 && current_throttle_state < 4:
+		last_throttle_control = 1
+		current_throttle_state += 1
+		emit_signal(throttle_states[current_throttle_state])
+		control_throttle = throttle_values[current_throttle_state]
+		if current_throttle_state != 1:
+			sprite.animation = "move"
+		else:
+			sprite.animation = "idle"
+
+	if input_vector.y < 0 && last_throttle_control >= 0 && current_throttle_state > 0:
+		last_throttle_control = -1
+		current_throttle_state -= 1
+		emit_signal(throttle_states[current_throttle_state])
+		control_throttle = throttle_values[current_throttle_state]
+		if current_throttle_state != 1:
+			sprite.animation = "move"
+		else:
+			sprite.animation = "idle"
 	
-	if abs(control_throttle) > 10:
-		sprite.animation = "move"
-	else:
-		sprite.animation = "idle"
-		
-	engine_sound.set_engine_level(control_throttle)
-		
+	if input_vector.y == 0 && last_throttle_control != 0:
+		last_throttle_control = 0
+	
 	control_buoyancy = control_buoyancy + buoyancy_input
 	if control_buoyancy > 100:
 		control_buoyancy = 100
@@ -131,6 +175,7 @@ func handle_depth():
 		self.current_thrust_scalar = 0
 	else:
 		self.current_thrust_scalar = thrust_scalar
+
 
 func get_control_vector():
 	return control_vector
