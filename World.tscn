@@ -95,7 +95,6 @@ follow_viewport_enable = true
 position = Vector2( 62.5207, -16.8964 )
 frames = SubResource( 5 )
 animation = "idle"
-frame = 2
 playing = true
 
 [node name="TestLevel" parent="." instance=ExtResource( 7 )]
@@ -104,14 +103,14 @@ playing = true
 position = Vector2( 75.6701, -37.5468 )
 frames = SubResource( 10 )
 animation = "idle"
-frame = 1
+frame = 3
 playing = true
 
 [node name="BigSharkDemo" type="AnimatedSprite" parent="."]
 position = Vector2( -76.5402, -33.0729 )
 frames = SubResource( 15 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 flip_h = true
 
