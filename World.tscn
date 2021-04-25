@@ -33,49 +33,49 @@ animations = [ {
 "speed": 4.0
 } ]
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 5 )
 region = Rect2( 32, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 5 )
 region = Rect2( 64, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 5 )
 region = Rect2( 96, 0, 32, 16 )
 
-[sub_resource type="SpriteFrames" id=15]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "idle",
 "speed": 4.0
 } ]
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 6 )
 region = Rect2( 64, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 6 )
 region = Rect2( 128, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 6 )
 region = Rect2( 192, 0, 64, 32 )
 
-[sub_resource type="SpriteFrames" id=20]
+[sub_resource type="SpriteFrames" id=15]
 animations = [ {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
 "name": "idle",
 "speed": 2.0
@@ -92,25 +92,26 @@ follow_viewport_enable = true
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="SharkDemo" type="AnimatedSprite" parent="."]
-position = Vector2( 62.2847, -21.8517 )
+position = Vector2( 62.5207, -16.8964 )
 frames = SubResource( 5 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 
 [node name="TestLevel" parent="." instance=ExtResource( 7 )]
 
 [node name="SharkDemo" type="AnimatedSprite" parent="."]
-position = Vector2( 72.1305, -24.5685 )
-frames = SubResource( 15 )
+position = Vector2( 75.6701, -37.5468 )
+frames = SubResource( 10 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="BigSharkDemo" type="AnimatedSprite" parent="."]
 position = Vector2( -76.5402, -33.0729 )
-frames = SubResource( 20 )
+frames = SubResource( 15 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 flip_h = true
 
