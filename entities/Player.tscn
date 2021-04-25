@@ -71,7 +71,6 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
 frames = SubResource( 7 )
 animation = "move"
-frame = 3
 playing = true
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -122,10 +121,10 @@ range_layer_min = -101
 layer = 100
 
 [node name="Stats" type="Label" parent="UI"]
-margin_left = 2990.0
-margin_top = 1780.0
-margin_right = 3389.0
-margin_bottom = 1966.0
+margin_left = 25.0
+margin_top = 809.0
+margin_right = 358.0
+margin_bottom = 1076.0
 grow_horizontal = 0
 theme = ExtResource( 7 )
 valign = 2

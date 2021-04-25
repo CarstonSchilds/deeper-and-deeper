@@ -3,7 +3,7 @@ extends "res://entities/Entity.gd"
 onready var timer = $Timer
 
 func _init():
-	self.bouyancy = 0
+	self.buoyancy = 0
 	self.weight = 0
 
 func _ready():
@@ -15,7 +15,7 @@ func init(patrol_time):
 	self.timer.wait_time = patrol_time
 	self.timer.start()
 
-func get_inputs():
+func get_control_vector():
 	return Vector2(0, 1)
 
 func _on_Timer_timeout():
