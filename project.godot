@@ -10,6 +10,7 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
+
 }
 
 [application]
@@ -70,5 +71,5 @@ buoyancy_down={
 
 [rendering]
 
-environment/default_clear_color=Color( 0.113725, 0.172549, 0.219608, 1 )
+environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
 environment/default_environment="res://assets/default_env.tres"

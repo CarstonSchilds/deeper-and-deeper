@@ -11,7 +11,7 @@ var drag_ratio = 3 # perpendicular drag = parallel drag * drag_ratio
 var thrust_scalar = 2
 var torque_scalar = 0.5
 
-
+var thrust_vector = null
 onready var current_buoyancy = buoyancy
 onready var current_thrust = thrust
 onready var current_weight = weight
@@ -28,6 +28,7 @@ func _ready():
 
 func _process(delta):
 	var input_vector = get_control_vector()
+	self.thrust_vector = get_thrust_vector(delta)
 	adjust_facing(input_vector.x, delta)
 	self.current_thrust = input_vector.y
 	calculate_forces()
@@ -46,7 +47,11 @@ func calculate_forces():
 		current_buoyancy = buoyancy;
 	
 	var environment_vector = Vector2(0, (self.current_weight * self.gravity) - self.current_buoyancy)
-	var thrust_vector = self.current_facing * self.current_thrust * self.current_thrust_scalar
+	var thrust_vector = null
+	if self.thrust_vector: # only ai should use self.thrust_vector directly
+		thrust_vector = self.thrust_vector
+	else:
+		thrust_vector = self.current_facing * self.current_thrust * self.current_thrust_scalar
 	var parallel_velocity = self.current_facing * self.current_facing.dot(self.current_velocity)
 	var perpendicular_velocity = self.current_velocity - parallel_velocity
 	var parallel_drag = parallel_velocity.normalized() * parallel_velocity.length_squared() * current_drag_coefficient * -1
@@ -56,6 +61,9 @@ func calculate_forces():
 	
 func get_control_vector():
 	return Vector2()
+
+func get_thrust_vector(delta):
+	return null # only use in enemies
 
 func move():
 	self.current_velocity += self.current_acceleration

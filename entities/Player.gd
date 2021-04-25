@@ -39,8 +39,7 @@ func _ready():
 func _process(delta):
 	handle_input()
 	handle_depth()
-	
-	self.stats_label.text = "Hull %0.0f\nBuoyancy %0.0f\nThrottle %s" % [self.health, control_buoyancy, throttle_state_names[current_throttle_state]]
+	self.stats_label.text = "Hull %0.0f\nBuoyancy %0.0f\nThrottle %0.0f" % [self.health, control_buoyancy, control_throttle]
 	self.depth_label.text = "Current %0.0f\nMax %0.0f" % [depth, self.max_depth]
 	
 
@@ -70,7 +69,6 @@ func sonar_used():
 	sonar_cooldown_timer.start()
 
 func _on_SonarCooldown_timeout():
-	print('got callback')
 	sonar_available = true
 
 func draw_sonar_hit(ray_cast_result):
@@ -78,7 +76,6 @@ func draw_sonar_hit(ray_cast_result):
 	self.get_parent().get_sonar_layer().add_child(particle)
 	particle.global_position = ray_cast_result.position
 	particle.emitting = true
-
 
 signal astern
 signal stop
@@ -124,10 +121,7 @@ var buoyancy_values = [
 	100
 ]
 
-
 func handle_input():
-	
-	# THROTTLE CONTROLS
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("rotate_right") - Input.get_action_strength("rotate_left")
 	input_vector.y = Input.get_action_strength("forward_thrust") - Input.get_action_strength("reverse_thrust")

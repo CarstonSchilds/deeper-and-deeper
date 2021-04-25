@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://entities/enemies/Brain.gd" type="Script" id=1]
+[ext_resource path="res://entities/enemies/states/NaturalBehaviour.gd" type="Script" id=2]
+[ext_resource path="res://entities/enemies/states/ReturnHome.gd" type="Script" id=3]
+[ext_resource path="res://entities/enemies/states/Pursue.gd" type="Script" id=4]
+[ext_resource path="res://entities/enemies/states/Attack.gd" type="Script" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 60.0
+
+[node name="Brain" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="States" type="Node" parent="."]
+
+[node name="NaturalBehaviour" type="Node" parent="States"]
+script = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="States/NaturalBehaviour"]
+wait_time = 2.0
+
+[node name="Pursue" type="Node" parent="States"]
+script = ExtResource( 4 )
+
+[node name="ReturnHome" type="Node" parent="States"]
+script = ExtResource( 3 )
+
+[node name="Attack" type="Node" parent="States"]
+script = ExtResource( 5 )
+
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+shape = SubResource( 1 )
+
+[node name="ThreatRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThreatRange"]
+shape = SubResource( 2 )
+[connection signal="timeout" from="States/NaturalBehaviour/Timer" to="States/NaturalBehaviour" method="_on_Timer_timeout"]
+[connection signal="body_entered" from="ThreatRange" to="." method="_on_ThreatRange_body_entered"]
+[connection signal="body_exited" from="ThreatRange" to="." method="_on_ThreatRange_body_exited"]

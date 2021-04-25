@@ -96,11 +96,9 @@ process_material = SubResource( 10 )
 texture = ExtResource( 3 )
 
 [node name="Spotlight" type="Light2D" parent="."]
-scale = Vector2( 3, 4 )
 z_index = -1
 texture = ExtResource( 4 )
-offset = Vector2( 0, 45 )
-texture_scale = 0.31
+offset = Vector2( 0, 141 )
 color = Color( 1, 0.945098, 0.694118, 1 )
 range_layer_min = -101
 shadow_enabled = true
@@ -115,7 +113,6 @@ shadow_enabled = true
 shadow_gradient_length = 0.1
 
 [node name="Sun" type="Light2D" parent="."]
-position = Vector2( 0.445465, 0 )
 texture = ExtResource( 6 )
 mode = 3
 range_layer_min = -101
@@ -169,4 +166,14 @@ script = ExtResource( 9 )
 [connection signal="ahead_slow" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_slow"]
 [connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
 [connection signal="stop" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_stop"]
+[node name="SpotlightArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpotlightArea"]
+polygon = PoolVector2Array( 0, 6, -7, 9, -12, 14, -22, 54, -22, 94, -3, 116, 3, 116, 22, 94, 22, 52, 13, 14, 7, 9 )
+
+[node name="SpotlightSprite" type="Sprite" parent="SpotlightArea"]
+visible = false
+texture = ExtResource( 4 )
+offset = Vector2( 0, 141 )
 [connection signal="timeout" from="SonarCooldown" to="." method="_on_SonarCooldown_timeout"]
