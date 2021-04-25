@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sub/sub.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://assets/sub/sub_light.png" type="Texture" id=5]
 [ext_resource path="res://assets/global_light.png" type="Texture" id=6]
 [ext_resource path="res://assets/ui/ui_theme.tres" type="Theme" id=7]
+[ext_resource path="res://assets/sounds/Submarine Prop Master.wav" type="AudioStream" id=8]
+[ext_resource path="res://entities/EngineSound.gd" type="Script" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.15743
@@ -71,6 +73,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
 frames = SubResource( 7 )
 animation = "move"
+frame = 2
 playing = true
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -154,5 +157,11 @@ position = Vector2( 0, -12 )
 
 [node name="PropAnchor" type="Position2D" parent="."]
 position = Vector2( -20, 0 )
+
+[node name="EngineSoundPlayer" type="AudioStreamPlayer2D" parent="PropAnchor"]
+position = Vector2( 20, 0 )
+stream = ExtResource( 8 )
+volume_db = -7.0
+script = ExtResource( 9 )
 
 [connection signal="timeout" from="SonarCooldown" to="." method="_on_SonarCooldown_timeout"]

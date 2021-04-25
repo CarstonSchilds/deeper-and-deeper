@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/water/Water_Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/water/Water_Transparent_Material.tres" type="Material" id=2]
 [ext_resource path="res://entities/Water.gd" type="Script" id=3]
 [ext_resource path="res://assets/water/Waves_Tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://assets/water/Waves_Transparent_Material.tres" type="Material" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -67,6 +68,7 @@ material = SubResource( 2 )
 motion_scale = Vector2( 0.9, 0.9 )
 
 [node name="WaterMidgroundTileMap" type="TileMap" parent="WavesMidground"]
+material = ExtResource( 5 )
 position = Vector2( 0, 2048 )
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
@@ -77,6 +79,7 @@ tile_data = PoolIntArray( -4194368, 0, 0, -4194367, 0, 65537, -4194366, 0, 0, -4
 material = SubResource( 3 )
 
 [node name="WaterForegroundTileMap" type="TileMap" parent="WavesForeground"]
+material = ExtResource( 5 )
 position = Vector2( 0, 2048 )
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )

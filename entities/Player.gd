@@ -9,6 +9,7 @@ onready var stats_label = $UI/Stats
 onready var sonar_cooldown_timer = $SonarCooldown
 onready var propellor_pos = $PropAnchor
 onready var water = $"../Water"
+onready var engine_sound = $"PropAnchor/EngineSoundPlayer"
 
 var depth = 0
 var depth_scale = 1500 # set this based on the max depth of the level
@@ -92,6 +93,8 @@ func handle_input():
 		sprite.animation = "move"
 	else:
 		sprite.animation = "idle"
+		
+	engine_sound.set_engine_level(control_throttle)
 		
 	control_buoyancy = control_buoyancy + buoyancy_input
 	if control_buoyancy > 100:
