@@ -57,7 +57,7 @@ func _physics_process(delta):
 		var space_state = get_world_2d().direct_space_state
 		for i in range(-8, 8):
 			var angle_delta = PI/32 * i
-			var result = space_state.intersect_ray(self.position, self.position + self.facing.rotated(-PI/2 + angle_delta).normalized() * sonar_range, [self])
+			var result = space_state.intersect_ray(self.position, self.position + self.current_facing.rotated(-PI/2 + angle_delta).normalized() * sonar_range, [self])
 			if 'position' in result:
 				draw_sonar_hit(result)
 		sonar_active = false
