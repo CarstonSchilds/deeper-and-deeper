@@ -9,7 +9,7 @@ onready var parent = $".."
 onready var world = $"../.."
 
 var sonar_available = true
-var sonar_range = 300
+var sonar_range = 1000
 var request_sonar = false
 
 func _physics_process(delta):
@@ -21,6 +21,8 @@ func get_normalized_ray_vector(angle_delta):
 	return parent.current_facing.rotated(-PI/2 + angle_delta).normalized()
 	
 func do_sonar():
+	var arc_material = sonar_arc.process_material
+	arc_material.angle = -self.global_rotation_degrees
 	sonar_arc.emitting = true
 	sonar_ping_player.play()
 	var space_state = get_world_2d().direct_space_state

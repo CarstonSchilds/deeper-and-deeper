@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Squid Mad 1 Master.wav-6e2a924511a8f7b511034fc9127ea334.sample"
+
+[deps]
+
+source_file="res://assets/sounds/Squid Mad 1 Master.wav"
+dest_files=[ "res://.import/Squid Mad 1 Master.wav-6e2a924511a8f7b511034fc9127ea334.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

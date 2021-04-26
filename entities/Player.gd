@@ -10,6 +10,7 @@ onready var stats_label = $UI/Stats
 onready var propellor_pos = $PropAnchor
 onready var water = $"../Water"
 onready var engine_sound = $"PropAnchor/EngineSoundPlayer"
+onready var camera = $"Camera"
 
 var depth = 0
 var depth_scale = 1500 # set this based on the max depth of the level
@@ -51,6 +52,8 @@ signal stop
 signal ahead_slow
 signal ahead_fast
 signal ahead_flank
+signal zoom_in
+signal zoom_out
 
 var last_throttle_control = 0
 var current_throttle_state = 1
@@ -89,6 +92,9 @@ var buoyancy_values = [
 	75,
 	100
 ]
+
+signal buoyancy_up
+signal buoyancy_down
 
 signal sonar
 signal light
@@ -131,11 +137,14 @@ func handle_input():
 		last_buoyancy_control = 1
 		current_buoyancy_state += 1
 		control_buoyancy = buoyancy_values[current_buoyancy_state]
+		emit_signal("buoyancy_up")
 
 	if buoyancy_input < 0 && last_buoyancy_control >= 0 && current_buoyancy_state > 0:
 		last_buoyancy_control = -1
 		current_buoyancy_state -= 1
 		control_buoyancy = buoyancy_values[current_buoyancy_state]
+		emit_signal("buoyancy_down")
+		
 	
 	if buoyancy_input == 0 && last_buoyancy_control != 0:
 		last_buoyancy_control = 0
@@ -149,6 +158,13 @@ func handle_input():
 	if Input.is_action_just_released("spotlight_toggle"):
 		self.spotlight.enabled = !self.spotlight.enabled
 		emit_signal("light")
+		
+	# CAMERA ZOOM CONTROLS
+	if Input.is_action_just_released("zoom_in"):
+		emit_signal("zoom_in")
+		
+	if Input.is_action_just_released("zoom_out"):
+		emit_signal("zoom_out")
 
 func handle_depth():
 	depth = self.global_position.y

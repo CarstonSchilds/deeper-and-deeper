@@ -39,11 +39,13 @@ script = ExtResource( 1 )
 follow_viewport_enable = true
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( -74.2393, -164.344 )
+position = Vector2( -42.4157, 39.1685 )
 
 [node name="TestLevel" parent="." instance=ExtResource( 7 )]
 
 [node name="Darkness" type="CanvasModulate" parent="."]
+visible = false
+scale = Vector2( 10, 10 )
 color = Color( 0, 0, 0, 0.901961 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
