@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/tiles/seafloor/Sand_Tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://entities/enemies/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/enemies/Piranha.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/tiles/kelp/kelp_tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://entities/enemies/Shark.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/enemies/Squid.tscn" type="PackedScene" id=5]
 
 [node name="TestLevel" type="Node2D"]
 
@@ -25,11 +27,17 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( -393205, 2, 0, -393204, 1, 0, 65543, 2, 0, 65544, 1, 3, 65545, 1, 2, 65546, 1, 3, 196598, 1, 3, 196599, 3, 0, 131075, 2, 0, 131076, 1, 3, 131077, 1, 0, 131078, 1, 3, 131079, 1, 0, 262135, 1, 1, 262136, 3, 0, 327672, 1, 0, 327673, 3, 0, 262147, 10, 65536, 327683, 10, 65536, 458745, 9, 65536, 393219, 7, 0, 393220, 6, 2, 524281, 9, 65536, 458756, 7, 0, 458757, 6, 1, 458758, 6, 3, 458759, 6, 3, 458760, 6, 2, 458761, 6, 0, 589817, 9, 0, 524298, 6, 3, 524299, 6, 1, 655353, 9, 0, 720888, 6, 2, 720889, 8, 0, 786423, 6, 3, 786424, 8, 0, 720907, 10, 65536, 786443, 10, 65536, 851979, 10, 65536, 917515, 10, 0, 1048566, 9, 65536, 983051, 10, 0, 1114102, 9, 65536, 1048587, 10, 65536, 1179638, 9, 65536, 1114123, 10, 65536, 1245174, 9, 65536, 1179659, 10, 65536, 1245195, 10, 65536, 1310731, 10, 0 )
 
-[node name="Fish" parent="." instance=ExtResource( 2 )]
-position = Vector2( 125.802, 68.2582 )
-
 [node name="Kelp" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 5, 1, 0, 7, 1, 0, 9, 2, 0, 65541, 0, 0, 65542, 2, 0, 65543, 0, 0, 65545, 0, 3, 65546, 4, 0, 131077, 3, 0, 131078, 0, 3, 131079, 0, 2 )
+
+[node name="Shark" parent="." instance=ExtResource( 4 )]
+position = Vector2( -183.287, 366.044 )
+
+[node name="Piranha" parent="." instance=ExtResource( 2 )]
+position = Vector2( 151.503, 56.5921 )
+
+[node name="Squid" parent="." instance=ExtResource( 5 )]
+position = Vector2( 291.662, 325.199 )
