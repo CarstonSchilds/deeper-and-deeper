@@ -2,6 +2,8 @@ extends Node2D
 
 signal hit_player
 
+var light_sensitive = false
+var sonar_sensitive = false
 var control_vector = Vector2()
 var home = Vector2()
 var body = null
@@ -19,11 +21,9 @@ var state_stack = []
 
 signal state_changed
 
-onready var attack_range = $AttackRange
-onready var attack_range_shape = $AttackRange/CollisionShape2D
 onready var target_range = $ThreatRange
 onready var threat_range_shape = $ThreatRange/CollisionShape2D
-	
+
 func _ready():
 	self.body = self.get_parent()
 	self.home = Vector2(self.body.position)
@@ -70,3 +70,8 @@ func move_and_steer_towards(target):
 	var vector_to_target = self.body.position.direction_to(target)
 	var angle_to_target = self.body.current_facing.angle_to(vector_to_target)
 	self.control_vector = vector_to_target.normalized() * 0.5
+
+func _on_LightDetection_area_entered(area):
+	if self.light_sensitive and area.name == 'SpotlightArea':
+		self.threatened = true
+		self.target = area.get_parent().get_parent()

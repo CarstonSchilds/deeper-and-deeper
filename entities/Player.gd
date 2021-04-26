@@ -3,6 +3,7 @@ extends "res://entities/Entity.gd"
 signal hit_player
 
 onready var spotlight = $Spotlight
+onready var spotlight_area = $Spotlight/SpotlightArea
 onready var sun = $Sun
 onready var glow = $Glow
 onready var depth_label = $UI/Depth
@@ -157,6 +158,7 @@ func handle_input():
 		
 	if Input.is_action_just_released("spotlight_toggle"):
 		self.spotlight.enabled = !self.spotlight.enabled
+		self.spotlight_area.monitorable = !self.spotlight_area.monitorable
 		emit_signal("light")
 		
 	# CAMERA ZOOM CONTROLS
@@ -220,4 +222,3 @@ func _on_CollisionDetector_body_entered(body):
 func _on_CollisionDetector_body_exited(body):
 	if body.name != 'Player':
 		colliding.erase(body)
-	
