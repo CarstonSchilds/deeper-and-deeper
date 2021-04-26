@@ -14,6 +14,7 @@
 script = ExtResource( 3 )
 
 [node name="Darkness" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="Background" type="ParallaxLayer" parent="."]
