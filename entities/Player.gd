@@ -1,7 +1,5 @@
 extends "res://entities/Entity.gd"
 
-signal hit_player
-
 onready var spotlight = $Spotlight
 onready var spotlight_area = $Spotlight/SpotlightArea
 onready var sun = $Sun
@@ -202,6 +200,11 @@ func handle_collisions(delta):
 		if colliding[body].duration > 1.5:
 			colliding[body].duration = 0
 
+signal little_damage
+signal big_damage
+signal terrain_damage
+signal show_damage
+
 func create_collision(body):
 	var result = {}
 	result.duration = 0
@@ -209,9 +212,18 @@ func create_collision(body):
 		body.brain.handle_damaged_player()
 	if "damage" in body: # if the body specifies a damage value, then it's an enemy
 		result.damage = body.damage
+		if result.damage > 5:
+			emit_signal("big_damage")
+			emit_signal("show_damage")
+		else:
+			emit_signal("little_damage")
+			emit_signal("show_damage")
+			
 	else: # if the body doesn't specify a damage amount, it is terrain
 		result.initial_damage = 5
 		result.damage = 1
+		emit_signal("terrain_damage")
+		emit_signal("show_damage")
 	return result
 
 func _on_CollisionDetector_body_entered(body):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sub/sub.png" type="Texture" id=2]
@@ -25,6 +25,14 @@
 [ext_resource path="res://entities/BallastBubbles.gd" type="Script" id=23]
 [ext_resource path="res://entities/BallastBubblesPlayer.gd" type="Script" id=24]
 [ext_resource path="res://assets/sounds/Bubbles 3 Master.wav" type="AudioStream" id=25]
+[ext_resource path="res://assets/sounds/Damage Gravel 2 Master.wav" type="AudioStream" id=26]
+[ext_resource path="res://entities/TerrainDamagePlayer.gd" type="Script" id=27]
+[ext_resource path="res://entities/LittleDamagePlayer.gd" type="Script" id=28]
+[ext_resource path="res://entities/BigDamagePlayer.gd" type="Script" id=29]
+[ext_resource path="res://assets/sounds/Damage 2 Master.wav" type="AudioStream" id=30]
+[ext_resource path="res://assets/sounds/Damage 1 Master.wav" type="AudioStream" id=31]
+[ext_resource path="res://assets/sub/sub2.png" type="Texture" id=32]
+[ext_resource path="res://entities/DamageParticle.gd" type="Script" id=33]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.0
@@ -114,6 +122,17 @@ scale_curve = SubResource( 17 )
 color_ramp = SubResource( 15 )
 anim_speed_random = 1.0
 
+[sub_resource type="ParticlesMaterial" id=19]
+emission_shape = 1
+emission_sphere_radius = 0.2
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 1.05
+scale_random = 0.04
+color = Color( 1, 0, 0, 1 )
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -132,7 +151,6 @@ shape = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
 frames = SubResource( 8 )
 animation = "move"
-frame = 2
 playing = true
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -178,7 +196,7 @@ shadow_enabled = true
 shadow_gradient_length = 5.0
 
 [node name="Sun" type="Light2D" parent="."]
-position = Vector2( -0.754059, 2.02064 )
+position = Vector2( -0.333588, 2.02064 )
 scale = Vector2( 10, 10 )
 texture = ExtResource( 6 )
 mode = 3
@@ -311,6 +329,42 @@ stream = ExtResource( 25 )
 volume_db = -2.0
 script = ExtResource( 24 )
 
+[node name="TerrainDamagePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 26 )
+volume_db = -8.0
+script = ExtResource( 27 )
+
+[node name="Timer" type="Timer" parent="TerrainDamagePlayer"]
+wait_time = 1.5
+
+[node name="LittleDamagePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 30 )
+volume_db = -10.0
+script = ExtResource( 28 )
+
+[node name="Timer" type="Timer" parent="LittleDamagePlayer"]
+wait_time = 0.5
+one_shot = true
+
+[node name="BigDamagePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 31 )
+volume_db = -5.0
+script = ExtResource( 29 )
+
+[node name="Timer" type="Timer" parent="BigDamagePlayer"]
+wait_time = 1.5
+
+[node name="DamageParticle" type="Particles2D" parent="."]
+emitting = false
+amount = 4
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource( 19 )
+texture = ExtResource( 32 )
+script = ExtResource( 33 )
+
 [connection signal="ahead_fast" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_fast"]
 [connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
 [connection signal="ahead_flank" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_flank"]
@@ -319,13 +373,19 @@ script = ExtResource( 24 )
 [connection signal="ahead_slow" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_slow"]
 [connection signal="astern" from="." to="PropAnchor/EngineBubbles" method="_on_Player_astern"]
 [connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
+[connection signal="big_damage" from="." to="BigDamagePlayer" method="_on_Player_big_damage"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesLeft" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
 [connection signal="light" from="." to="LightClickPlayer" method="_on_Player_light"]
+[connection signal="little_damage" from="." to="LittleDamagePlayer" method="_on_Player_little_damage"]
+[connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
+[connection signal="show_damage" from="." to="BallastBubblesLeft" method="_on_Player_show_damage"]
+[connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
 [connection signal="sonar" from="." to="Sonar" method="_on_Player_sonar"]
 [connection signal="stop" from="." to="PropAnchor/EngineBubbles" method="_on_Player_stop"]
 [connection signal="stop" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_stop"]
+[connection signal="terrain_damage" from="." to="TerrainDamagePlayer" method="_on_Player_terrain_damage"]
 [connection signal="zoom_in" from="." to="Camera" method="_on_Player_zoom_in"]
 [connection signal="zoom_out" from="." to="Camera" method="_on_Player_zoom_out"]
 [connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
@@ -334,3 +394,6 @@ script = ExtResource( 24 )
 [connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle/PingEchoPlayer" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Sonar/SonarParticle/GabageCollectTimer" to="Sonar/SonarParticle" method="_on_GabageCollectTimer_timeout"]
+[connection signal="timeout" from="TerrainDamagePlayer/Timer" to="TerrainDamagePlayer" method="_on_Timer_timeout"]
+[connection signal="timeout" from="LittleDamagePlayer/Timer" to="LittleDamagePlayer" method="_on_Timer_timeout"]
+[connection signal="timeout" from="BigDamagePlayer/Timer" to="BigDamagePlayer" method="_on_Timer_timeout"]
