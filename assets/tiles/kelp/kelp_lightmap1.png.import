@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/seafloor.png-e3dde1f39837ffa71bff56f8250ebb77.stex"
+path="res://.import/kelp_lightmap1.png-ae6a9456b89c2d542cf8488d6f6fae63.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/seafloor.png"
-dest_files=[ "res://.import/seafloor.png-e3dde1f39837ffa71bff56f8250ebb77.stex" ]
+source_file="res://assets/tiles/kelp/kelp_lightmap1.png"
+dest_files=[ "res://.import/kelp_lightmap1.png-ae6a9456b89c2d542cf8488d6f6fae63.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
