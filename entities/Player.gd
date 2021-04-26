@@ -5,7 +5,9 @@ onready var spotlight_area = $Spotlight/SpotlightArea
 onready var sun = $Sun
 onready var glow = $Glow
 onready var depth_label = $UI/Depth
-onready var stats_label = $UI/Stats
+onready var throttle_label = $UI/Throttle
+onready var buoyancy_label = $UI/Buoyancy
+onready var hull_label = $UI/Hull
 onready var propellor_pos = $PropAnchor
 #onready var water = $"../Water"
 onready var engine_sound = $"PropAnchor/EngineSoundPlayer"
@@ -15,7 +17,7 @@ var depth = 0
 var depth_scale = 1500 # set this based on the max depth of the level
 var max_depth = -INF
 
-var control_buoyancy = 50.0
+var control_buoyancy = 100.0
 var control_throttle = 0.0
 var control_vector = Vector2.ZERO
 
@@ -29,15 +31,28 @@ func _init():
 	self.drag_coefficient = SUB_DRAG
 
 func _ready():
+	print(self)
 	pass
 
 func _process(delta):
 	handle_input()
 	handle_depth()
-	handle_collisions(delta)
-	self.stats_label.text = "Hull %0.0f\nBuoyancy %0.0f\nThrottle %s" % [self.health, control_buoyancy, throttle_state_names[current_throttle_state]]
-	self.depth_label.text = "Current %0.0f\nMax %0.0f" % [depth, self.max_depth]
 	
+	self.hull_label.text = "Hull %0.0f" % [self.health]
+	self.buoyancy_label.text = "Buoyancy %0.0f" % [control_buoyancy]
+	self.throttle_label.text = "Throttle %s" % [throttle_state_names[current_throttle_state]]
+	depth_label.text = "Current %0.0f\nMax %0.0f" % [depth, self.max_depth]
+	
+	if self.health < 25:
+		self.hull_label.set("custom_colors/font_color", ColorN("red", 1))
+	elif self.health < 50:
+		self.hull_label.set("custom_colors/font_color", ColorN("orange", 1))
+		
+	if self.health < 25:
+		self.buoyancy_label.set("custom_colors/font_color", ColorN("red", 1))
+		
+func _physics_process(delta):
+	handle_collisions(delta)
 
 func map(x, input_start, input_end, output_start, output_end):
 	return (x - input_start)/(input_end - input_start) * (output_end - output_start) + output_start
@@ -106,6 +121,7 @@ func handle_input():
 		last_throttle_control = 1
 		current_throttle_state += 1
 		emit_signal(throttle_states[current_throttle_state])
+		adjust_sound_area(current_throttle_state)
 		control_throttle = throttle_values[current_throttle_state]
 		if current_throttle_state != 1:
 			sprite.animation = "move"
@@ -116,6 +132,7 @@ func handle_input():
 		last_throttle_control = -1
 		current_throttle_state -= 1
 		emit_signal(throttle_states[current_throttle_state])
+		adjust_sound_area(current_throttle_state)
 		control_throttle = throttle_values[current_throttle_state]
 		if current_throttle_state != 1:
 			sprite.animation = "move"
@@ -147,6 +164,9 @@ func handle_input():
 	if buoyancy_input == 0 && last_buoyancy_control != 0:
 		last_buoyancy_control = 0
 	
+	if self.health < 25:	
+		control_buoyancy = min(control_buoyancy, (self.health / 25.0) * 90.0)
+	
 	self.buoyancy = ( control_buoyancy / 100.0 ) * ( SUB_BUOYANCY * 0.1 ) + ( SUB_BUOYANCY * 0.85 )
 	
 	# SONAR AND SPOTLIGHT CONTROLS
@@ -165,6 +185,23 @@ func handle_input():
 	if Input.is_action_just_released("zoom_out"):
 		emit_signal("zoom_out")
 
+onready var player_sound_area = $"PlayerSoundArea"
+
+func adjust_sound_area(current_throttle_state):
+	var size = 0.25
+	var amplitude = abs(current_throttle_state - 1)
+	if amplitude == 1:
+		size = 1
+	elif amplitude == 2:
+		size = 2
+	elif amplitude == 3:
+		size = 4
+	player_sound_area.scale.x = size
+	player_sound_area.scale.y = size
+	
+onready var water_breach_player = $"WaterBreachPlayer"
+var breach_sound_played = false
+	
 func handle_depth():
 	depth = self.global_position.y
 	self.sun.energy = bound(map(depth, 0, depth_scale, 1, 0), 0, 1)
@@ -174,6 +211,10 @@ func handle_depth():
 	if depth > self.max_depth:
 		self.max_depth = depth
 		
+	if depth > 0 and ! breach_sound_played:
+		water_breach_player.play()
+		breach_sound_played = true
+
 	# Enable water BG mirroring so we don't reach the end of it
 	# if depth > 2048:
 	#	water.set_parralax_mirroring(true)
@@ -196,6 +237,8 @@ func handle_collisions(delta):
 				colliding[body].erase("initial_damage")
 			else:
 				self.damage(colliding[body].damage)
+				emit_signal("little_damage")
+				emit_signal("show_damage")
 		colliding[body].duration += delta
 		if colliding[body].duration > 1.5:
 			colliding[body].duration = 0
@@ -233,3 +276,5 @@ func _on_CollisionDetector_body_entered(body):
 func _on_CollisionDetector_body_exited(body):
 	if body.name != 'Player':
 		colliding.erase(body)
+
+

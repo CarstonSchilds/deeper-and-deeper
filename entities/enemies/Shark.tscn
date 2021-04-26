@@ -1,48 +1,65 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://entities/enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/shark/shark.png" type="Texture" id=2]
+[ext_resource path="res://entities/enemies/Shark.gd" type="Script" id=3]
+[ext_resource path="res://entities/enemies/SharkAngryAudioPlayer.gd" type="Script" id=4]
+[ext_resource path="res://assets/sounds/06 Bloop.wav" type="AudioStream" id=5]
+[ext_resource path="res://entities/enemies/SharkBrain.gd" type="Script" id=6]
 
-[sub_resource type="CapsuleShape2D" id=7]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 3.99996
 height = 22.0001
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
 region = Rect2( 96, 0, 32, 16 )
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 } ]
 
-[sub_resource type="OccluderPolygon2D" id=6]
-polygon = PoolVector2Array( -16, -7, -14, -7, -14, -6, -13, -6, -13, -4, -12, -4, -12, -2, -11, -2, -11, -1, -7, -1, -7, -2, -3, -2, -3, -3, -1, -3, -1, -5, -2, -5, -2, -7, 0, -7, 0, -6, 2, -6, 2, -5, 3, -5, 3, -4, 4, -4, 4, -3, 7, -3, 7, -4, 12, -4, 12, -3, 13, -3, 13, -2, 14, -2, 14, 2, 13, 2, 13, 3, 6, 3, 6, 4, 3, 4, 3, 5, 2, 5, 2, 6, -1, 6, -1, 4, 0, 4, 0, 3, -12, 3, -12, 5, -14, 5, -14, 6, -15, 6, -15, 5, -16, 5, -16, 3, -15, 3, -15, -4, -16, -4 )
+[sub_resource type="OccluderPolygon2D" id=7]
+polygon = PoolVector2Array( -15.945, -7.41764, -13.826, -6.92102, -10.8794, -1.55748, -6.60844, -0.961536, -1.14559, -3.04735, -1.90708, -6.68926, 1.90037, -5.92777, 4.4166, -3.51087, 11.6342, -4.07371, 14.0842, -1.39194, 13.3227, 2.8128, 7.33012, 3.44186, 3.42335, 4.23646, 1.93348, 5.99119, -1.1787, 6.05741, -0.946938, 4.0047, -11.5747, 4.07091, -14.422, 6.18984, -16.0774, 4.26956, -15.051, 2.87902, -14.9517, -1.88857 )
 
 [node name="Shark" instance=ExtResource( 1 )]
 position = Vector2( 0, 0 )
+script = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2( -1, 0 )
-shape = SubResource( 7 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="SpritePosition" index="0"]
-frames = SubResource( 5 )
+frames = SubResource( 6 )
+playing = true
 
 [node name="LightOccluder2D" parent="." index="2"]
-occluder = SubResource( 6 )
+occluder = SubResource( 7 )
+
+[node name="Brain" parent="." index="3"]
+position = Vector2( 0.0164985, 0 )
+script = ExtResource( 6 )
+
+[node name="SharkAngryAudioPlayer" type="AudioStreamPlayer2D" parent="." index="4"]
+stream = ExtResource( 5 )
+volume_db = -1.0
+script = ExtResource( 4 )
+
+[connection signal="state_changed" from="Brain" to="SharkAngryAudioPlayer" method="_on_Brain_state_changed"]

@@ -4,8 +4,9 @@ onready var brain = $Brain
 var damage = 3
 
 func _init():
-	self.buoyancy = 0
-	self.weight = 0
+	self.animal = true
+	self.buoyancy = 0.9
+	self.weight = 1
 
 func _ready():
 	self.sprite.animation = "idle"

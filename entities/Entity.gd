@@ -11,7 +11,9 @@ var drag_ratio = 3 # perpendicular drag = parallel drag * drag_ratio
 var thrust_scalar = 2
 var torque_scalar = 0.5
 
+var animal = false
 var thrust_vector = null
+
 onready var current_buoyancy = buoyancy
 onready var current_thrust = thrust
 onready var current_weight = weight
@@ -27,10 +29,17 @@ func _ready():
 	pass
 
 func _process(delta):
-	var input_vector = get_control_vector()
-	self.thrust_vector = get_thrust_vector(delta)
-	adjust_facing(input_vector.x, delta)
-	self.current_thrust = input_vector.y
+	if animal:
+		self.thrust_vector = get_thrust_vector(delta)
+		adjust_facing(0.0, delta)
+		if self.current_facing.x < 0:
+			self.scale.y = -1
+		else:
+			self.scale.y = 1
+	else:
+		var input_vector = get_control_vector()
+		adjust_facing(input_vector.x, delta)
+		self.current_thrust = input_vector.y
 	calculate_forces()
 	move()
 
@@ -48,7 +57,7 @@ func calculate_forces():
 	
 	var environment_vector = Vector2(0, (self.current_weight * self.gravity) - self.current_buoyancy)
 	var thrust_vector = null
-	if self.thrust_vector: # only ai should use self.thrust_vector directly
+	if animal: # only ai should use self.thrust_vector directly
 		thrust_vector = self.thrust_vector
 	else:
 		thrust_vector = self.current_facing * self.current_thrust * self.current_thrust_scalar

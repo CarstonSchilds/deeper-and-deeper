@@ -7,7 +7,7 @@
 [ext_resource path="res://entities/enemies/states/Rest.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 60.0
+radius = 61.5641
 
 [sub_resource type="CircleShape2D" id=2]
 
@@ -45,8 +45,9 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LightDetection"]
 shape = SubResource( 2 )
+
 [connection signal="timeout" from="States/NaturalBehaviour/Timer" to="States/NaturalBehaviour" method="_on_Timer_timeout"]
 [connection signal="timeout" from="States/Rest/Timer" to="States/Rest" method="_on_Timer_timeout"]
-[connection signal="body_entered" from="ThreatRange" to="." method="_on_ThreatRange_body_entered"]
-[connection signal="body_exited" from="ThreatRange" to="." method="_on_ThreatRange_body_exited"]
+[connection signal="area_entered" from="ThreatRange" to="." method="_on_ThreatRange_area_entered"]
+[connection signal="area_exited" from="ThreatRange" to="." method="_on_ThreatRange_area_exited"]
 [connection signal="area_entered" from="LightDetection" to="." method="_on_LightDetection_area_entered"]

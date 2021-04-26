@@ -5,6 +5,8 @@ onready var particle_template = $SonarParticle
 onready var sonar_cooldown_timer = $SonarCooldown
 onready var sonar_arc = $SonarArc
 onready var sonar_ping_player = $"SonarPingPlayer"
+onready var sonar_aggro_area = $"SonarAggroArea"
+onready var sonar_aggro_timer = $"SonarAggroArea/SonarAggroTimer"
 onready var parent = $".."
 onready var world = $"../.."
 
@@ -31,8 +33,8 @@ func do_sonar():
 		var result = space_state.intersect_ray(self.global_position, self.global_position + get_normalized_ray_vector(angle_delta) * sonar_range, [self])
 		if 'position' in result:
 			draw_sonar_hit(result)
+	aggro_sonar_sensitive_enemies()
 	sonar_used()
-	
 
 func sonar_used():
 	sonar_available = false
@@ -57,3 +59,19 @@ func draw_sonar_hit(ray_cast_result):
 
 func _on_Player_sonar():
 	self.request_sonar = true
+
+var heard_sonar = {}
+
+func aggro_sonar_sensitive_enemies():
+	sonar_aggro_timer.start()
+	var nearby = sonar_aggro_area.get_overlapping_areas()
+	for i in nearby:
+		if i.name == 'LightDetection':
+			var brain = i.get_parent()
+			heard_sonar[brain] = brain
+
+func _on_SonarAggroTimer_timeout():
+	# Aggro all sonar sensitive enemies in sonar_threats
+	for brain in heard_sonar:
+		brain.heard_sonar(parent)
+	heard_sonar = {}

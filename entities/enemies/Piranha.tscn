@@ -1,5 +1,18 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://entities/enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/enemies/PirannahAngryAudioPlayer.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/06 Bloop.wav" type="AudioStream" id=3]
 
 [node name="Piranha" instance=ExtResource( 1 )]
+
+[node name="AnimatedSprite" parent="SpritePosition" index="0"]
+frame = 2
+playing = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="4"]
+stream = ExtResource( 3 )
+volume_db = -2.0
+script = ExtResource( 2 )
+
+[connection signal="state_changed" from="Brain" to="AudioStreamPlayer2D" method="_on_Brain_state_changed"]

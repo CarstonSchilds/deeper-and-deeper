@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/tiles/seafloor/Sand_Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://entities/enemies/Piranha.tscn" type="PackedScene" id=2]
@@ -10,17 +10,30 @@
 [ext_resource path="res://entities/Purple_Coral.tscn" type="PackedScene" id=8]
 [ext_resource path="res://entities/Blue_Coral.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/Orange_Coral.tscn" type="PackedScene" id=10]
+[ext_resource path="res://entities/enemies/BigShark.tscn" type="PackedScene" id=11]
 
 [node name="Level" type="Node2D"]
 
 [node name="Shark" parent="." instance=ExtResource( 4 )]
 position = Vector2( -183.287, 366.044 )
 
+[node name="BigShark" parent="." instance=ExtResource( 11 )]
+position = Vector2( -33.6804, 362.486 )
+
 [node name="Piranha" parent="." instance=ExtResource( 2 )]
 position = Vector2( 151.503, 56.5921 )
 
+[node name="Piranha2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 304.687, 78.4189 )
+
+[node name="Piranha3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 208.649, 99.4519 )
+
+[node name="Piranha4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 231.667, 45.0834 )
+
 [node name="Squid" parent="." instance=ExtResource( 5 )]
-position = Vector2( 252.963, 429.025 )
+position = Vector2( 319.781, 536.378 )
 
 [node name="Rocks" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -187,9 +200,6 @@ position = Vector2( 2307.91, 5564.07 )
 [node name="Purple_Coral2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 2064.27, 5598.98 )
 
-[node name="Orange_Coral" parent="Purple_Coral2" instance=ExtResource( 10 )]
-position = Vector2( -674.925, -28.8018 )
-
 [node name="Blue_Coral6" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1567.92, 5533.79 )
 
@@ -204,3 +214,6 @@ position = Vector2( 2153.19, 5597.7 )
 
 [node name="Orange_Coral4" parent="." instance=ExtResource( 10 )]
 position = Vector2( 2390.32, 5536.32 )
+
+[node name="Orange_Coral5" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1389.34, 5570.18 )
