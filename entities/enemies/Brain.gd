@@ -35,7 +35,6 @@ func notify():
 
 func think(delta):
 	var new_state = current_state.update(delta)
-	print(current_state.get_class())
 	if new_state:
 		self.change_state(new_state)
 	return self.control_vector

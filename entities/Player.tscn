@@ -1,8 +1,8 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sub/sub.png" type="Texture" id=2]
-[ext_resource path="res://assets/demo_sonar.png" type="Texture" id=3]
+[ext_resource path="res://assets/sub/sonar_particle_texture.tres" type="Texture" id=3]
 [ext_resource path="res://assets/light.png" type="Texture" id=4]
 [ext_resource path="res://assets/sub/sub_light.png" type="Texture" id=5]
 [ext_resource path="res://assets/global_light.png" type="Texture" id=6]
@@ -10,17 +10,21 @@
 [ext_resource path="res://assets/sounds/Submarine Prop Master.wav" type="AudioStream" id=8]
 [ext_resource path="res://entities/EngineSound.gd" type="Script" id=9]
 [ext_resource path="res://assets/music/Master.wav" type="AudioStream" id=10]
-
-[sub_resource type="CapsuleShape2D" id=11]
-radius = 7.0
+[ext_resource path="res://entities/Sonar.gd" type="Script" id=11]
+[ext_resource path="res://assets/sub/sonar_arc.png" type="Texture" id=12]
+[ext_resource path="res://assets/sounds/14 SonarPing_BW.59099.wav" type="AudioStream" id=13]
+[ext_resource path="res://entities/SonarParticle.gd" type="Script" id=14]
+[ext_resource path="res://assets/sounds/15 SonarPing_BW.59100.wav" type="AudioStream" id=15]
+[ext_resource path="res://entities/PingEchoPlayer.gd" type="Script" id=16]
+[ext_resource path="res://entities/LightClickPlayer.gd" type="Script" id=17]
+[ext_resource path="res://assets/sounds/12 Light switch.wav" type="AudioStream" id=18]
 
 [sub_resource type="CapsuleShape2D" id=1]
+radius = 7.0
+
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 6.15743
 height = 19.9959
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
@@ -28,42 +32,75 @@ region = Rect2( 0, 0, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 64, 32 )
+region = Rect2( 0, 0, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
-region = Rect2( 128, 0, 64, 32 )
+region = Rect2( 64, 0, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
 region = Rect2( 192, 0, 64, 32 )
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ SubResource( 2 ) ],
+"frames": [ SubResource( 3 ) ],
 "loop": true,
 "name": "idle",
 "speed": 4.0
 }, {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
 "name": "move",
 "speed": 8.0
 } ]
 
-[sub_resource type="Curve" id=8]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.518182 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="Gradient" id=17]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="CurveTexture" id=9]
-curve = SubResource( 8 )
+[sub_resource type="GradientTexture" id=18]
+gradient = SubResource( 17 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="Curve" id=9]
+max_value = 2.5
+_data = [ Vector2( 0, 0 ), 0.0, 2.5, 0, 1, Vector2( 1, 2.5 ), 2.5, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=11]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 2.0
+gravity = Vector3( 0, 0, 0 )
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 18 )
+
+[sub_resource type="Gradient" id=12]
+offsets = PoolRealArray( 0, 0.0026178, 0.549738, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0.457447, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 12 )
+
+[sub_resource type="Curve" id=14]
+max_value = 5.0
+_data = [ Vector2( 0.0148148, 0 ), 0.0, 5.07519, 0, 1, Vector2( 1, 5 ), 5.07519, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=15]
+curve = SubResource( 14 )
+
+[sub_resource type="ParticlesMaterial" id=16]
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 9 )
-color = Color( 0, 1, 0.0627451, 0.490196 )
+scale_curve = SubResource( 15 )
+color_ramp = SubResource( 13 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -72,18 +109,18 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
 rotation = 1.5708
-shape = SubResource( 11 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="SpritePosition" type="Position2D" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
-frames = SubResource( 7 )
+frames = SubResource( 8 )
 animation = "move"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -95,15 +132,6 @@ drag_margin_left = 0.1
 drag_margin_top = 0.1
 drag_margin_right = 0.1
 drag_margin_bottom = 0.1
-
-[node name="SonarParticle" type="Particles2D" parent="."]
-light_mask = -2147483647
-emitting = false
-amount = 3
-lifetime = 3.0
-one_shot = true
-process_material = SubResource( 10 )
-texture = ExtResource( 3 )
 
 [node name="Spotlight" type="Light2D" parent="."]
 z_index = -1
@@ -123,6 +151,7 @@ shadow_enabled = true
 shadow_gradient_length = 0.1
 
 [node name="Sun" type="Light2D" parent="."]
+position = Vector2( 0, -0.0556793 )
 texture = ExtResource( 6 )
 mode = 3
 range_layer_min = -101
@@ -155,12 +184,49 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SonarCooldown" type="Timer" parent="."]
+[node name="Sonar" type="Node2D" parent="."]
+position = Vector2( 0, -12 )
+script = ExtResource( 11 )
+
+[node name="SonarCooldown" type="Timer" parent="Sonar"]
 wait_time = 2.0
 one_shot = true
 
-[node name="SonarAnchor" type="Position2D" parent="."]
-position = Vector2( 0, -12 )
+[node name="SonarParticle" type="Particles2D" parent="Sonar"]
+light_mask = -2147483647
+emitting = false
+amount = 4
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource( 11 )
+texture = ExtResource( 3 )
+script = ExtResource( 14 )
+
+[node name="Timer" type="Timer" parent="Sonar/SonarParticle"]
+one_shot = true
+
+[node name="PingEchoPlayer" type="AudioStreamPlayer2D" parent="Sonar/SonarParticle"]
+stream = ExtResource( 15 )
+volume_db = -25.0
+pitch_scale = 0.75
+script = ExtResource( 16 )
+
+[node name="GabageCollectTimer" type="Timer" parent="Sonar/SonarParticle"]
+wait_time = 5.0
+one_shot = true
+
+[node name="SonarArc" type="Particles2D" parent="Sonar"]
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+process_material = SubResource( 16 )
+texture = ExtResource( 12 )
+
+[node name="SonarPingPlayer" type="AudioStreamPlayer" parent="Sonar"]
+stream = ExtResource( 13 )
+volume_db = -9.0
 
 [node name="PropAnchor" type="Position2D" parent="."]
 position = Vector2( -20, 0 )
@@ -186,11 +252,22 @@ polygon = PoolVector2Array( 0, 6, -7, 9, -12, 14, -22, 54, -22, 94, -3, 116, 3, 
 visible = false
 texture = ExtResource( 4 )
 offset = Vector2( 0, 141 )
+
+[node name="LightClickPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+volume_db = -3.0
+script = ExtResource( 17 )
+
 [connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
 [connection signal="ahead_flank" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_flank"]
 [connection signal="ahead_slow" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_slow"]
 [connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
+[connection signal="light" from="." to="LightClickPlayer" method="_on_Player_light"]
+[connection signal="sonar" from="." to="Sonar" method="_on_Player_sonar"]
 [connection signal="stop" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_stop"]
 [connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
 [connection signal="body_exited" from="CollisionDetector" to="." method="_on_CollisionDetector_body_exited"]
-[connection signal="timeout" from="SonarCooldown" to="." method="_on_SonarCooldown_timeout"]
+[connection signal="timeout" from="Sonar/SonarCooldown" to="Sonar" method="_on_SonarCooldown_timeout"]
+[connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle/PingEchoPlayer" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Sonar/SonarParticle/GabageCollectTimer" to="Sonar/SonarParticle" method="_on_GabageCollectTimer_timeout"]
