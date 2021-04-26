@@ -15,16 +15,20 @@ func set_light(light):
 func get_light():
 	return self.light
 
-var is_mirrored = true
+# Modifying mirroring while the engine is running doesn't appear to work
 
-func set_parralax_mirroring(mirror : bool):
-	if mirror && !is_mirrored:
-		background.motion_mirroring = Vector2(4096,4096)
-		midground.motion_mirroring = Vector2(4096,4096)
-		foreground.motion_mirroring = Vector2(4096,4096)
-		is_mirrored = true
-	elif is_mirrored:
-		background.motion_mirroring = Vector2(4096,0)
-		midground.motion_mirroring = Vector2(4096,0)
-		foreground.motion_mirroring = Vector2(4096,0)
-		is_mirrored = false
+# var is_mirrored = true
+
+# const MIRROR_SIZE = 4128
+
+# func set_parralax_mirroring(mirror : bool):
+#	if mirror && !is_mirrored:
+#		background.motion_mirroring = Vector2(0,MIRROR_SIZE)
+#		midground.motion_mirroring = Vector2(0,MIRROR_SIZE)
+#		foreground.motion_mirroring = Vector2(0,MIRROR_SIZE)
+#		is_mirrored = true
+#	elif is_mirrored:
+#		background.motion_mirroring = Vector2(0,0)
+#		midground.motion_mirroring = Vector2(0,0)
+#		foreground.motion_mirroring = Vector2(0,0)
+#		is_mirrored = false

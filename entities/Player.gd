@@ -9,16 +9,15 @@ onready var glow = $Glow
 onready var depth_label = $UI/Depth
 onready var stats_label = $UI/Stats
 onready var propellor_pos = $PropAnchor
-onready var water = $"../Water"
+#onready var water = $"../Water"
 onready var engine_sound = $"PropAnchor/EngineSoundPlayer"
 onready var camera = $"Camera"
 
 var depth = 0
 var depth_scale = 1500 # set this based on the max depth of the level
-var background_light = null
 var max_depth = -INF
 
-var control_buoyancy = 100.0
+var control_buoyancy = 50.0
 var control_throttle = 0.0
 var control_vector = Vector2.ZERO
 
@@ -178,10 +177,10 @@ func handle_depth():
 		self.max_depth = depth
 		
 	# Enable water BG mirroring so we don't reach the end of it
-	if depth > 2048:
-		water.set_parralax_mirroring(true)
-	else:
-		water.set_parralax_mirroring(false)
+	# if depth > 2048:
+	#	water.set_parralax_mirroring(true)
+	# else:
+	#	water.set_parralax_mirroring(false)
 
 func damage(amount):
 	self.health -= amount

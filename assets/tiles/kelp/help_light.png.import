@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/corals.png-e6cad9d085f47b21808ac60928e17b34.stex"
+path="res://.import/help_light.png-e7e83f2478f34dec2dd7b7af7702b78e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/corals/corals.png"
-dest_files=[ "res://.import/corals.png-e6cad9d085f47b21808ac60928e17b34.stex" ]
+source_file="res://assets/tiles/kelp/help_light.png"
+dest_files=[ "res://.import/help_light.png-e7e83f2478f34dec2dd7b7af7702b78e.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

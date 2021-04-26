@@ -132,6 +132,7 @@ shape = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
 frames = SubResource( 8 )
 animation = "move"
+frame = 2
 playing = true
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -152,7 +153,7 @@ offset = Vector2( 0, 243 )
 color = Color( 1, 0.945098, 0.694118, 1 )
 range_layer_min = -101
 shadow_enabled = true
-shadow_gradient_length = 0.4
+shadow_gradient_length = 5.0
 
 [node name="SpotlightArea" type="Area2D" parent="Spotlight"]
 position = Vector2( 0, -1.45908 )
@@ -170,11 +171,11 @@ offset = Vector2( 0, 141 )
 
 [node name="Glow" type="Light2D" parent="."]
 texture = ExtResource( 5 )
-texture_scale = 0.7
+texture_scale = 1.5
 color = Color( 1, 0.945098, 0.694118, 1 )
 range_layer_min = -101
 shadow_enabled = true
-shadow_gradient_length = 0.1
+shadow_gradient_length = 5.0
 
 [node name="Sun" type="Light2D" parent="."]
 position = Vector2( -0.754059, 2.02064 )
@@ -277,7 +278,6 @@ script = ExtResource( 21 )
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 volume_db = -10.0
-autoplay = true
 
 [node name="LightClickPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
@@ -310,21 +310,22 @@ script = ExtResource( 23 )
 stream = ExtResource( 25 )
 volume_db = -2.0
 script = ExtResource( 24 )
-[connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
+
 [connection signal="ahead_fast" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_fast"]
-[connection signal="ahead_flank" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_flank"]
+[connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
 [connection signal="ahead_flank" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_flank"]
-[connection signal="ahead_slow" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_slow"]
+[connection signal="ahead_flank" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_flank"]
 [connection signal="ahead_slow" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_slow"]
-[connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
+[connection signal="ahead_slow" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_slow"]
 [connection signal="astern" from="." to="PropAnchor/EngineBubbles" method="_on_Player_astern"]
+[connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesLeft" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
 [connection signal="light" from="." to="LightClickPlayer" method="_on_Player_light"]
 [connection signal="sonar" from="." to="Sonar" method="_on_Player_sonar"]
-[connection signal="stop" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_stop"]
 [connection signal="stop" from="." to="PropAnchor/EngineBubbles" method="_on_Player_stop"]
+[connection signal="stop" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_stop"]
 [connection signal="zoom_in" from="." to="Camera" method="_on_Player_zoom_in"]
 [connection signal="zoom_out" from="." to="Camera" method="_on_Player_zoom_out"]
 [connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]

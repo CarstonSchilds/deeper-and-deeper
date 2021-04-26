@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/corals.png-e6cad9d085f47b21808ac60928e17b34.stex"
+path="res://.import/kelp_light.png-5c7f420327ba4abf1f4c15b2e016cc03.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/corals/corals.png"
-dest_files=[ "res://.import/corals.png-e6cad9d085f47b21808ac60928e17b34.stex" ]
+source_file="res://assets/tiles/kelp/kelp_light.png"
+dest_files=[ "res://.import/kelp_light.png-5c7f420327ba4abf1f4c15b2e016cc03.stex" ]
 
 [params]
 
