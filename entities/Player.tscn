@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sub/sub.png" type="Texture" id=2]
@@ -34,7 +34,7 @@
 [ext_resource path="res://assets/sub/sub2.png" type="Texture" id=32]
 [ext_resource path="res://entities/DamageParticle.gd" type="Script" id=33]
 [ext_resource path="res://assets/sounds/Breach Master.wav" type="AudioStream" id=34]
-[ext_resource path="res://assets/sounds/Alarm Master.wav" type="AudioStream" id=35]
+[ext_resource path="res://assets/sounds/Alarm Fade Out.wav" type="AudioStream" id=35]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 9.39685
@@ -76,6 +76,22 @@ animations = [ {
 "name": "move",
 "speed": 8.0
 } ]
+
+[sub_resource type="Animation" id=21]
+resource_name = "FadeOut"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
 
 [sub_resource type="Gradient" id=9]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
@@ -157,7 +173,7 @@ shape = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
 frames = SubResource( 8 )
 animation = "move"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -170,6 +186,22 @@ drag_margin_top = 0.1
 drag_margin_right = 0.1
 drag_margin_bottom = 0.1
 script = ExtResource( 19 )
+
+[node name="FadeToBlackLayer" type="CanvasLayer" parent="Camera"]
+layer = 128
+
+[node name="ColorRect" type="ColorRect" parent="Camera/FadeToBlackLayer"]
+margin_left = -2048.0
+margin_top = -2048.0
+margin_right = 2048.0
+margin_bottom = 2048.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FadeToBlackAnimationPlayer" type="AnimationPlayer" parent="Camera/FadeToBlackLayer/ColorRect"]
+anims/FadeOut = SubResource( 21 )
 
 [node name="Spotlight" type="Light2D" parent="."]
 z_index = -1
@@ -427,34 +459,35 @@ volume_db = -5.0
 stream = ExtResource( 35 )
 volume_db = -9.0
 
-[connection signal="ahead_fast" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_fast"]
 [connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
-[connection signal="ahead_flank" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_flank"]
+[connection signal="ahead_fast" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_fast"]
 [connection signal="ahead_flank" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_flank"]
-[connection signal="ahead_slow" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_slow"]
+[connection signal="ahead_flank" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_flank"]
 [connection signal="ahead_slow" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_slow"]
-[connection signal="astern" from="." to="PropAnchor/EngineBubbles" method="_on_Player_astern"]
+[connection signal="ahead_slow" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_slow"]
 [connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
+[connection signal="astern" from="." to="PropAnchor/EngineBubbles" method="_on_Player_astern"]
 [connection signal="big_damage" from="." to="BigDamagePlayer" method="_on_Player_big_damage"]
-[connection signal="buoyancy_down" from="." to="BallastBubblesLeft" method="_on_Player_buoyancy_down"]
-[connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
+[connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
+[connection signal="buoyancy_down" from="." to="BallastBubblesLeft" method="_on_Player_buoyancy_down"]
 [connection signal="light" from="." to="LightClickPlayer" method="_on_Player_light"]
 [connection signal="little_damage" from="." to="LittleDamagePlayer" method="_on_Player_little_damage"]
-[connection signal="show_damage" from="." to="BallastBubblesLeft" method="_on_Player_show_damage"]
-[connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
+[connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
+[connection signal="show_damage" from="." to="BallastBubblesLeft" method="_on_Player_show_damage"]
 [connection signal="sonar" from="." to="Sonar" method="_on_Player_sonar"]
-[connection signal="stop" from="." to="PropAnchor/EngineBubbles" method="_on_Player_stop"]
 [connection signal="stop" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_stop"]
+[connection signal="stop" from="." to="PropAnchor/EngineBubbles" method="_on_Player_stop"]
 [connection signal="terrain_damage" from="." to="TerrainDamagePlayer" method="_on_Player_terrain_damage"]
 [connection signal="zoom_in" from="." to="Camera" method="_on_Player_zoom_in"]
 [connection signal="zoom_out" from="." to="Camera" method="_on_Player_zoom_out"]
 [connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
 [connection signal="body_exited" from="CollisionDetector" to="." method="_on_CollisionDetector_body_exited"]
+[connection signal="animation_finished" from="Camera/FadeToBlackLayer/ColorRect/FadeToBlackAnimationPlayer" to="." method="_on_FadeToBlackAnimationPlayer_animation_finished"]
 [connection signal="timeout" from="Sonar/SonarCooldown" to="Sonar" method="_on_SonarCooldown_timeout"]
-[connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle/PingEchoPlayer" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Sonar/SonarParticle/GabageCollectTimer" to="Sonar/SonarParticle" method="_on_GabageCollectTimer_timeout"]
 [connection signal="timeout" from="Sonar/SonarAggroArea/SonarAggroTimer" to="Sonar" method="_on_SonarAggroTimer_timeout"]
 [connection signal="timeout" from="TerrainDamagePlayer/Timer" to="TerrainDamagePlayer" method="_on_Timer_timeout"]

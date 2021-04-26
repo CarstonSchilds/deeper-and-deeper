@@ -43,14 +43,13 @@ func _process(delta):
 	self.throttle_label.text = "Throttle %s" % [throttle_state_names[current_throttle_state]]
 	depth_label.text = "Current %0.0f\nMax %0.0f" % [depth, self.max_depth]
 	
-	if self.health < 25:
+	if self.health <= 25:
 		self.hull_label.set("custom_colors/font_color", ColorN("red", 1))
-	elif self.health < 50:
-		self.hull_label.set("custom_colors/font_color", ColorN("orange", 1))
-		
-	if self.health < 25:
 		self.buoyancy_label.set("custom_colors/font_color", ColorN("red", 1))
-		
+	elif self.health <= 50:
+		self.hull_label.set("custom_colors/font_color", ColorN("orange", 1))
+
+
 func _physics_process(delta):
 	handle_collisions(delta)
 
@@ -116,6 +115,10 @@ func handle_input():
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("rotate_right") - Input.get_action_strength("rotate_left")
 	input_vector.y = Input.get_action_strength("forward_thrust") - Input.get_action_strength("reverse_thrust")
+	
+	if self.health == 0:
+		input_vector.x = 0
+		input_vector.y = 0
 		
 	if input_vector.y > 0 && last_throttle_control <= 0 && current_throttle_state < 4:
 		last_throttle_control = 1
@@ -164,7 +167,7 @@ func handle_input():
 	if buoyancy_input == 0 && last_buoyancy_control != 0:
 		last_buoyancy_control = 0
 	
-	if self.health < 25:	
+	if self.health <= 25:	
 		control_buoyancy = min(control_buoyancy, (self.health / 25.0) * 90.0)
 	
 	self.buoyancy = ( control_buoyancy / 100.0 ) * ( SUB_BUOYANCY * 0.1 ) + ( SUB_BUOYANCY * 0.85 )
@@ -221,8 +224,25 @@ func handle_depth():
 	# else:
 	#	water.set_parralax_mirroring(false)
 
+onready var alarm_player = $"AlarmPlayer"
+var alarm_played = false
+
+onready var fade_to_black_animation_player = $"Camera/FadeToBlackLayer/ColorRect/FadeToBlackAnimationPlayer"
+var death_fade_to_black_started = false
+	
 func damage(amount):
 	self.health -= amount
+	if self.health <= 25 && !alarm_played:
+		alarm_player.play()
+		alarm_played = true
+	if self.health < 0:
+		self.health = 0
+	
+	if self.health == 0 && !death_fade_to_black_started:
+		fade_to_black_animation_player.play("FadeOut")
+
+func _on_FadeToBlackAnimationPlayer_animation_finished(anim_name):
+	get_tree().change_scene("res://ui/TitleScreen.tscn")
 
 func get_control_vector():
 	return control_vector
@@ -276,5 +296,7 @@ func _on_CollisionDetector_body_entered(body):
 func _on_CollisionDetector_body_exited(body):
 	if body.name != 'Player':
 		colliding.erase(body)
+
+
 
 
