@@ -1,17 +1,19 @@
 extends Node2D
 
+signal hit_player
+
 var control_vector = Vector2()
 var home = Vector2()
 var body = null
-var world = null
-var user = null
 var current_state = null
 var threatened = false
+var rest = false
+var target = null
 onready var state_map = {
 	'natural_behaviour': $States/NaturalBehaviour,
 	'pursue': $States/Pursue,
 	'return_home': $States/ReturnHome,
-	'attack': $States/Attack
+	'rest': $States/Rest
 }
 var state_stack = []
 
@@ -33,6 +35,7 @@ func notify():
 
 func think(delta):
 	var new_state = current_state.update(delta)
+	print(current_state.get_class())
 	if new_state:
 		self.change_state(new_state)
 	return self.control_vector
@@ -52,6 +55,9 @@ func change_state(state):
 	if state != 'previous':
 		current_state.enter(self)
 	emit_signal('state_changed', state_stack)
+
+func handle_damaged_player():
+	self.rest = true
 
 func _on_ThreatRange_body_entered(body):
 	if body.name == 'Player':

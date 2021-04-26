@@ -1,6 +1,7 @@
 extends "res://entities/Entity.gd"
 
 onready var brain = $Brain
+var damage = 3
 
 func _init():
 	self.buoyancy = 0

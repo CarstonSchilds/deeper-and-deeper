@@ -1,5 +1,7 @@
 extends "res://entities/Entity.gd"
 
+signal hit_player
+
 onready var sonar = $SonarParticle
 onready var spotlight = $Spotlight
 onready var sun = $Sun
@@ -39,6 +41,7 @@ func _ready():
 func _process(delta):
 	handle_input()
 	handle_depth()
+	handle_collisions(delta)
 	self.stats_label.text = "Hull %0.0f\nBuoyancy %0.0f\nThrottle %s" % [self.health, control_buoyancy, throttle_state_names[current_throttle_state]]
 	self.depth_label.text = "Current %0.0f\nMax %0.0f" % [depth, self.max_depth]
 	
@@ -192,6 +195,43 @@ func handle_depth():
 	else:
 		water.set_parralax_mirroring(false)
 
+func damage(amount):
+	self.health -= amount
 
 func get_control_vector():
 	return control_vector
+
+var colliding = {}
+
+func handle_collisions(delta):
+	for body in colliding.keys():
+		if colliding[body].duration == 0:
+			if "initial_damage" in colliding[body]:
+				self.damage(colliding[body].initial_damage)
+				colliding[body].erase("initial_damage")
+			else:
+				self.damage(colliding[body].damage)
+		colliding[body].duration += delta
+		if colliding[body].duration > 1.5:
+			colliding[body].duration = 0
+
+func create_collision(body):
+	var result = {}
+	result.duration = 0
+	if "brain" in body:
+		body.brain.handle_damaged_player()
+	if "damage" in body: # if the body specifies a damage value, then it's an enemy
+		result.damage = body.damage
+	else: # if the body doesn't specify a damage amount, it is terrain
+		result.initial_damage = 5
+		result.damage = 1
+	return result
+
+func _on_CollisionDetector_body_entered(body):
+	if body.name != 'Player':
+		colliding[body] = create_collision(body)
+
+func _on_CollisionDetector_body_exited(body):
+	if body.name != 'Player':
+		colliding.erase(body)
+	

@@ -17,4 +17,4 @@ func update(delta):
 	brain.move_and_steer_towards(brain.home)
 
 func get_class():
-	return 'pursue'
+	return 'return_home'

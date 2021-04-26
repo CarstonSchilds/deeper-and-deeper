@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sub/sub.png" type="Texture" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://assets/sounds/Submarine Prop Master.wav" type="AudioStream" id=8]
 [ext_resource path="res://entities/EngineSound.gd" type="Script" id=9]
 [ext_resource path="res://assets/music/Master.wav" type="AudioStream" id=10]
+
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 7.0
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.15743
@@ -64,6 +67,12 @@ color = Color( 0, 1, 0.0627451, 0.490196 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
+
+[node name="CollisionDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
+rotation = 1.5708
+shape = SubResource( 11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -167,11 +176,6 @@ stream = ExtResource( 10 )
 volume_db = -10.0
 autoplay = true
 
-[connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
-[connection signal="ahead_flank" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_flank"]
-[connection signal="ahead_slow" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_slow"]
-[connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
-[connection signal="stop" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_stop"]
 [node name="SpotlightArea" type="Area2D" parent="."]
 collision_mask = 2
 
@@ -182,4 +186,11 @@ polygon = PoolVector2Array( 0, 6, -7, 9, -12, 14, -22, 54, -22, 94, -3, 116, 3, 
 visible = false
 texture = ExtResource( 4 )
 offset = Vector2( 0, 141 )
+[connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
+[connection signal="ahead_flank" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_flank"]
+[connection signal="ahead_slow" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_slow"]
+[connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
+[connection signal="stop" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_stop"]
+[connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
+[connection signal="body_exited" from="CollisionDetector" to="." method="_on_CollisionDetector_body_exited"]
 [connection signal="timeout" from="SonarCooldown" to="." method="_on_SonarCooldown_timeout"]
