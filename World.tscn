@@ -39,7 +39,7 @@ script = ExtResource( 1 )
 follow_viewport_enable = true
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( -74.2393, -164.344 )
+position = Vector2( -73.6168, 27.4228 )
 
 [node name="TestLevel" parent="." instance=ExtResource( 7 )]
 
@@ -50,5 +50,4 @@ color = Color( 0, 0, 0, 0.901961 )
 position = Vector2( 437.76, 1542.26 )
 frames = SubResource( 5 )
 animation = "idle"
-frame = 3
 playing = true
