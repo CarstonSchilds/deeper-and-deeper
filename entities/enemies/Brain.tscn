@@ -32,7 +32,7 @@ script = ExtResource( 3 )
 script = ExtResource( 5 )
 
 [node name="Timer" type="Timer" parent="States/Rest"]
-wait_time = 0.8
+wait_time = 1.2
 
 [node name="ThreatRange" type="Area2D" parent="."]
 
