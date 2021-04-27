@@ -173,7 +173,7 @@ margin_bottom = 825.0
 theme = SubResource( 8 )
 text = "A, D      - Rotate Sub
 W, S     - Throttle Control
-R, F      - Byouancy Control
+R, F      - Buoyancy Control
 E           - Toggle Spotlight
 Space  - Sonar"
 valign = 1
