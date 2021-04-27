@@ -23,7 +23,6 @@ func _on_Play_button_up():
 	bubbles_sound.play()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	print("starting")
 	get_tree().change_scene("res://World.tscn")
 
 func _process(delta):

@@ -31,7 +31,6 @@ func _init():
 	self.drag_coefficient = SUB_DRAG
 
 func _ready():
-	print(self)
 	pass
 
 func _process(delta):
