@@ -1,77 +1,107 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://ui/TitleScreen.gd" type="Script" id=1]
 [ext_resource path="res://assets/ui/fonts/DNPixel-Regular.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://entities/Water.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/water/Sky_Gradient.tres" type="Texture" id=4]
+[ext_resource path="res://assets/sounds/Bubbles 4 Master.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/demo_sonar.png" type="Texture" id=6]
+[ext_resource path="res://assets/water/uifade.tres" type="Animation" id=7]
 
-[sub_resource type="Animation" id=1]
-resource_name = "fade"
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 2.1 ),
-"transitions": PoolRealArray( 1, 0.901247 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
-}
-
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 90
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="Theme" id=3]
-default_font = SubResource( 2 )
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 30
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="Theme" id=5]
-default_font = SubResource( 4 )
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
 
-[node name="TitleScreen" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[sub_resource type="DynamicFont" id=8]
+size = 60
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=9]
+default_font = SubResource( 8 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 45
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=11]
+default_font = SubResource( 10 )
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.451264, 1 )
+colors = PoolColorArray( 0.289658, 0.222816, 0.966797, 1, 0.565934, 0.981456, 0.849982, 1, 0.984614, 0.983166, 0.999281, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 2
+emission_box_extents = Vector3( 960, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+gravity = Vector3( 0, -60, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+scale_random = 1.0
+color_ramp = SubResource( 6 )
+
+[node name="TitleScreen" type="Node2D"]
 script = ExtResource( 1 )
+
+[node name="ParallaxBackground" parent="." instance=ExtResource( 3 )]
+
+[node name="CameraRig" type="Position2D" parent="."]
+
+[node name="Camera" type="Camera2D" parent="CameraRig"]
+offset = Vector2( 960, 540 )
+current = true
+
+[node name="Title" type="RichTextLabel" parent="CameraRig"]
+margin_left = 690.0
+margin_top = 80.0
+margin_right = 1230.0
+margin_bottom = 180.0
+theme = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=12 freq=4]Sublunker[/wave]"
+text = "Sublunker"
+
+[node name="MainMenu" type="Control" parent="CameraRig"]
+margin_right = 40.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/fade = SubResource( 1 )
-
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 1024.0
-margin_bottom = 600.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="."]
-margin_right = 1024.0
-margin_bottom = 200.0
-theme = SubResource( 3 )
-text = "Submersea"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Play" type="Button" parent="."]
-margin_top = 390.0
-margin_right = 1024.0
-margin_bottom = 486.0
+[node name="Play" type="Button" parent="CameraRig/MainMenu"]
+margin_left = 870.0
+margin_top = 400.0
+margin_right = 1050.0
+margin_bottom = 450.0
 focus_mode = 0
-theme = SubResource( 5 )
+theme = SubResource( 4 )
+custom_colors/font_color_hover = Color( 0.898039, 0.901961, 0.470588, 1 )
+custom_colors/font_color_pressed = Color( 0.54902, 1, 0.47451, 1 )
 shortcut_in_tooltip = false
 enabled_focus_mode = 0
 text = "Play"
@@ -80,4 +110,165 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="button_up" from="Play" to="." method="_on_Play_button_up"]
+[node name="Controls" type="Button" parent="CameraRig/MainMenu"]
+margin_left = 870.0
+margin_top = 480.0
+margin_right = 1050.0
+margin_bottom = 530.0
+focus_mode = 0
+theme = SubResource( 4 )
+custom_colors/font_color_hover = Color( 0.898039, 0.901961, 0.470588, 1 )
+custom_colors/font_color_pressed = Color( 0.54902, 1, 0.47451, 1 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "Controls"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="Button" parent="CameraRig/MainMenu"]
+margin_left = 870.0
+margin_top = 560.0
+margin_right = 1050.0
+margin_bottom = 610.0
+focus_mode = 0
+theme = SubResource( 4 )
+custom_colors/font_color_hover = Color( 0.898039, 0.901961, 0.470588, 1 )
+custom_colors/font_color_pressed = Color( 0.54902, 1, 0.47451, 1 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "Credits"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Control" parent="CameraRig"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="CameraRig/Controls"]
+margin_left = 807.0
+margin_top = 290.0
+margin_right = 1113.0
+margin_bottom = 350.0
+theme = SubResource( 9 )
+text = "Controls:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="CameraRig/Controls"]
+margin_left = 396.0
+margin_top = 450.0
+margin_right = 1524.0
+margin_bottom = 825.0
+theme = SubResource( 11 )
+text = "A, D      - Rotate Sub
+W, S     - Throttle Control
+R, F      - Byouancy Control
+E           - Toggle Spotlight
+Space  - Sonar"
+valign = 1
+
+[node name="Back2" type="Button" parent="CameraRig/Controls"]
+margin_left = 1762.77
+margin_top = 45.0324
+margin_right = 1862.77
+margin_bottom = 95.0324
+focus_mode = 0
+theme = SubResource( 4 )
+custom_colors/font_color_hover = Color( 0.898039, 0.901961, 0.470588, 1 )
+custom_colors/font_color_pressed = Color( 0.54902, 1, 0.47451, 1 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "Back"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="Control" parent="CameraRig"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="CameraRig/Credits"]
+margin_left = 1762.77
+margin_top = 45.0324
+margin_right = 1862.77
+margin_bottom = 95.0324
+focus_mode = 0
+theme = SubResource( 4 )
+custom_colors/font_color_hover = Color( 0.898039, 0.901961, 0.470588, 1 )
+custom_colors/font_color_pressed = Color( 0.54902, 1, 0.47451, 1 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "Back"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CameraRig/Credits"]
+margin_left = 828.0
+margin_top = 290.0
+margin_right = 1092.0
+margin_bottom = 350.0
+theme = SubResource( 9 )
+text = "Credits:"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="CameraRig/Credits"]
+margin_left = 396.0
+margin_top = 450.0
+margin_right = 1524.0
+margin_bottom = 825.0
+theme = SubResource( 11 )
+text = "Programmers
+Colin Heathman, Carston Schilds
+
+Artist
+Colin Heathman
+
+Sound Design and Music
+Cam Heathman"
+align = 1
+valign = 1
+
+[node name="Sky" type="Sprite" parent="CameraRig"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 960, 540 )
+rotation = -1.5708
+scale = Vector2( 1.1, 1920 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraRig/Sky"]
+anims/fade = ExtResource( 7 )
+
+[node name="BubblesParticle" type="Particles2D" parent="CameraRig"]
+position = Vector2( 960, 1080 )
+emitting = false
+amount = 1000
+lifetime = 15.0
+process_material = SubResource( 7 )
+texture = ExtResource( 6 )
+
+[node name="BubblesSound" type="AudioStreamPlayer" parent="CameraRig"]
+stream = ExtResource( 5 )
+[connection signal="button_up" from="CameraRig/MainMenu/Play" to="." method="_on_Play_button_up"]
+[connection signal="button_up" from="CameraRig/MainMenu/Controls" to="." method="_on_Controls_button_up"]
+[connection signal="button_up" from="CameraRig/MainMenu/Credits" to="." method="_on_Credits_button_up"]
+[connection signal="button_up" from="CameraRig/Controls/Back2" to="." method="_on_Back2_button_up"]
+[connection signal="button_up" from="CameraRig/Credits/Back" to="." method="_on_Back_button_up"]
