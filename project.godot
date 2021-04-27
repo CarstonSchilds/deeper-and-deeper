@@ -15,8 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="deeper-and-deeper"
-run/main_scene="res://World.tscn"
+config/name="Sublunker"
+run/main_scene="res://ui/TitleScreen.tscn"
 config/icon="res://assets/icon.png"
 
 [autoload]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sub/sub.png" type="Texture" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://assets/ui/ui_theme.tres" type="Theme" id=7]
 [ext_resource path="res://assets/sounds/Submarine Prop Master.wav" type="AudioStream" id=8]
 [ext_resource path="res://entities/EngineSound.gd" type="Script" id=9]
-[ext_resource path="res://assets/music/Master.wav" type="AudioStream" id=10]
 [ext_resource path="res://entities/Sonar.gd" type="Script" id=11]
 [ext_resource path="res://assets/sub/sonar_arc.png" type="Texture" id=12]
 [ext_resource path="res://assets/sounds/14 SonarPing_BW.59099.wav" type="AudioStream" id=13]
@@ -77,7 +76,7 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=9]
 resource_name = "FadeOut"
 length = 5.0
 tracks/0/type = "value"
@@ -93,41 +92,41 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="Gradient" id=9]
+[sub_resource type="Gradient" id=10]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=10]
-gradient = SubResource( 9 )
+[sub_resource type="GradientTexture" id=11]
+gradient = SubResource( 10 )
 
-[sub_resource type="Curve" id=11]
+[sub_resource type="Curve" id=12]
 max_value = 2.5
 _data = [ Vector2( 0, 0 ), 0.0, 2.5, 0, 1, Vector2( 1, 2.5 ), 2.5, 0.0, 1, 0 ]
 
-[sub_resource type="CurveTexture" id=12]
-curve = SubResource( 11 )
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
 
-[sub_resource type="ParticlesMaterial" id=13]
+[sub_resource type="ParticlesMaterial" id=14]
 lifetime_randomness = 0.5
 emission_shape = 1
 emission_sphere_radius = 2.0
 gravity = Vector3( 0, 0, 0 )
-scale_curve = SubResource( 12 )
-color_ramp = SubResource( 10 )
+scale_curve = SubResource( 13 )
+color_ramp = SubResource( 11 )
 
-[sub_resource type="Gradient" id=14]
+[sub_resource type="Gradient" id=15]
 colors = PoolColorArray( 0.25098, 0.466667, 0.533333, 1, 0.25098, 0.466667, 0.533333, 0 )
 
-[sub_resource type="GradientTexture" id=15]
-gradient = SubResource( 14 )
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 15 )
 
-[sub_resource type="Curve" id=16]
+[sub_resource type="Curve" id=17]
 max_value = 2.0
 _data = [ Vector2( 0, 0.486364 ), 0.0, 0.940909, 0, 1, Vector2( 1, 1.42727 ), 0.940909, 0.0, 1, 0 ]
 
-[sub_resource type="CurveTexture" id=17]
-curve = SubResource( 16 )
+[sub_resource type="CurveTexture" id=18]
+curve = SubResource( 17 )
 
-[sub_resource type="ParticlesMaterial" id=18]
+[sub_resource type="ParticlesMaterial" id=19]
 lifetime_randomness = 0.5
 emission_shape = 1
 emission_sphere_radius = 2.0
@@ -137,11 +136,11 @@ initial_velocity = 2.0
 initial_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 17 )
-color_ramp = SubResource( 15 )
+scale_curve = SubResource( 18 )
+color_ramp = SubResource( 16 )
 anim_speed_random = 1.0
 
-[sub_resource type="ParticlesMaterial" id=19]
+[sub_resource type="ParticlesMaterial" id=20]
 emission_shape = 1
 emission_sphere_radius = 0.2
 flag_disable_z = true
@@ -152,7 +151,7 @@ scale = 1.05
 scale_random = 0.04
 color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="CircleShape2D" id=20]
+[sub_resource type="CircleShape2D" id=21]
 radius = 22.6978
 
 [node name="Player" type="KinematicBody2D"]
@@ -173,7 +172,6 @@ shape = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
 frames = SubResource( 8 )
 animation = "move"
-frame = 2
 playing = true
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -201,7 +199,7 @@ __meta__ = {
 }
 
 [node name="FadeToBlackAnimationPlayer" type="AnimationPlayer" parent="Camera/FadeToBlackLayer/ColorRect"]
-anims/FadeOut = SubResource( 21 )
+anims/FadeOut = SubResource( 9 )
 
 [node name="Spotlight" type="Light2D" parent="."]
 z_index = -1
@@ -235,7 +233,7 @@ shadow_enabled = true
 shadow_gradient_length = 5.0
 
 [node name="Sun" type="Light2D" parent="."]
-position = Vector2( -0.333588, 2.02064 )
+position = Vector2( -2.98023e-08, 2 )
 scale = Vector2( 10, 10 )
 texture = ExtResource( 6 )
 mode = 3
@@ -314,7 +312,7 @@ amount = 4
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
-process_material = SubResource( 13 )
+process_material = SubResource( 14 )
 texture = ExtResource( 3 )
 script = ExtResource( 14 )
 
@@ -370,13 +368,9 @@ emitting = false
 amount = 32
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 18 )
+process_material = SubResource( 19 )
 texture = ExtResource( 20 )
 script = ExtResource( 21 )
-
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 10 )
-volume_db = -10.0
 
 [node name="LightClickPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
@@ -390,7 +384,7 @@ amount = 32
 one_shot = true
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 18 )
+process_material = SubResource( 19 )
 texture = ExtResource( 20 )
 script = ExtResource( 23 )
 
@@ -401,7 +395,7 @@ amount = 32
 one_shot = true
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 18 )
+process_material = SubResource( 19 )
 texture = ExtResource( 20 )
 script = ExtResource( 23 )
 
@@ -442,14 +436,14 @@ lifetime = 0.2
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
-process_material = SubResource( 19 )
+process_material = SubResource( 20 )
 texture = ExtResource( 32 )
 script = ExtResource( 33 )
 
 [node name="PlayerSoundArea" type="Area2D" parent="."]
 
 [node name="Circle" type="CollisionShape2D" parent="PlayerSoundArea"]
-shape = SubResource( 20 )
+shape = SubResource( 21 )
 
 [node name="WaterBreachPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 34 )
@@ -458,7 +452,11 @@ volume_db = -5.0
 [node name="AlarmPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 35 )
 volume_db = -9.0
+<<<<<<< HEAD
 
+=======
+[connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
+>>>>>>> beautified title screen
 [connection signal="ahead_fast" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_fast"]
 [connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
 [connection signal="ahead_flank" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_flank"]
@@ -468,11 +466,21 @@ volume_db = -9.0
 [connection signal="astern" from="." to="PropAnchor/EngineBubbles" method="_on_Player_astern"]
 [connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
 [connection signal="big_damage" from="." to="BigDamagePlayer" method="_on_Player_big_damage"]
+<<<<<<< HEAD
 [connection signal="buoyancy_down" from="." to="BallastBubblesLeft" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
 [connection signal="light" from="." to="LightClickPlayer" method="_on_Player_light"]
 [connection signal="little_damage" from="." to="LittleDamagePlayer" method="_on_Player_little_damage"]
+=======
+[connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
+[connection signal="buoyancy_down" from="." to="BallastBubblesLeft" method="_on_Player_buoyancy_down"]
+[connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
+[connection signal="light" from="." to="LightClickPlayer" method="_on_Player_light"]
+[connection signal="little_damage" from="." to="LittleDamagePlayer" method="_on_Player_little_damage"]
+[connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
+[connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
+>>>>>>> beautified title screen
 [connection signal="show_damage" from="." to="BallastBubblesLeft" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
