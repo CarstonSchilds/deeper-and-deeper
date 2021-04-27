@@ -452,11 +452,7 @@ volume_db = -5.0
 [node name="AlarmPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 35 )
 volume_db = -9.0
-<<<<<<< HEAD
-
-=======
 [connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
->>>>>>> beautified title screen
 [connection signal="ahead_fast" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_fast"]
 [connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
 [connection signal="ahead_flank" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_flank"]
@@ -466,13 +462,6 @@ volume_db = -9.0
 [connection signal="astern" from="." to="PropAnchor/EngineBubbles" method="_on_Player_astern"]
 [connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
 [connection signal="big_damage" from="." to="BigDamagePlayer" method="_on_Player_big_damage"]
-<<<<<<< HEAD
-[connection signal="buoyancy_down" from="." to="BallastBubblesLeft" method="_on_Player_buoyancy_down"]
-[connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
-[connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
-[connection signal="light" from="." to="LightClickPlayer" method="_on_Player_light"]
-[connection signal="little_damage" from="." to="LittleDamagePlayer" method="_on_Player_little_damage"]
-=======
 [connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesLeft" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
@@ -480,7 +469,6 @@ volume_db = -9.0
 [connection signal="little_damage" from="." to="LittleDamagePlayer" method="_on_Player_little_damage"]
 [connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
->>>>>>> beautified title screen
 [connection signal="show_damage" from="." to="BallastBubblesLeft" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]

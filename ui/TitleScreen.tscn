@@ -26,32 +26,32 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=4]
 default_font = SubResource( 3 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=5]
 size = 60
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="Theme" id=9]
-default_font = SubResource( 8 )
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=7]
 size = 45
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="Theme" id=11]
-default_font = SubResource( 10 )
+[sub_resource type="Theme" id=8]
+default_font = SubResource( 7 )
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=9]
 offsets = PoolRealArray( 0, 0.451264, 1 )
 colors = PoolColorArray( 0.289658, 0.222816, 0.966797, 1, 0.565934, 0.981456, 0.849982, 1, 0.984614, 0.983166, 0.999281, 1 )
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
+[sub_resource type="GradientTexture" id=10]
+gradient = SubResource( 9 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=11]
 emission_shape = 2
 emission_box_extents = Vector3( 960, 1, 1 )
 flag_disable_z = true
@@ -63,7 +63,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 3.0
 scale_random = 1.0
-color_ramp = SubResource( 6 )
+color_ramp = SubResource( 10 )
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource( 1 )
@@ -157,7 +157,7 @@ margin_left = 807.0
 margin_top = 290.0
 margin_right = 1113.0
 margin_bottom = 350.0
-theme = SubResource( 9 )
+theme = SubResource( 6 )
 text = "Controls:"
 align = 1
 valign = 1
@@ -170,7 +170,7 @@ margin_left = 396.0
 margin_top = 450.0
 margin_right = 1524.0
 margin_bottom = 825.0
-theme = SubResource( 11 )
+theme = SubResource( 8 )
 text = "A, D      - Rotate Sub
 W, S     - Throttle Control
 R, F      - Byouancy Control
@@ -225,7 +225,7 @@ margin_left = 828.0
 margin_top = 290.0
 margin_right = 1092.0
 margin_bottom = 350.0
-theme = SubResource( 9 )
+theme = SubResource( 6 )
 text = "Credits:"
 align = 1
 valign = 1
@@ -235,7 +235,7 @@ margin_left = 396.0
 margin_top = 450.0
 margin_right = 1524.0
 margin_bottom = 825.0
-theme = SubResource( 11 )
+theme = SubResource( 8 )
 text = "Programmers
 Colin Heathman, Carston Schilds
 
@@ -262,13 +262,15 @@ position = Vector2( 960, 1080 )
 emitting = false
 amount = 1000
 lifetime = 15.0
-process_material = SubResource( 7 )
+process_material = SubResource( 11 )
 texture = ExtResource( 6 )
 
 [node name="BubblesSound" type="AudioStreamPlayer" parent="CameraRig"]
 stream = ExtResource( 5 )
+
 [connection signal="button_up" from="CameraRig/MainMenu/Play" to="." method="_on_Play_button_up"]
 [connection signal="button_up" from="CameraRig/MainMenu/Controls" to="." method="_on_Controls_button_up"]
 [connection signal="button_up" from="CameraRig/MainMenu/Credits" to="." method="_on_Credits_button_up"]
 [connection signal="button_up" from="CameraRig/Controls/Back2" to="." method="_on_Back2_button_up"]
 [connection signal="button_up" from="CameraRig/Credits/Back" to="." method="_on_Back_button_up"]
+[connection signal="animation_finished" from="CameraRig/Sky/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

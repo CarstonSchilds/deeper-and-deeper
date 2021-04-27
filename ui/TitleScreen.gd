@@ -21,7 +21,9 @@ func _on_Play_button_up():
 	animation_player.play('fade')
 	bubbles.emitting = true
 	bubbles_sound.play()
-	yield(animation_player, 'animation_finished')
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	print("starting")
 	get_tree().change_scene("res://World.tscn")
 
 func _process(delta):
@@ -46,3 +48,4 @@ func _on_Controls_button_up():
 func _on_Credits_button_up():
 	main.visible = false
 	credits.visible = true
+
