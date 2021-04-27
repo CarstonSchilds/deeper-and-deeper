@@ -17,7 +17,7 @@ var depth = 0
 var depth_scale = 1500 # set this based on the max depth of the level
 var max_depth = -INF
 
-var control_buoyancy = 100.0
+var control_buoyancy = 50.0
 var control_throttle = 0.0
 var control_vector = Vector2.ZERO
 
@@ -95,7 +95,7 @@ var throttle_values = [
 ]
 
 var last_buoyancy_control = 0
-var current_buoyancy_state = 4
+var current_buoyancy_state = 2
 
 var buoyancy_values = [
 	0,

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/tiles/seafloor/Sand_Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://entities/enemies/Piranha.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://entities/Blue_Coral.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/Orange_Coral.tscn" type="PackedScene" id=10]
 [ext_resource path="res://entities/enemies/BigShark.tscn" type="PackedScene" id=11]
+[ext_resource path="res://entities/Derelict_sub.tscn" type="PackedScene" id=12]
 
 [node name="Level" type="Node2D"]
 
@@ -250,6 +251,10 @@ position = Vector2( 1432.14, 5516.28 )
 
 [node name="Blue_Coral" parent="." instance=ExtResource( 9 )]
 position = Vector2( 4712.13, 1979.2 )
+
+[node name="Blue_Coral" parent="Blue_Coral" instance=ExtResource( 12 )]
+position = Vector2( -2497.46, 3608.51 )
+rotation = -2.89933
 
 [node name="Purple_Coral" parent="." instance=ExtResource( 8 )]
 position = Vector2( 5261.83, 4509.89 )
