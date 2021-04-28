@@ -1,6 +1,6 @@
 extends Node2D
 
-var leash_range = 400
+var leash_range = 200
 var light_sensitive = false
 var sonar_sensitive = false
 var no_patrol = false

@@ -175,7 +175,8 @@ text = "A, D      - Rotate Sub
 W, S     - Throttle Control
 R, F      - Buoyancy Control
 E           - Toggle Spotlight
-Space  - Sonar"
+Space  - Sonar
+Mouse Scroll  - Zoom"
 valign = 1
 
 [node name="Back2" type="Button" parent="CameraRig/Controls"]
