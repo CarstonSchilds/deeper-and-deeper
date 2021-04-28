@@ -172,6 +172,7 @@ shape = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
 frames = SubResource( 8 )
 animation = "move"
+frame = 2
 playing = true
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -226,7 +227,7 @@ offset = Vector2( 0, 141 )
 
 [node name="Glow" type="Light2D" parent="."]
 texture = ExtResource( 5 )
-texture_scale = 1.5
+texture_scale = 2.0
 color = Color( 1, 0.945098, 0.694118, 1 )
 range_layer_min = -101
 shadow_enabled = true
@@ -243,10 +244,14 @@ range_layer_min = -101
 layer = 100
 
 [node name="Depth" type="Label" parent="UI"]
-margin_left = 1495.0
-margin_top = 890.0
-margin_right = 1894.0
-margin_bottom = 1076.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -426.0
+margin_top = -226.0
+margin_right = -30.0
+margin_bottom = -22.0
 grow_horizontal = 0
 theme = ExtResource( 7 )
 align = 2
@@ -256,10 +261,12 @@ __meta__ = {
 }
 
 [node name="Throttle" type="Label" parent="UI"]
-margin_left = 37.0
-margin_top = 1019.0
-margin_right = 722.0
-margin_bottom = 1066.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 38.0
+margin_top = -73.0
+margin_right = 725.0
+margin_bottom = -28.0
 grow_horizontal = 0
 theme = ExtResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -270,10 +277,12 @@ __meta__ = {
 }
 
 [node name="Buoyancy" type="Label" parent="UI"]
-margin_left = 38.0
-margin_top = 975.0
-margin_right = 723.0
-margin_bottom = 1018.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 39.0
+margin_top = -123.0
+margin_right = 726.0
+margin_bottom = -76.0
 grow_horizontal = 0
 theme = ExtResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -284,10 +293,12 @@ __meta__ = {
 }
 
 [node name="Hull" type="Label" parent="UI"]
-margin_left = 40.0
-margin_top = 930.0
-margin_right = 725.0
-margin_bottom = 972.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 41.0
+margin_top = -172.0
+margin_right = 728.0
+margin_bottom = -122.0
 grow_horizontal = 0
 theme = ExtResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -452,7 +463,7 @@ volume_db = -5.0
 [node name="AlarmPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 35 )
 volume_db = -9.0
-[connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
+
 [connection signal="ahead_fast" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_fast"]
 [connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
 [connection signal="ahead_flank" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_flank"]
@@ -462,16 +473,14 @@ volume_db = -9.0
 [connection signal="astern" from="." to="PropAnchor/EngineBubbles" method="_on_Player_astern"]
 [connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
 [connection signal="big_damage" from="." to="BigDamagePlayer" method="_on_Player_big_damage"]
-[connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesLeft" method="_on_Player_buoyancy_down"]
+[connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
 [connection signal="light" from="." to="LightClickPlayer" method="_on_Player_light"]
 [connection signal="little_damage" from="." to="LittleDamagePlayer" method="_on_Player_little_damage"]
-[connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="BallastBubblesLeft" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
-[connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
 [connection signal="sonar" from="." to="Sonar" method="_on_Player_sonar"]
 [connection signal="stop" from="." to="PropAnchor/EngineBubbles" method="_on_Player_stop"]
 [connection signal="stop" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_stop"]
