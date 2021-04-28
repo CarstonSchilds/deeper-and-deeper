@@ -72,7 +72,10 @@ func move_and_steer_towards(target):
 	var vector_to_target = self.body.position.direction_to(target)
 	var normalized_vector_to_target = vector_to_target.normalized()
 	self.body.current_facing = normalized_vector_to_target
-	self.control_vector = normalized_vector_to_target * 0.5
+	self.control_vector = normalized_vector_to_target * 0.6
+
+func stop_moving():
+	self.control_vector = Vector2(0.0,0.0)
 
 func _on_LightDetection_area_entered(area):
 	if self.light_sensitive and area.name == 'SpotlightArea' and !self.threatened:

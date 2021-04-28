@@ -13,6 +13,7 @@ func _ready():
 
 func enter(brain):
 	.enter(brain)
+	flip = 1
 	timer.wait_time = brain.normal_patrol_time + random_patrol_time
 	timer.start()
 	if brain.body.current_facing:

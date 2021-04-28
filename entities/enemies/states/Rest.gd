@@ -27,6 +27,7 @@ func update(delta):
 		return 'pursue'
 	brain.body.buoyancy = 1.1
 	brain.control_vector = Vector2(0, 0)
+	brain.stop_moving()
 	
 
 func get_class():

@@ -48,7 +48,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="SpritePosition" index="0"]
 frames = SubResource( 6 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="LightOccluder2D" parent="." index="2"]
