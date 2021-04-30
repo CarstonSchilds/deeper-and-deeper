@@ -24,7 +24,7 @@ func _on_Timer_timeout():
 
 func update(delta):
 	if done:
-		return 'pursue'
+		return 'attack'
 	brain.body.buoyancy = 1.1
 	brain.control_vector = Vector2(0, 0)
 	brain.stop_moving()

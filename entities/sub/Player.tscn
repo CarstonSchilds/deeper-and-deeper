@@ -1,0 +1,500 @@
+[gd_scene load_steps=56 format=2]
+
+[ext_resource path="res://entities/sub/Player.gd" type="Script" id=1]
+[ext_resource path="res://assets/sub/sub.png" type="Texture" id=2]
+[ext_resource path="res://assets/sub/sonar_particle_texture.tres" type="Texture" id=3]
+[ext_resource path="res://assets/sub/spotlight.png" type="Texture" id=4]
+[ext_resource path="res://assets/sub/sub_light.png" type="Texture" id=5]
+[ext_resource path="res://assets/global_light.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/ui_theme.tres" type="Theme" id=7]
+[ext_resource path="res://assets/sounds/Submarine Prop Master.wav" type="AudioStream" id=8]
+[ext_resource path="res://entities/sub/sound_players/EngineSound.gd" type="Script" id=9]
+[ext_resource path="res://entities/sub/Sonar.gd" type="Script" id=11]
+[ext_resource path="res://assets/sub/sonar_arc.png" type="Texture" id=12]
+[ext_resource path="res://assets/sounds/14 SonarPing_BW.59099.wav" type="AudioStream" id=13]
+[ext_resource path="res://entities/sub/SonarParticle.gd" type="Script" id=14]
+[ext_resource path="res://assets/sounds/15 SonarPing_BW.59100.wav" type="AudioStream" id=15]
+[ext_resource path="res://entities/sub/sound_players/PingEchoPlayer.gd" type="Script" id=16]
+[ext_resource path="res://entities/sub/sound_players/LightClickPlayer.gd" type="Script" id=17]
+[ext_resource path="res://assets/sounds/12 Light switch.wav" type="AudioStream" id=18]
+[ext_resource path="res://entities/sub/Camera.gd" type="Script" id=19]
+[ext_resource path="res://assets/sub/bubbles_texture.tres" type="Texture" id=20]
+[ext_resource path="res://entities/sub/EngineBubbles.gd" type="Script" id=21]
+[ext_resource path="res://assets/sub/SonarArcMaterial.tres" type="Material" id=22]
+[ext_resource path="res://entities/sub/BallastBubbles.gd" type="Script" id=23]
+[ext_resource path="res://entities/sub/sound_players/BallastBubblesPlayer.gd" type="Script" id=24]
+[ext_resource path="res://assets/sounds/Bubbles 3 Master.wav" type="AudioStream" id=25]
+[ext_resource path="res://assets/sounds/Damage Gravel 2 Master.wav" type="AudioStream" id=26]
+[ext_resource path="res://entities/sub/sound_players/TerrainDamagePlayer.gd" type="Script" id=27]
+[ext_resource path="res://entities/sub/sound_players/LittleDamagePlayer.gd" type="Script" id=28]
+[ext_resource path="res://entities/sub/sound_players/BigDamagePlayer.gd" type="Script" id=29]
+[ext_resource path="res://assets/sounds/Damage 2 Master.wav" type="AudioStream" id=30]
+[ext_resource path="res://assets/sounds/Damage 1 Master.wav" type="AudioStream" id=31]
+[ext_resource path="res://assets/sub/sub2.png" type="Texture" id=32]
+[ext_resource path="res://entities/sub/DamageParticle.gd" type="Script" id=33]
+[ext_resource path="res://assets/sounds/Breach Master.wav" type="AudioStream" id=34]
+[ext_resource path="res://assets/sounds/Alarm Fade Out.wav" type="AudioStream" id=35]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 9.39685
+height = 23.5681
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 6.15743
+height = 19.9959
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 32 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "idle",
+"speed": 4.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "move",
+"speed": 8.0
+} ]
+
+[sub_resource type="Animation" id=9]
+resource_name = "FadeOut"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Gradient" id=10]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=11]
+gradient = SubResource( 10 )
+
+[sub_resource type="Curve" id=12]
+max_value = 2.5
+_data = [ Vector2( 0, 0 ), 0.0, 2.5, 0, 1, Vector2( 1, 2.5 ), 2.5, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=14]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 2.0
+gravity = Vector3( 0, 0, 0 )
+scale_curve = SubResource( 13 )
+color_ramp = SubResource( 11 )
+
+[sub_resource type="Gradient" id=15]
+colors = PoolColorArray( 0.25098, 0.466667, 0.533333, 1, 0.25098, 0.466667, 0.533333, 0 )
+
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 15 )
+
+[sub_resource type="Curve" id=17]
+max_value = 2.0
+_data = [ Vector2( 0, 0.486364 ), 0.0, 0.940909, 0, 1, Vector2( 1, 1.42727 ), 0.940909, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=18]
+curve = SubResource( 17 )
+
+[sub_resource type="ParticlesMaterial" id=19]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+gravity = Vector3( 0, -20, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 18 )
+color_ramp = SubResource( 16 )
+anim_speed_random = 1.0
+
+[sub_resource type="ParticlesMaterial" id=20]
+emission_shape = 1
+emission_sphere_radius = 0.2
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 1.05
+scale_random = 0.04
+color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="CircleShape2D" id=21]
+radius = 22.6978
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="SpritePosition" type="Position2D" parent="."]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
+frames = SubResource( 8 )
+animation = "move"
+frame = 2
+playing = true
+
+[node name="Camera" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.25, 0.25 )
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
+script = ExtResource( 19 )
+
+[node name="FadeToBlackLayer" type="CanvasLayer" parent="Camera"]
+layer = 128
+
+[node name="ColorRect" type="ColorRect" parent="Camera/FadeToBlackLayer"]
+margin_left = -2048.0
+margin_top = -2048.0
+margin_right = 2048.0
+margin_bottom = 2048.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FadeToBlackAnimationPlayer" type="AnimationPlayer" parent="Camera/FadeToBlackLayer/ColorRect"]
+anims/FadeOut = SubResource( 9 )
+
+[node name="Spotlight" type="Light2D" parent="."]
+z_index = -1
+texture = ExtResource( 4 )
+offset = Vector2( 0, 243 )
+color = Color( 1, 0.945098, 0.694118, 1 )
+range_layer_min = -101
+shadow_enabled = true
+shadow_gradient_length = 5.0
+
+[node name="SpotlightArea" type="Area2D" parent="Spotlight"]
+position = Vector2( 0, -1.45908 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spotlight/SpotlightArea"]
+polygon = PoolVector2Array( 0, 9.603, -11.1443, 12.0976, -21.3896, 20.5612, -24.9532, 55.5289, -16.2191, 142.928, -5.20667, 263.397, 5.207, 263.397, 16.219, 142.928, 24.953, 55.529, 21.39, 20.561, 11.144, 12.098 )
+
+[node name="SpotlightSprite" type="Sprite" parent="Spotlight/SpotlightArea"]
+visible = false
+position = Vector2( 0, 102 )
+texture = ExtResource( 4 )
+offset = Vector2( 0, 141 )
+
+[node name="Glow" type="Light2D" parent="."]
+texture = ExtResource( 5 )
+texture_scale = 2.0
+color = Color( 1, 0.945098, 0.694118, 1 )
+range_layer_min = -101
+shadow_enabled = true
+shadow_gradient_length = 5.0
+
+[node name="Sun" type="Light2D" parent="."]
+position = Vector2( -2.98023e-08, 2 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 6 )
+mode = 3
+range_layer_min = -101
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Depth" type="Label" parent="UI"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -426.0
+margin_top = -226.0
+margin_right = -30.0
+margin_bottom = -22.0
+grow_horizontal = 0
+theme = ExtResource( 7 )
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Throttle" type="Label" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 38.0
+margin_top = -73.0
+margin_right = 725.0
+margin_bottom = -28.0
+grow_horizontal = 0
+theme = ExtResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Throttle"
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buoyancy" type="Label" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 39.0
+margin_top = -123.0
+margin_right = 726.0
+margin_bottom = -76.0
+grow_horizontal = 0
+theme = ExtResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Buoyancy"
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hull" type="Label" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 41.0
+margin_top = -172.0
+margin_right = 728.0
+margin_bottom = -122.0
+grow_horizontal = 0
+theme = ExtResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Hull"
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sonar" type="Node2D" parent="."]
+position = Vector2( 0, -12 )
+script = ExtResource( 11 )
+
+[node name="SonarCooldown" type="Timer" parent="Sonar"]
+wait_time = 2.0
+one_shot = true
+
+[node name="SonarParticle" type="Particles2D" parent="Sonar"]
+light_mask = -2147483647
+emitting = false
+amount = 4
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource( 14 )
+texture = ExtResource( 3 )
+script = ExtResource( 14 )
+
+[node name="Timer" type="Timer" parent="Sonar/SonarParticle"]
+one_shot = true
+
+[node name="PingEchoPlayer" type="AudioStreamPlayer2D" parent="Sonar/SonarParticle"]
+stream = ExtResource( 15 )
+volume_db = -25.0
+pitch_scale = 0.75
+script = ExtResource( 16 )
+
+[node name="GabageCollectTimer" type="Timer" parent="Sonar/SonarParticle"]
+wait_time = 5.0
+one_shot = true
+
+[node name="SonarArc" type="Particles2D" parent="Sonar"]
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+local_coords = false
+process_material = ExtResource( 22 )
+texture = ExtResource( 12 )
+
+[node name="SonarPingPlayer" type="AudioStreamPlayer" parent="Sonar"]
+stream = ExtResource( 13 )
+volume_db = -9.0
+
+[node name="SonarAggroArea" type="Area2D" parent="Sonar"]
+position = Vector2( 0, -1.45908 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sonar/SonarAggroArea"]
+polygon = PoolVector2Array( -3.12639, 6.64174, 3.126, 6.642, 150.127, -177.762, 76.7362, -212.095, 0.422424, -223.873, -76.736, -212.095, -150.127, -177.762 )
+
+[node name="SonarAggroTimer" type="Timer" parent="Sonar/SonarAggroArea"]
+wait_time = 0.5
+one_shot = true
+
+[node name="PropAnchor" type="Position2D" parent="."]
+position = Vector2( -20, 0 )
+
+[node name="EngineSoundPlayer" type="AudioStreamPlayer2D" parent="PropAnchor"]
+position = Vector2( 20, 0 )
+stream = ExtResource( 8 )
+volume_db = -7.0
+script = ExtResource( 9 )
+
+[node name="EngineBubbles" type="Particles2D" parent="PropAnchor"]
+emitting = false
+amount = 32
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 19 )
+texture = ExtResource( 20 )
+script = ExtResource( 21 )
+
+[node name="LightClickPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+volume_db = -3.0
+script = ExtResource( 17 )
+
+[node name="BallastBubblesLeft" type="Particles2D" parent="."]
+position = Vector2( -10, 0 )
+emitting = false
+amount = 32
+one_shot = true
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 19 )
+texture = ExtResource( 20 )
+script = ExtResource( 23 )
+
+[node name="BallastBubblesRight" type="Particles2D" parent="."]
+position = Vector2( 5, 0 )
+emitting = false
+amount = 32
+one_shot = true
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 19 )
+texture = ExtResource( 20 )
+script = ExtResource( 23 )
+
+[node name="BallastBubblesPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 25 )
+volume_db = -8.0
+script = ExtResource( 24 )
+
+[node name="TerrainDamagePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 26 )
+volume_db = -8.0
+script = ExtResource( 27 )
+
+[node name="Timer" type="Timer" parent="TerrainDamagePlayer"]
+wait_time = 1.5
+
+[node name="LittleDamagePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 30 )
+volume_db = -10.0
+script = ExtResource( 28 )
+
+[node name="Timer" type="Timer" parent="LittleDamagePlayer"]
+wait_time = 0.5
+one_shot = true
+
+[node name="BigDamagePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 31 )
+volume_db = -5.0
+script = ExtResource( 29 )
+
+[node name="Timer" type="Timer" parent="BigDamagePlayer"]
+wait_time = 1.5
+
+[node name="DamageParticle" type="Particles2D" parent="."]
+emitting = false
+amount = 4
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource( 20 )
+texture = ExtResource( 32 )
+script = ExtResource( 33 )
+
+[node name="PlayerSoundArea" type="Area2D" parent="."]
+
+[node name="Circle" type="CollisionShape2D" parent="PlayerSoundArea"]
+shape = SubResource( 21 )
+
+[node name="WaterBreachPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 34 )
+volume_db = -5.0
+
+[node name="AlarmPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 35 )
+volume_db = -9.0
+
+[connection signal="ahead_fast" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_fast"]
+[connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
+[connection signal="ahead_flank" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_flank"]
+[connection signal="ahead_flank" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_flank"]
+[connection signal="ahead_slow" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_slow"]
+[connection signal="ahead_slow" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_slow"]
+[connection signal="astern" from="." to="PropAnchor/EngineBubbles" method="_on_Player_astern"]
+[connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
+[connection signal="big_damage" from="." to="BigDamagePlayer" method="_on_Player_big_damage"]
+[connection signal="buoyancy_down" from="." to="BallastBubblesLeft" method="_on_Player_buoyancy_down"]
+[connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
+[connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
+[connection signal="light" from="." to="LightClickPlayer" method="_on_Player_light"]
+[connection signal="little_damage" from="." to="LittleDamagePlayer" method="_on_Player_little_damage"]
+[connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
+[connection signal="show_damage" from="." to="BallastBubblesLeft" method="_on_Player_show_damage"]
+[connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
+[connection signal="sonar" from="." to="Sonar" method="_on_Player_sonar"]
+[connection signal="stop" from="." to="PropAnchor/EngineBubbles" method="_on_Player_stop"]
+[connection signal="stop" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_stop"]
+[connection signal="terrain_damage" from="." to="TerrainDamagePlayer" method="_on_Player_terrain_damage"]
+[connection signal="zoom_in" from="." to="Camera" method="_on_Player_zoom_in"]
+[connection signal="zoom_out" from="." to="Camera" method="_on_Player_zoom_out"]
+[connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
+[connection signal="body_exited" from="CollisionDetector" to="." method="_on_CollisionDetector_body_exited"]
+[connection signal="animation_finished" from="Camera/FadeToBlackLayer/ColorRect/FadeToBlackAnimationPlayer" to="." method="_on_FadeToBlackAnimationPlayer_animation_finished"]
+[connection signal="timeout" from="Sonar/SonarCooldown" to="Sonar" method="_on_SonarCooldown_timeout"]
+[connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle/PingEchoPlayer" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Sonar/SonarParticle/GabageCollectTimer" to="Sonar/SonarParticle" method="_on_GabageCollectTimer_timeout"]
+[connection signal="timeout" from="Sonar/SonarAggroArea/SonarAggroTimer" to="Sonar" method="_on_SonarAggroTimer_timeout"]
+[connection signal="timeout" from="TerrainDamagePlayer/Timer" to="TerrainDamagePlayer" method="_on_Timer_timeout"]
+[connection signal="timeout" from="LittleDamagePlayer/Timer" to="LittleDamagePlayer" method="_on_Timer_timeout"]
+[connection signal="timeout" from="BigDamagePlayer/Timer" to="BigDamagePlayer" method="_on_Timer_timeout"]

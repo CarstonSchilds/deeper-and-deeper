@@ -10,7 +10,6 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
@@ -88,4 +87,4 @@ zoom_out={
 [rendering]
 
 environment/default_clear_color=Color( 0, 0, 0, 1 )
-environment/default_environment="res://assets/default_env.tres"
+environment/default_environment="res://assets/environment/default_env.tres"

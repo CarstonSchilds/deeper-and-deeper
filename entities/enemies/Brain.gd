@@ -15,6 +15,7 @@ var target = null
 
 onready var state_map = {
 	'natural_behaviour': $States/NaturalBehaviour,
+	'attack': $States/Attack,
 	'pursue': $States/Pursue,
 	'return_home': $States/ReturnHome,
 	'rest': $States/Rest
@@ -72,7 +73,7 @@ func move_and_steer_towards(target):
 	var vector_to_target = self.body.position.direction_to(target)
 	var normalized_vector_to_target = vector_to_target.normalized()
 	self.body.current_facing = normalized_vector_to_target
-	self.control_vector = normalized_vector_to_target * 0.6
+	self.control_vector = normalized_vector_to_target * 1
 
 func stop_moving():
 	self.control_vector = Vector2(0.0,0.0)
