@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/tiles/seafloor/Sand_Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://entities/enemies/piranha/Piranha.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://entities/doodads/Orange_Coral.tscn" type="PackedScene" id=10]
 [ext_resource path="res://entities/enemies/bigshark/BigShark.tscn" type="PackedScene" id=11]
 [ext_resource path="res://entities/doodads/Derelict_sub.tscn" type="PackedScene" id=12]
+[ext_resource path="res://entities/enemies/wyrm/Wyrm.tscn" type="PackedScene" id=13]
 
 [node name="Level" type="Node2D"]
 
@@ -47,9 +48,6 @@ position = Vector2( 2073.85, 3115.52 )
 
 [node name="BigShark6" parent="." instance=ExtResource( 11 )]
 position = Vector2( 1272.21, 3925.1 )
-
-[node name="BigShark5" parent="." instance=ExtResource( 11 )]
-position = Vector2( 2177.09, 4857.83 )
 
 [node name="BigShark2" parent="." instance=ExtResource( 11 )]
 position = Vector2( 2283.73, 1940.77 )
@@ -116,9 +114,6 @@ position = Vector2( 3452.52, 2470.91 )
 
 [node name="Squid5" parent="." instance=ExtResource( 5 )]
 position = Vector2( 2394.71, 3858.34 )
-
-[node name="Squid6" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1798.18, 4837.05 )
 
 [node name="Squid4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 5040.68, 3458.66 )
@@ -313,3 +308,9 @@ position = Vector2( 2390.32, 5536.32 )
 
 [node name="Orange_Coral5" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1389.34, 5570.18 )
+
+[node name="Wyrm" parent="." instance=ExtResource( 13 )]
+position = Vector2( 1725.37, 1445.51 )
+
+[node name="Wyrm2" parent="." instance=ExtResource( 13 )]
+position = Vector2( 1939.18, 4855.87 )

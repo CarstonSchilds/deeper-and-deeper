@@ -28,19 +28,19 @@ region = Rect2( 192, 0, 64, 112 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
-region = Rect2( 384, 0, 64, 112 )
+region = Rect2( 256, 0, 64, 112 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
-region = Rect2( 448, 0, 64, 112 )
+region = Rect2( 320, 0, 64, 112 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 2 )
-region = Rect2( 256, 0, 64, 112 )
+region = Rect2( 384, 0, 64, 112 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
-region = Rect2( 320, 0, 64, 112 )
+region = Rect2( 448, 0, 64, 112 )
 
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
@@ -51,13 +51,13 @@ animations = [ {
 }, {
 "frames": [ SubResource( 6 ), SubResource( 7 ) ],
 "loop": true,
-"name": "moving",
+"name": "start_move",
 "speed": 2.0
 }, {
 "frames": [ SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
-"name": "start_move",
-"speed": 5.0
+"name": "moving",
+"speed": 2.0
 } ]
 
 [sub_resource type="OccluderPolygon2D" id=11]
@@ -74,7 +74,6 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="SpritePosition" index="0"]
 frames = SubResource( 10 )
-frame = 1
 playing = true
 
 [node name="LightOccluder2D" parent="." index="2"]
