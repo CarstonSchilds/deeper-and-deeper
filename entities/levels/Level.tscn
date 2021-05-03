@@ -15,6 +15,7 @@
 [ext_resource path="res://entities/enemies/wyrm/Wyrm.tscn" type="PackedScene" id=13]
 
 [node name="Level" type="Node2D"]
+light_mask = 3
 
 [node name="Shark" parent="." instance=ExtResource( 4 )]
 position = Vector2( -162.074, 462.211 )

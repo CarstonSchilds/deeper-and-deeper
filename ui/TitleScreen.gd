@@ -14,7 +14,6 @@ var CAMERA_SPEED = 50
 func _ready():
 	sky.hide()
 	Music.play_master()
-	background.disable_darkness()
 
 func _on_Play_button_up():
 	sky.show()

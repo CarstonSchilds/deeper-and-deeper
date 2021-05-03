@@ -2,19 +2,21 @@ extends "res://entities/Entity.gd"
 
 onready var spotlight = $Spotlight
 onready var spotlight_area = $Spotlight/SpotlightArea
-onready var sun = $Sun
 onready var glow = $Glow
+
 onready var depth_label = $UI/Depth
 onready var throttle_label = $UI/Throttle
 onready var buoyancy_label = $UI/Buoyancy
 onready var hull_label = $UI/Hull
+
 onready var propellor_pos = $PropAnchor
-#onready var water = $"../Water"
+
 onready var engine_sound = $"PropAnchor/EngineSoundPlayer"
+
 onready var camera = $"Camera"
 
 var depth = 0
-var depth_scale = 1500 # set this based on the max depth of the level
+var depth_scale = 3000 # set this based on the max depth of the level
 var max_depth = -INF
 
 var control_buoyancy = 50.0
@@ -40,7 +42,7 @@ func _process(delta):
 	self.hull_label.text = "Hull %0.0f" % [self.health]
 	self.buoyancy_label.text = "Buoyancy %0.0f" % [control_buoyancy]
 	self.throttle_label.text = "Throttle %s" % [throttle_state_names[current_throttle_state]]
-	depth_label.text = "Current %0.0f\nMax %0.0f" % [depth, self.max_depth]
+	depth_label.text = "Depth %0.0f\nMax %0.0f" % [depth, self.max_depth]
 	
 	if self.health <= 25:
 		self.hull_label.set("custom_colors/font_color", ColorN("red", 1))
@@ -206,9 +208,8 @@ var breach_sound_played = false
 	
 func handle_depth():
 	depth = self.global_position.y
-	self.sun.energy = bound(map(depth, 0, depth_scale, 1, 0), 0, 1)
-	self.glow.energy = bound(map(depth, 0, depth_scale, 0, 1), 0, 1)
-	self.glow.scale = Vector2(1, 1) * bound(map(depth, 0, depth_scale, 5, 1), 1, 5)
+	self.glow.energy = bound(map(depth, 0, depth_scale, 0.9, 0.8), 0.9, 0.8)
+	self.glow.scale = Vector2(1, 1) * bound(map(depth, 0, depth_scale, 3, 1), 1, 3)
 	
 	if depth > self.max_depth:
 		self.max_depth = depth

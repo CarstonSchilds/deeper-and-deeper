@@ -1,11 +1,10 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://entities/sub/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sub/sub.png" type="Texture" id=2]
 [ext_resource path="res://assets/sub/sonar_particle_texture.tres" type="Texture" id=3]
 [ext_resource path="res://assets/sub/spotlight.png" type="Texture" id=4]
 [ext_resource path="res://assets/sub/sub_light.png" type="Texture" id=5]
-[ext_resource path="res://assets/global_light.png" type="Texture" id=6]
 [ext_resource path="res://assets/ui/ui_theme.tres" type="Theme" id=7]
 [ext_resource path="res://assets/sounds/Submarine Prop Master.wav" type="AudioStream" id=8]
 [ext_resource path="res://entities/sub/sound_players/EngineSound.gd" type="Script" id=9]
@@ -176,6 +175,7 @@ frame = 2
 playing = true
 
 [node name="Camera" type="Camera2D" parent="."]
+light_mask = 3
 current = true
 zoom = Vector2( 0.25, 0.25 )
 drag_margin_h_enabled = true
@@ -203,13 +203,17 @@ __meta__ = {
 anims/FadeOut = SubResource( 9 )
 
 [node name="Spotlight" type="Light2D" parent="."]
+light_mask = 3
 z_index = -1
 texture = ExtResource( 4 )
 offset = Vector2( 0, 243 )
 color = Color( 1, 0.945098, 0.694118, 1 )
-range_layer_min = -101
+range_layer_min = -120
+range_layer_max = 25
+range_item_cull_mask = 3
 shadow_enabled = true
 shadow_gradient_length = 5.0
+shadow_item_cull_mask = 3
 
 [node name="SpotlightArea" type="Area2D" parent="Spotlight"]
 position = Vector2( 0, -1.45908 )
@@ -217,7 +221,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spotlight/SpotlightArea"]
-polygon = PoolVector2Array( 0, 9.603, -11.1443, 12.0976, -21.3896, 20.5612, -24.9532, 55.5289, -16.2191, 142.928, -5.20667, 263.397, 5.207, 263.397, 16.219, 142.928, 24.953, 55.529, 21.39, 20.561, 11.144, 12.098 )
+polygon = PoolVector2Array( 0, 9.603, -11.1443, 12.0976, -21.3896, 20.5612, -24.9532, 55.5289, -16.2191, 142.928, -4.24496, 226.755, 4.245, 226.755, 16.219, 142.928, 24.953, 55.529, 21.39, 20.561, 11.144, 12.098 )
 
 [node name="SpotlightSprite" type="Sprite" parent="Spotlight/SpotlightArea"]
 visible = false
@@ -226,19 +230,17 @@ texture = ExtResource( 4 )
 offset = Vector2( 0, 141 )
 
 [node name="Glow" type="Light2D" parent="."]
+light_mask = 3
 texture = ExtResource( 5 )
 texture_scale = 2.0
 color = Color( 1, 0.945098, 0.694118, 1 )
-range_layer_min = -101
+range_layer_min = -120
+range_layer_max = 25
+range_item_cull_mask = 3
 shadow_enabled = true
-shadow_gradient_length = 5.0
-
-[node name="Sun" type="Light2D" parent="."]
-position = Vector2( -2.98023e-08, 2 )
-scale = Vector2( 10, 10 )
-texture = ExtResource( 6 )
-mode = 3
-range_layer_min = -101
+shadow_gradient_length = 2.0
+shadow_filter = 1
+shadow_item_cull_mask = 3
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
@@ -381,6 +383,7 @@ randomness = 1.0
 local_coords = false
 process_material = SubResource( 19 )
 texture = ExtResource( 20 )
+normal_map = ExtResource( 20 )
 script = ExtResource( 21 )
 
 [node name="LightClickPlayer" type="AudioStreamPlayer" parent="."]
@@ -389,7 +392,8 @@ volume_db = -3.0
 script = ExtResource( 17 )
 
 [node name="BallastBubblesLeft" type="Particles2D" parent="."]
-position = Vector2( -10, 0 )
+position = Vector2( -5, -0.0393734 )
+z_index = 1
 emitting = false
 amount = 32
 one_shot = true
@@ -397,10 +401,12 @@ randomness = 1.0
 local_coords = false
 process_material = SubResource( 19 )
 texture = ExtResource( 20 )
+normal_map = ExtResource( 20 )
 script = ExtResource( 23 )
 
 [node name="BallastBubblesRight" type="Particles2D" parent="."]
 position = Vector2( 5, 0 )
+z_index = 1
 emitting = false
 amount = 32
 one_shot = true
@@ -408,6 +414,7 @@ randomness = 1.0
 local_coords = false
 process_material = SubResource( 19 )
 texture = ExtResource( 20 )
+normal_map = ExtResource( 20 )
 script = ExtResource( 23 )
 
 [node name="BallastBubblesPlayer" type="AudioStreamPlayer" parent="."]
@@ -478,9 +485,9 @@ volume_db = -9.0
 [connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
 [connection signal="light" from="." to="LightClickPlayer" method="_on_Player_light"]
 [connection signal="little_damage" from="." to="LittleDamagePlayer" method="_on_Player_little_damage"]
-[connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="BallastBubblesLeft" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
+[connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
 [connection signal="sonar" from="." to="Sonar" method="_on_Player_sonar"]
 [connection signal="stop" from="." to="PropAnchor/EngineBubbles" method="_on_Player_stop"]
 [connection signal="stop" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_stop"]
