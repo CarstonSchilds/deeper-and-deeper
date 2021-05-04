@@ -25,13 +25,14 @@ func exit(brain):
 func _on_Timer_timeout():
 	flip *= -1
 	brain.body.current_facing *= -1
-#	brain.body.sprite.set_flip_v(self.current_facing.x < 0)
 
 func update(delta):
 	if brain.threatened:
 		return 'pursue'
-	if !brain.no_patrol:
-		brain.control_vector = Vector2(1, 0) * flip
+	if brain.no_patrol:
+		brain.stop_moving()
+	else:
+		brain.control_vector = Vector2(brain.body.current_facing.x, 0)
 
 func get_class():
 	return 'natural_behaviour'

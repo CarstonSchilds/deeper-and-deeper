@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://entities/enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/squid/squid.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://entities/enemies/squid/Squid.gd" type="Script" id=4]
 [ext_resource path="res://entities/enemies/squid/SquidAngryAudioPlayer.gd" type="Script" id=5]
 [ext_resource path="res://assets/sounds/Squid Mad 1 Master.wav" type="AudioStream" id=6]
+[ext_resource path="res://entities/enemies/squid/SquidAnimatedSprite.gd" type="Script" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 61.1607
@@ -74,7 +75,9 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="SpritePosition" index="0"]
 frames = SubResource( 10 )
+frame = 3
 playing = true
+script = ExtResource( 7 )
 
 [node name="LightOccluder2D" parent="." index="2"]
 occluder = SubResource( 11 )
@@ -88,6 +91,6 @@ stream = ExtResource( 6 )
 volume_db = -4.0
 script = ExtResource( 5 )
 
-[connection signal="animation_finished" from="SpritePosition/AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
-[connection signal="state_changed" from="Brain" to="." method="_on_Brain_state_changed"]
+[connection signal="animation_finished" from="SpritePosition/AnimatedSprite" to="SpritePosition/AnimatedSprite" method="_on_AnimatedSprite_animation_finished"]
+[connection signal="state_changed" from="Brain" to="SpritePosition/AnimatedSprite" method="_on_Brain_state_changed"]
 [connection signal="state_changed" from="Brain" to="AudioStreamPlayer2D" method="_on_Brain_state_changed"]

@@ -1,4 +1,4 @@
 extends "res://entities/enemies/Enemy.gd"
 
 func _init():
-	damage = 3
+	damage = 1

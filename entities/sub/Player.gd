@@ -109,8 +109,8 @@ var buoyancy_values = [
 signal buoyancy_up
 signal buoyancy_down
 
-signal sonar
-signal light
+signal sonar_toggle
+signal light_toggle
 
 func handle_input():
 	var input_vector = Vector2.ZERO
@@ -168,19 +168,25 @@ func handle_input():
 	if buoyancy_input == 0 && last_buoyancy_control != 0:
 		last_buoyancy_control = 0
 	
-	if self.health <= 25:	
+	if self.health <= 25:
 		control_buoyancy = min(control_buoyancy, (self.health / 25.0) * 90.0)
+		if control_buoyancy < 75 && current_buoyancy_state > 3:
+			current_buoyancy_state = 3
+		elif control_buoyancy < 50 && current_buoyancy_state > 2:
+			current_buoyancy_state = 2
+		elif control_buoyancy < 25 && current_buoyancy_state > 1:
+			current_buoyancy_state = 1
 	
 	self.buoyancy = ( control_buoyancy / 100.0 ) * ( SUB_BUOYANCY * 0.1 ) + ( SUB_BUOYANCY * 0.85 )
 	
 	# SONAR AND SPOTLIGHT CONTROLS
-	if Input.is_action_just_released("sonar_toggle"):
-		emit_signal("sonar")
+	if Input.is_action_just_released("sonar"):
+		emit_signal("sonar_toggle")
 		
 	if Input.is_action_just_released("spotlight_toggle"):
 		self.spotlight.enabled = !self.spotlight.enabled
 		self.spotlight_area.monitorable = !self.spotlight_area.monitorable
-		emit_signal("light")
+		emit_signal("light_toggle")
 		
 	# CAMERA ZOOM CONTROLS
 	if Input.is_action_just_released("zoom_in"):
@@ -217,12 +223,6 @@ func handle_depth():
 	if depth > 0 and ! breach_sound_played:
 		water_breach_player.play()
 		breach_sound_played = true
-
-	# Enable water BG mirroring so we don't reach the end of it
-	# if depth > 2048:
-	#	water.set_parralax_mirroring(true)
-	# else:
-	#	water.set_parralax_mirroring(false)
 
 onready var alarm_player = $"AlarmPlayer"
 var alarm_played = false

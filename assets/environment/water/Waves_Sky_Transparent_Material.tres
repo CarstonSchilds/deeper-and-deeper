@@ -1,0 +1,86 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=2]
+
+[ext_resource path="res://assets/environment/water/Waves_Texture.tres" type="Texture" id=1]
+
+[sub_resource type="VisualShaderNodeCompare" id=1]
+output_port_for_preview = 0
+default_input_values = [ 0, 0.0, 1, 0.01, 2, 1e-05 ]
+function = 4
+
+[sub_resource type="VisualShaderNodeVectorOp" id=2]
+output_port_for_preview = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorConstant" id=3]
+constant = Color( 0, 0.564706, 0.784314, 1 )
+
+[sub_resource type="VisualShaderNodeScalarOp" id=4]
+output_port_for_preview = 0
+default_input_values = [ 0, 0.0, 1, 0.75 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture" id=5]
+output_port_for_preview = 0
+texture = ExtResource( 1 )
+
+[sub_resource type="VisualShader" id=6]
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_3;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Color:14
+	vec3 n_out14p0 = vec3(0.000000, 0.564706, 0.784314);
+	float n_out14p1 = 1.000000;
+
+// Texture:3
+	vec4 tex_frg_3_read = texture(tex_frg_3, UV.xy);
+	vec3 n_out3p0 = tex_frg_3_read.rgb;
+	float n_out3p1 = tex_frg_3_read.a;
+
+// Compare:11
+	float n_in11p1 = 0.01000;
+	bool n_out11p0 = n_out3p1<n_in11p1;
+
+// VectorOp:12
+	vec3 n_out12p0 = n_out14p0 * vec3(n_out11p0 ? 1.0 : 0.0);
+
+// ScalarOp:15
+	float n_in15p1 = 0.75000;
+	float n_out15p0 = (n_out11p0 ? 1.0 : 0.0) * n_in15p1;
+
+// Output:0
+	COLOR.rgb = n_out12p0;
+	COLOR.a = n_out15p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -645, -613.25 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 980, -400 )
+nodes/fragment/3/node = SubResource( 5 )
+nodes/fragment/3/position = Vector2( 180, -440 )
+nodes/fragment/11/node = SubResource( 1 )
+nodes/fragment/11/position = Vector2( 460, -380 )
+nodes/fragment/12/node = SubResource( 2 )
+nodes/fragment/12/position = Vector2( 720, -540 )
+nodes/fragment/14/node = SubResource( 3 )
+nodes/fragment/14/position = Vector2( 480, -520 )
+nodes/fragment/15/node = SubResource( 4 )
+nodes/fragment/15/position = Vector2( 720, -300 )
+nodes/fragment/connections = PoolIntArray( 11, 0, 12, 1, 14, 0, 12, 0, 11, 0, 15, 0, 12, 0, 0, 0, 15, 0, 0, 1, 3, 1, 11, 0 )
+
+[resource]
+shader = SubResource( 6 )

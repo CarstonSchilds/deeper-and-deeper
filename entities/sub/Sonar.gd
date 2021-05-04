@@ -5,6 +5,7 @@ onready var particle_template = $SonarParticle
 onready var sonar_cooldown_timer = $SonarCooldown
 onready var sonar_arc = $SonarArc
 onready var sonar_ping_player = $"SonarPingPlayer"
+onready var sonar_active_particle = $"SonarActiveParticle"
 onready var sonar_aggro_area = $"SonarAggroArea"
 onready var sonar_aggro_timer = $"SonarAggroArea/SonarAggroTimer"
 onready var parent = $".."
@@ -16,7 +17,6 @@ var request_sonar = false
 
 func _physics_process(delta):
 	if sonar_available and request_sonar:
-		request_sonar = false
 		do_sonar()
 
 func get_normalized_ray_vector(angle_delta):
@@ -56,9 +56,9 @@ func draw_sonar_hit(ray_cast_result):
 	particle_timer.wait_time = distance.length() * 0.005
 	particle_timer.start()
 
-
-func _on_Player_sonar():
-	self.request_sonar = true
+func _on_Player_sonar_toggle():
+	self.request_sonar = !self.request_sonar
+	sonar_active_particle.emitting = self.request_sonar
 
 var heard_sonar = {}
 
@@ -75,3 +75,4 @@ func _on_SonarAggroTimer_timeout():
 	for brain in heard_sonar:
 		brain.heard_sonar(parent)
 	heard_sonar = {}
+

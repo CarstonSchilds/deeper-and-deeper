@@ -9,7 +9,7 @@ onready var bubbles_sound = $CameraRig/BubblesSound
 onready var main = $CameraRig/MainMenu
 onready var credits = $CameraRig/Credits
 onready var controls = $CameraRig/Controls
-var CAMERA_SPEED = 50
+var CAMERA_SPEED = 10
 
 func _ready():
 	sky.hide()

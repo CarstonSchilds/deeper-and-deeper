@@ -40,5 +40,5 @@ func _on_Player_ahead_fast():
 func _on_Player_ahead_flank():
 	var level = 100
 	var speed = ( level - 25 ) * ( 100 / 75 )
-	self.volume_db = -7
+	self.volume_db = -3
 	self.pitch_scale = 0.75 + ( 0.75 * speed / 100 )
