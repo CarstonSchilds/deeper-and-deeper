@@ -33,7 +33,7 @@ func _init():
 	self.drag_coefficient = SUB_DRAG
 
 func _ready():
-	pass
+	self.current_facing = Vector2(0,-1)
 
 func _process(delta):
 	handle_input()

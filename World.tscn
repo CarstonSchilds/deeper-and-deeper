@@ -32,6 +32,7 @@ follow_viewport_enable = true
 [node name="Player" parent="." instance=ExtResource( 2 )]
 show_behind_parent = true
 position = Vector2( -90.603, -149.156 )
+rotation = -1.5708
 
 [node name="Map" parent="." instance=ExtResource( 7 )]
 z_index = 100
