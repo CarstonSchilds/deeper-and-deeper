@@ -13,9 +13,9 @@ motion_scale = Vector2( 0.8, 0.8 )
 [node name="SkySprite" type="Sprite" parent="Background"]
 light_mask = 0
 material = ExtResource( 2 )
-position = Vector2( 1024, -1056 )
+position = Vector2( 2048, -1056 )
 rotation = 1.5708
-scale = Vector2( 1, 2048 )
+scale = Vector2( 1, 4096 )
 z_as_relative = false
 texture = ExtResource( 1 )
 centered = false
@@ -28,9 +28,9 @@ motion_scale = Vector2( 0.9, 0.9 )
 [node name="SkySprite" type="Sprite" parent="Midground"]
 light_mask = 0
 material = ExtResource( 2 )
-position = Vector2( 1024, -1056 )
+position = Vector2( 2048, -1056 )
 rotation = 1.5708
-scale = Vector2( 1, 2048 )
+scale = Vector2( 1, 4096 )
 z_as_relative = false
 texture = ExtResource( 1 )
 centered = false
@@ -42,9 +42,9 @@ material = ExtResource( 2 )
 [node name="SkySprite" type="Sprite" parent="Foreground"]
 light_mask = 0
 material = ExtResource( 2 )
-position = Vector2( 1024, -1056 )
+position = Vector2( 2048, -1056 )
 rotation = 1.5708
-scale = Vector2( 1, 2048 )
+scale = Vector2( 1, 4096 )
 z_as_relative = false
 texture = ExtResource( 1 )
 centered = false

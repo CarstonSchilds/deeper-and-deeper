@@ -39,9 +39,9 @@ z_index = 100
 
 [node name="Darkness" type="Light2D" parent="."]
 light_mask = 3
-position = Vector2( -1024, -1024 )
+position = Vector2( -2048, -1024 )
 rotation = 1.5708
-scale = Vector2( 1, 8192 )
+scale = Vector2( 1, 10240 )
 texture = SubResource( 2 )
 offset = Vector2( 4096, -0.5 )
 mode = 1

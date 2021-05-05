@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/sub/sonar_particle_texture.tres" type="Texture" id=3]
 [ext_resource path="res://assets/sub/spotlight.png" type="Texture" id=4]
 [ext_resource path="res://assets/sub/sub_light.png" type="Texture" id=5]
-[ext_resource path="res://assets/ui/ui_theme.tres" type="Theme" id=7]
+[ext_resource path="res://assets/ui/ui_theme_small.tres" type="Theme" id=6]
 [ext_resource path="res://assets/sounds/Submarine Prop Master.wav" type="AudioStream" id=8]
 [ext_resource path="res://entities/sub/sound_players/EngineSound.gd" type="Script" id=9]
 [ext_resource path="res://entities/sub/Sonar.gd" type="Script" id=11]
@@ -112,29 +112,29 @@ gravity = Vector3( 0, 0, 0 )
 scale_curve = SubResource( 13 )
 color_ramp = SubResource( 11 )
 
-[sub_resource type="ParticlesMaterial" id=22]
+[sub_resource type="ParticlesMaterial" id=15]
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 
-[sub_resource type="CircleShape2D" id=23]
+[sub_resource type="CircleShape2D" id=16]
 radius = 126.347
 
-[sub_resource type="Gradient" id=15]
+[sub_resource type="Gradient" id=17]
 colors = PoolColorArray( 0.25098, 0.466667, 0.533333, 1, 0.25098, 0.466667, 0.533333, 0 )
 
-[sub_resource type="GradientTexture" id=16]
-gradient = SubResource( 15 )
+[sub_resource type="GradientTexture" id=18]
+gradient = SubResource( 17 )
 
-[sub_resource type="Curve" id=17]
+[sub_resource type="Curve" id=19]
 max_value = 2.0
 _data = [ Vector2( 0, 0.486364 ), 0.0, 0.940909, 0, 1, Vector2( 1, 1.42727 ), 0.940909, 0.0, 1, 0 ]
 
-[sub_resource type="CurveTexture" id=18]
-curve = SubResource( 17 )
+[sub_resource type="CurveTexture" id=20]
+curve = SubResource( 19 )
 
-[sub_resource type="ParticlesMaterial" id=19]
+[sub_resource type="ParticlesMaterial" id=21]
 lifetime_randomness = 0.5
 emission_shape = 1
 emission_sphere_radius = 2.0
@@ -144,11 +144,11 @@ initial_velocity = 2.0
 initial_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 18 )
-color_ramp = SubResource( 16 )
+scale_curve = SubResource( 20 )
+color_ramp = SubResource( 18 )
 anim_speed_random = 1.0
 
-[sub_resource type="ParticlesMaterial" id=20]
+[sub_resource type="ParticlesMaterial" id=22]
 emission_shape = 1
 emission_sphere_radius = 0.2
 flag_disable_z = true
@@ -159,7 +159,7 @@ scale = 1.05
 scale_random = 0.04
 color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="CircleShape2D" id=21]
+[sub_resource type="CircleShape2D" id=23]
 radius = 22.6978
 
 [node name="Player" type="KinematicBody2D"]
@@ -180,6 +180,7 @@ shape = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
 frames = SubResource( 8 )
 animation = "move"
+frame = 1
 playing = true
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -265,7 +266,7 @@ margin_top = -226.0
 margin_right = -30.0
 margin_bottom = -22.0
 grow_horizontal = 0
-theme = ExtResource( 7 )
+theme = ExtResource( 6 )
 align = 2
 valign = 2
 __meta__ = {
@@ -280,7 +281,7 @@ margin_top = -73.0
 margin_right = 725.0
 margin_bottom = -28.0
 grow_horizontal = 0
-theme = ExtResource( 7 )
+theme = ExtResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Throttle"
 valign = 2
@@ -296,7 +297,7 @@ margin_top = -123.0
 margin_right = 726.0
 margin_bottom = -76.0
 grow_horizontal = 0
-theme = ExtResource( 7 )
+theme = ExtResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Buoyancy"
 valign = 2
@@ -312,7 +313,7 @@ margin_top = -172.0
 margin_right = 728.0
 margin_bottom = -122.0
 grow_horizontal = 0
-theme = ExtResource( 7 )
+theme = ExtResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Hull"
 valign = 2
@@ -357,7 +358,7 @@ position = Vector2( 0, 2 )
 emitting = false
 amount = 1
 lifetime = 0.2
-process_material = SubResource( 22 )
+process_material = SubResource( 15 )
 texture = ExtResource( 3 )
 
 [node name="SonarArc" type="Particles2D" parent="Sonar"]
@@ -380,7 +381,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sonar/SonarAggroArea"]
 position = Vector2( 0, -115 )
-shape = SubResource( 23 )
+shape = SubResource( 16 )
 
 [node name="SonarAggroTimer" type="Timer" parent="Sonar/SonarAggroArea"]
 wait_time = 0.5
@@ -401,13 +402,14 @@ emitting = false
 amount = 32
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 19 )
+process_material = SubResource( 21 )
 texture = ExtResource( 20 )
 script = ExtResource( 21 )
 
 [node name="LightClickPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
 volume_db = -3.0
+bus = "Sumarine"
 script = ExtResource( 17 )
 
 [node name="BallastBubblesLeft" type="Particles2D" parent="."]
@@ -419,7 +421,7 @@ amount = 32
 one_shot = true
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 19 )
+process_material = SubResource( 21 )
 texture = ExtResource( 20 )
 script = ExtResource( 23 )
 
@@ -432,18 +434,20 @@ amount = 32
 one_shot = true
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 19 )
+process_material = SubResource( 21 )
 texture = ExtResource( 20 )
 script = ExtResource( 23 )
 
 [node name="BallastBubblesPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )
 volume_db = -8.0
+bus = "Sumarine"
 script = ExtResource( 24 )
 
 [node name="TerrainDamagePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 26 )
 volume_db = -8.0
+bus = "Sumarine"
 script = ExtResource( 27 )
 
 [node name="Timer" type="Timer" parent="TerrainDamagePlayer"]
@@ -452,6 +456,7 @@ wait_time = 1.5
 [node name="LittleDamagePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 30 )
 volume_db = -10.0
+bus = "Sumarine"
 script = ExtResource( 28 )
 
 [node name="Timer" type="Timer" parent="LittleDamagePlayer"]
@@ -461,6 +466,7 @@ one_shot = true
 [node name="BigDamagePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 31 )
 volume_db = -5.0
+bus = "Sumarine"
 script = ExtResource( 29 )
 
 [node name="Timer" type="Timer" parent="BigDamagePlayer"]
@@ -474,43 +480,45 @@ lifetime = 0.2
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
-process_material = SubResource( 20 )
+process_material = SubResource( 22 )
 texture = ExtResource( 32 )
 script = ExtResource( 33 )
 
 [node name="PlayerSoundArea" type="Area2D" parent="."]
 
 [node name="Circle" type="CollisionShape2D" parent="PlayerSoundArea"]
-shape = SubResource( 21 )
+shape = SubResource( 23 )
 
 [node name="WaterBreachPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 34 )
 volume_db = -5.0
+bus = "Environment"
 
 [node name="AlarmPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 35 )
 volume_db = -9.0
+bus = "Sumarine"
 
-[connection signal="ahead_fast" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_fast"]
 [connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
-[connection signal="ahead_flank" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_flank"]
+[connection signal="ahead_fast" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_fast"]
 [connection signal="ahead_flank" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_flank"]
-[connection signal="ahead_slow" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_slow"]
+[connection signal="ahead_flank" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_flank"]
 [connection signal="ahead_slow" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_slow"]
-[connection signal="astern" from="." to="PropAnchor/EngineBubbles" method="_on_Player_astern"]
+[connection signal="ahead_slow" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_slow"]
 [connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
+[connection signal="astern" from="." to="PropAnchor/EngineBubbles" method="_on_Player_astern"]
 [connection signal="big_damage" from="." to="BigDamagePlayer" method="_on_Player_big_damage"]
-[connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesLeft" method="_on_Player_buoyancy_down"]
+[connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
 [connection signal="light_toggle" from="." to="LightClickPlayer" method="_on_Player_light_toggle"]
 [connection signal="little_damage" from="." to="LittleDamagePlayer" method="_on_Player_little_damage"]
+[connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="BallastBubblesLeft" method="_on_Player_show_damage"]
-[connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
 [connection signal="sonar_toggle" from="." to="Sonar" method="_on_Player_sonar_toggle"]
-[connection signal="stop" from="." to="PropAnchor/EngineBubbles" method="_on_Player_stop"]
 [connection signal="stop" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_stop"]
+[connection signal="stop" from="." to="PropAnchor/EngineBubbles" method="_on_Player_stop"]
 [connection signal="terrain_damage" from="." to="TerrainDamagePlayer" method="_on_Player_terrain_damage"]
 [connection signal="zoom_in" from="." to="Camera" method="_on_Player_zoom_in"]
 [connection signal="zoom_out" from="." to="Camera" method="_on_Player_zoom_out"]
@@ -518,8 +526,8 @@ volume_db = -9.0
 [connection signal="body_exited" from="CollisionDetector" to="." method="_on_CollisionDetector_body_exited"]
 [connection signal="animation_finished" from="Camera/FadeToBlackLayer/ColorRect/FadeToBlackAnimationPlayer" to="." method="_on_FadeToBlackAnimationPlayer_animation_finished"]
 [connection signal="timeout" from="Sonar/SonarCooldown" to="Sonar" method="_on_SonarCooldown_timeout"]
-[connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle/PingEchoPlayer" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Sonar/SonarParticle/GabageCollectTimer" to="Sonar/SonarParticle" method="_on_GabageCollectTimer_timeout"]
 [connection signal="timeout" from="Sonar/SonarAggroArea/SonarAggroTimer" to="Sonar" method="_on_SonarAggroTimer_timeout"]
 [connection signal="timeout" from="TerrainDamagePlayer/Timer" to="TerrainDamagePlayer" method="_on_Timer_timeout"]

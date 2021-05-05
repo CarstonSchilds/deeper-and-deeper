@@ -48,7 +48,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="SpritePosition" index="0"]
 frames = SubResource( 6 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="LightOccluder2D" parent="." index="2"]
@@ -61,6 +61,7 @@ script = ExtResource( 6 )
 [node name="SharkAngryAudioPlayer" type="AudioStreamPlayer2D" parent="." index="4"]
 stream = ExtResource( 1 )
 volume_db = -1.0
+bus = "Enemies"
 script = ExtResource( 5 )
 
 [connection signal="state_changed" from="Brain" to="SharkAngryAudioPlayer" method="_on_Brain_state_changed"]

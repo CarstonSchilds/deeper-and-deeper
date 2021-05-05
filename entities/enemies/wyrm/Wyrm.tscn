@@ -7,51 +7,51 @@
 [ext_resource path="res://entities/enemies/wyrm/Wyrm.gd" type="Script" id=5]
 [ext_resource path="res://entities/enemies/wyrm/WyrmBrain.gd" type="Script" id=6]
 
-[sub_resource type="CapsuleShape2D" id=21]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 6.74584
 height = 93.382
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 144, 64 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
 region = Rect2( 144, 0, 144, 64 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 288, 0, 144, 64 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
 region = Rect2( 432, 0, 144, 64 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
 region = Rect2( 576, 0, 144, 64 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
 region = Rect2( 720, 0, 144, 64 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
 region = Rect2( 864, 0, 144, 64 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
 region = Rect2( 1008, 0, 144, 64 )
 
-[sub_resource type="SpriteFrames" id=19]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 } ]
 
-[sub_resource type="OccluderPolygon2D" id=20]
+[sub_resource type="OccluderPolygon2D" id=11]
 polygon = PoolVector2Array( -62.6447, -4.96294, -44.1911, -14.3881, -27.0059, -16.4172, -12.9743, -21.2058, -3.61982, -16.6399, 1.50285, -11.8514, 14.2314, -21.0365, 23.5864, -21.2467, 29.9982, -16.6217, 35.1487, -13.0479, 39.1433, -7.95367, 55.3059, -7.05906, 55.4932, 8.9541, 42.0084, 9.04774, 29.7889, 18.2165, 17.6504, 21.2233, 6.40279, 16.546, 2.53798, 12.1016, -1.92659, 15.3756, -8.77225, 19.3441, -18.2967, 21.5268, -28.1187, 15.6733, -36.4717, 14.5415, -45.0466, 13.8733, -68.7341, 2.38176 )
 
 [node name="Wyrm" instance=ExtResource( 3 )]
@@ -60,15 +60,15 @@ script = ExtResource( 5 )
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2( 2.7906, 1.78381 )
-shape = SubResource( 21 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="SpritePosition" index="0"]
-frames = SubResource( 19 )
-frame = 4
+frames = SubResource( 10 )
+frame = 7
 playing = true
 
 [node name="LightOccluder2D" parent="." index="2"]
-occluder = SubResource( 20 )
+occluder = SubResource( 11 )
 
 [node name="Brain" parent="." index="3"]
 position = Vector2( -0.0331078, 0 )
@@ -77,6 +77,7 @@ script = ExtResource( 6 )
 [node name="AngryFishNoises" type="AudioStreamPlayer2D" parent="." index="4"]
 stream = ExtResource( 2 )
 volume_db = -7.0
+bus = "Enemies"
 script = ExtResource( 4 )
 
 [connection signal="state_changed" from="Brain" to="AngryFishNoises" method="_on_Brain_state_changed"]
