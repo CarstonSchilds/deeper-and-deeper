@@ -9,6 +9,7 @@
 light_mask = 0
 material = ExtResource( 2 )
 motion_scale = Vector2( 0.8, 0.8 )
+motion_offset = Vector2( 0, -8 )
 
 [node name="SkySprite" type="Sprite" parent="Background"]
 light_mask = 0
@@ -24,8 +25,10 @@ centered = false
 light_mask = 0
 material = ExtResource( 2 )
 motion_scale = Vector2( 0.9, 0.9 )
+motion_offset = Vector2( 0, -4 )
 
 [node name="SkySprite" type="Sprite" parent="Midground"]
+visible = false
 light_mask = 0
 material = ExtResource( 2 )
 position = Vector2( 2048, -1056 )
@@ -40,6 +43,7 @@ light_mask = 0
 material = ExtResource( 2 )
 
 [node name="SkySprite" type="Sprite" parent="Foreground"]
+visible = false
 light_mask = 0
 material = ExtResource( 2 )
 position = Vector2( 2048, -1056 )

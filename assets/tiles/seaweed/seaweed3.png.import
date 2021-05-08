@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rocks.png-c39e7815171e58a62976d9d8efb203ed.stex"
+path="res://.import/seaweed3.png-315ad970881ed7e072a3fdf9f8bc5526.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/seafloor/rocks.png"
-dest_files=[ "res://.import/rocks.png-c39e7815171e58a62976d9d8efb203ed.stex" ]
+source_file="res://assets/tiles/seaweed/seaweed3.png"
+dest_files=[ "res://.import/seaweed3.png-315ad970881ed7e072a3fdf9f8bc5526.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

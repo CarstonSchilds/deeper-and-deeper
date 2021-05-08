@@ -15,22 +15,31 @@ var sonar_available = true
 var sonar_range = 1000
 var request_sonar = false
 
+func _process(delta):
+	sonar_active_particle.emitting = self.request_sonar and !parent.rolling
+
 func _physics_process(delta):
-	if sonar_available and request_sonar:
+	if sonar_available and request_sonar and !parent.rolling:
 		do_sonar()
 
-func get_normalized_ray_vector(angle_delta):
-	return parent.current_facing.rotated(-PI/2 + angle_delta).normalized()
+func get_normalized_ray_vector(rot, angle_delta):
+	return parent.current_facing.rotated(rot + angle_delta).normalized()
 	
 func do_sonar():
 	var arc_material = sonar_arc.process_material
-	arc_material.angle = -self.global_rotation_degrees
+	if parent.inverted:
+		arc_material.angle = -self.global_rotation_degrees + 180
+	else:
+		arc_material.angle = -self.global_rotation_degrees
 	sonar_arc.emitting = true
 	sonar_ping_player.play()
 	var space_state = get_world_2d().direct_space_state
 	for i in range(-64, 64):
 		var angle_delta = PI/256 * i
-		var result = space_state.intersect_ray(self.global_position, self.global_position + get_normalized_ray_vector(angle_delta) * sonar_range, [self])
+		var rot = -PI/2
+		if parent.inverted:
+			rot = -rot
+		var result = space_state.intersect_ray(self.global_position, self.global_position + get_normalized_ray_vector(rot, angle_delta) * sonar_range, [self])
 		if 'position' in result:
 			draw_sonar_hit(result)
 	aggro_sonar_sensitive_enemies()
@@ -58,7 +67,6 @@ func draw_sonar_hit(ray_cast_result):
 
 func _on_Player_sonar_toggle():
 	self.request_sonar = !self.request_sonar
-	sonar_active_particle.emitting = self.request_sonar
 
 var heard_sonar = {}
 

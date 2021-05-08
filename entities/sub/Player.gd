@@ -1,5 +1,6 @@
 extends "res://entities/Entity.gd"
 
+var spotlight_on = true
 onready var spotlight = $Spotlight
 onready var spotlight_area = $Spotlight/SpotlightArea
 onready var glow = $Glow
@@ -67,6 +68,7 @@ signal ahead_fast
 signal ahead_flank
 signal zoom_in
 signal zoom_out
+signal barrel_roll
 
 var last_throttle_control = 0
 var current_throttle_state = 1
@@ -128,9 +130,9 @@ func handle_input():
 		adjust_sound_area(current_throttle_state)
 		control_throttle = throttle_values[current_throttle_state]
 		if current_throttle_state != 1:
-			sprite.animation = "move"
+			sprite.set_moving()
 		else:
-			sprite.animation = "idle"
+			sprite.set_idle()
 
 	if input_vector.y < 0 && last_throttle_control >= 0 && current_throttle_state > 0:
 		last_throttle_control = -1
@@ -139,9 +141,9 @@ func handle_input():
 		adjust_sound_area(current_throttle_state)
 		control_throttle = throttle_values[current_throttle_state]
 		if current_throttle_state != 1:
-			sprite.animation = "move"
+			sprite.set_moving()
 		else:
-			sprite.animation = "idle"
+			sprite.set_idle()
 		
 	if input_vector.y == 0 && last_throttle_control != 0:
 		last_throttle_control = 0
@@ -179,14 +181,19 @@ func handle_input():
 	
 	self.buoyancy = ( control_buoyancy / 100.0 ) * ( SUB_BUOYANCY * 0.1 ) + ( SUB_BUOYANCY * 0.85 )
 	
+	# ROLL Controls
+	if Input.is_action_just_released("barrel_roll"):
+		do_roll()
+		emit_signal("barrel_roll")
+	
 	# SONAR AND SPOTLIGHT CONTROLS
 	if Input.is_action_just_released("sonar"):
 		emit_signal("sonar_toggle")
 		
 	if Input.is_action_just_released("spotlight_toggle"):
-		self.spotlight.enabled = !self.spotlight.enabled
-		self.spotlight_area.monitorable = !self.spotlight_area.monitorable
+		spotlight_on = !spotlight_on
 		emit_signal("light_toggle")
+		update_spotlight()
 		
 	# CAMERA ZOOM CONTROLS
 	if Input.is_action_just_released("zoom_in"):
@@ -297,6 +304,37 @@ func _on_CollisionDetector_body_exited(body):
 	if body.name != 'Player':
 		colliding.erase(body)
 
+var inverted = false
+var rolling = false
 
+signal rolling
+signal not_rolling
 
+func invert(inverted):
+	self.inverted = inverted
+	if inverted:
+		print("inverted!")
+		self.scale.y = -1
+	else:
+		print("uninverted!")
+		self.scale.y = 1
 
+func done_rolling():
+	# Called when rolling animation is done
+	rolling = false	
+	update_spotlight()
+
+func do_roll():
+	rolling = true
+	update_spotlight()
+	if inverted:
+		print("rolling back!")
+		sprite.start_roll_back()
+	else:
+		print("rolling over!")
+		sprite.start_roll_over()
+
+func update_spotlight():
+	var is_on = !rolling and spotlight_on
+	self.spotlight.enabled = is_on
+	self.spotlight_area.monitorable = is_on
