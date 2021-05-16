@@ -1,54 +1,56 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/environment/sky/Sky_Gradient.tres" type="Texture" id=1]
 [ext_resource path="res://assets/environment/sky/Sky_Transparent_Material.tres" type="Material" id=2]
+[ext_resource path="res://assets/environment/sky/Sky_Opaque_Material.tres" type="Material" id=3]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 0.43985, 0.792969, 1, 0, 0.309804, 0.431373, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 1 )
+width = 1024
 
 [node name="Sky" type="ParallaxBackground"]
 
 [node name="Background" type="ParallaxLayer" parent="."]
 light_mask = 0
-material = ExtResource( 2 )
 motion_scale = Vector2( 0.8, 0.8 )
 motion_offset = Vector2( 0, -8 )
 
 [node name="SkySprite" type="Sprite" parent="Background"]
 light_mask = 0
-material = ExtResource( 2 )
+material = ExtResource( 3 )
 position = Vector2( 2048, -1056 )
 rotation = 1.5708
 scale = Vector2( 1, 4096 )
 z_as_relative = false
-texture = ExtResource( 1 )
+texture = SubResource( 4 )
 centered = false
 
 [node name="Midground" type="ParallaxLayer" parent="."]
 light_mask = 0
-material = ExtResource( 2 )
 motion_scale = Vector2( 0.9, 0.9 )
 motion_offset = Vector2( 0, -4 )
 
 [node name="SkySprite" type="Sprite" parent="Midground"]
-visible = false
 light_mask = 0
 material = ExtResource( 2 )
 position = Vector2( 2048, -1056 )
 rotation = 1.5708
 scale = Vector2( 1, 4096 )
 z_as_relative = false
-texture = ExtResource( 1 )
+texture = SubResource( 4 )
 centered = false
 
 [node name="Foreground" type="ParallaxLayer" parent="."]
 light_mask = 0
-material = ExtResource( 2 )
 
 [node name="SkySprite" type="Sprite" parent="Foreground"]
-visible = false
 light_mask = 0
 material = ExtResource( 2 )
 position = Vector2( 2048, -1056 )
 rotation = 1.5708
 scale = Vector2( 1, 4096 )
 z_as_relative = false
-texture = ExtResource( 1 )
+texture = SubResource( 4 )
 centered = false

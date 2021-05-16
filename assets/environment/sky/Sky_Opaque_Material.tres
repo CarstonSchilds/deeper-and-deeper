@@ -6,7 +6,7 @@
 texture = ExtResource( 1 )
 
 [sub_resource type="VisualShaderNodeScalarConstant" id=2]
-constant = 0.3
+constant = 1.0
 
 [sub_resource type="VisualShader" id=3]
 code = "shader_type canvas_item;
@@ -26,7 +26,7 @@ void fragment() {
 	float n_out3p1 = tex_frg_3_read.a;
 
 // Scalar:4
-	float n_out4p0 = 0.300000;
+	float n_out4p0 = 1.000000;
 
 // Output:0
 	COLOR.rgb = n_out3p0;
@@ -39,7 +39,7 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -304, -122.25 )
+graph_offset = Vector2( -176, -300 )
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2( 500, 140 )

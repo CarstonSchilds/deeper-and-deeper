@@ -14,7 +14,7 @@ onready var propellor_pos = $PropAnchor
 
 onready var engine_sound = $"PropAnchor/EngineSoundPlayer"
 
-onready var camera = $"Camera"
+onready var camera   = $"Camera"
 
 var depth = 0
 var depth_scale = 3000 # set this based on the max depth of the level
@@ -51,9 +51,21 @@ func _process(delta):
 	elif self.health <= 50:
 		self.hull_label.set("custom_colors/font_color", ColorN("orange", 1))
 
-
 func _physics_process(delta):
 	handle_collisions(delta)
+
+func _input(event):
+	if event is InputEventMouseMotion :
+		if event.button_mask & 2:
+			var offset = camera.offset - ( event.relative / 2.0 )
+			var width  =  get_viewport_rect().size.x / 4.0
+			var height =  get_viewport_rect().size.y / 4.0
+			var x = bound(round(offset.x), -width,  width)
+			var y = bound(round(offset.y), -height, height)
+			camera.offset = Vector2(x, y)
+		if event.button_mask & 1:
+			var offset = (event.position - (get_viewport_rect().size / 2.0) ) / 2.5
+			camera.offset = Vector2(round(offset.x), round(offset.y))
 
 func map(x, input_start, input_end, output_start, output_end):
 	return (x - input_start)/(input_end - input_start) * (output_end - output_start) + output_start
@@ -228,7 +240,7 @@ func handle_depth():
 		self.max_depth = depth
 		
 	if depth > 0 and ! breach_sound_played:
-		water_breach_player.play()
+#		water_breach_player.play()
 		breach_sound_played = true
 
 onready var alarm_player = $"AlarmPlayer"

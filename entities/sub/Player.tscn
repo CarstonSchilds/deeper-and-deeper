@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://entities/sub/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sub/sub.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://entities/sub/AnimatedSprite.gd" type="Script" id=7]
 [ext_resource path="res://assets/sounds/Submarine Prop Master.wav" type="AudioStream" id=8]
 [ext_resource path="res://entities/sub/sound_players/EngineSound.gd" type="Script" id=9]
+[ext_resource path="res://assets/sub/bubble1.png" type="Texture" id=10]
 [ext_resource path="res://entities/sub/Sonar.gd" type="Script" id=11]
 [ext_resource path="res://assets/sub/sonar_arc.png" type="Texture" id=12]
 [ext_resource path="res://assets/sounds/14 SonarPing_BW.59099.wav" type="AudioStream" id=13]
@@ -35,135 +36,7 @@
 [ext_resource path="res://assets/sounds/Breach Master.wav" type="AudioStream" id=34]
 [ext_resource path="res://assets/sounds/Alarm Fade Out.wav" type="AudioStream" id=35]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 9.39685
-height = 23.5681
-
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 6.15743
-height = 19.9959
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 2 )
-region = Rect2( 128, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 2 )
-region = Rect2( 256, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 2 )
-region = Rect2( 320, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 2 )
-region = Rect2( 384, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 2 )
-region = Rect2( 448, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 2 )
-region = Rect2( 512, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 2 )
-region = Rect2( 576, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 2 )
-region = Rect2( 640, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
-region = Rect2( 256, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 2 )
-region = Rect2( 320, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
-region = Rect2( 384, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 2 )
-region = Rect2( 448, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 2 )
-region = Rect2( 448, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=38]
-atlas = ExtResource( 2 )
-region = Rect2( 512, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=39]
-atlas = ExtResource( 2 )
-region = Rect2( 576, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 2 )
-region = Rect2( 640, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 64, 32 )
-
-[sub_resource type="SpriteFrames" id=13]
-animations = [ {
-"frames": [ SubResource( 3 ) ],
-"loop": true,
-"name": "idle",
-"speed": 4.0
-}, {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
-"loop": true,
-"name": "move",
-"speed": 8.0
-}, {
-"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
-"loop": true,
-"name": "roll",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
-"loop": true,
-"name": "roll back",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ) ],
-"loop": true,
-"name": "roll over",
-"speed": 5.0
-} ]
-
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=1]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:color")
@@ -178,50 +51,178 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="Gradient" id=15]
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 9.39685
+height = 23.5681
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 6.15743
+height = 19.9959
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 448, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 512, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 576, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 640, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 2 )
+region = Rect2( 448, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 2 )
+region = Rect2( 448, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 2 )
+region = Rect2( 512, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 2 )
+region = Rect2( 576, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 2 )
+region = Rect2( 640, 0, 64, 32 )
+
+[sub_resource type="SpriteFrames" id=27]
+animations = [ {
+"frames": [ SubResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 4.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "move",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "roll over",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"loop": true,
+"name": "roll back",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
+"loop": true,
+"name": "roll",
+"speed": 5.0
+} ]
+
+[sub_resource type="Gradient" id=28]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=16]
-gradient = SubResource( 15 )
+[sub_resource type="GradientTexture" id=29]
+gradient = SubResource( 28 )
 
-[sub_resource type="Curve" id=17]
+[sub_resource type="Curve" id=30]
 max_value = 2.5
 _data = [ Vector2( 0, 0 ), 0.0, 2.5, 0, 1, Vector2( 1, 2.5 ), 2.5, 0.0, 1, 0 ]
 
-[sub_resource type="CurveTexture" id=18]
-curve = SubResource( 17 )
+[sub_resource type="CurveTexture" id=31]
+curve = SubResource( 30 )
 
-[sub_resource type="ParticlesMaterial" id=19]
+[sub_resource type="ParticlesMaterial" id=32]
 lifetime_randomness = 0.5
 emission_shape = 1
 emission_sphere_radius = 2.0
 gravity = Vector3( 0, 0, 0 )
-scale_curve = SubResource( 18 )
-color_ramp = SubResource( 16 )
+scale_curve = SubResource( 31 )
+color_ramp = SubResource( 29 )
 
-[sub_resource type="ParticlesMaterial" id=20]
+[sub_resource type="ParticlesMaterial" id=33]
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 
-[sub_resource type="CircleShape2D" id=21]
+[sub_resource type="CircleShape2D" id=34]
 radius = 126.347
 
-[sub_resource type="Gradient" id=22]
+[sub_resource type="Gradient" id=35]
 colors = PoolColorArray( 0.25098, 0.466667, 0.533333, 1, 0.25098, 0.466667, 0.533333, 0 )
 
-[sub_resource type="GradientTexture" id=23]
-gradient = SubResource( 22 )
+[sub_resource type="GradientTexture" id=36]
+gradient = SubResource( 35 )
 
-[sub_resource type="Curve" id=24]
+[sub_resource type="Curve" id=37]
 max_value = 2.0
 _data = [ Vector2( 0, 0.486364 ), 0.0, 0.940909, 0, 1, Vector2( 1, 1.42727 ), 0.940909, 0.0, 1, 0 ]
 
-[sub_resource type="CurveTexture" id=25]
-curve = SubResource( 24 )
+[sub_resource type="CurveTexture" id=38]
+curve = SubResource( 37 )
 
-[sub_resource type="ParticlesMaterial" id=26]
+[sub_resource type="ParticlesMaterial" id=39]
 lifetime_randomness = 0.5
 emission_shape = 1
 emission_sphere_radius = 2.0
@@ -231,11 +232,11 @@ initial_velocity = 2.0
 initial_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 25 )
-color_ramp = SubResource( 23 )
+scale_curve = SubResource( 38 )
+color_ramp = SubResource( 36 )
 anim_speed_random = 1.0
 
-[sub_resource type="ParticlesMaterial" id=27]
+[sub_resource type="ParticlesMaterial" id=40]
 emission_shape = 1
 emission_sphere_radius = 0.2
 flag_disable_z = true
@@ -246,36 +247,16 @@ scale = 1.05
 scale_random = 0.04
 color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="CircleShape2D" id=28]
+[sub_resource type="CircleShape2D" id=41]
 radius = 22.6978
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
-[node name="CollisionDetector" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
-rotation = 1.5708
-shape = SubResource( 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
-shape = SubResource( 2 )
-
-[node name="SpritePosition" type="Position2D" parent="."]
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
-frames = SubResource( 13 )
-animation = "idle"
-playing = true
-script = ExtResource( 7 )
-
 [node name="Camera" type="Camera2D" parent="."]
 light_mask = 3
 current = true
-zoom = Vector2( 0.25, 0.25 )
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
+smoothing_enabled = true
 drag_margin_left = 0.1
 drag_margin_top = 0.1
 drag_margin_right = 0.1
@@ -296,7 +277,28 @@ __meta__ = {
 }
 
 [node name="FadeToBlackAnimationPlayer" type="AnimationPlayer" parent="Camera/FadeToBlackLayer/ColorRect"]
-anims/FadeOut = SubResource( 14 )
+anims/FadeOut = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Camera"]
+texture = ExtResource( 10 )
+
+[node name="CollisionDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="SpritePosition" type="Position2D" parent="."]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
+frames = SubResource( 27 )
+animation = "idle"
+playing = true
+script = ExtResource( 7 )
 
 [node name="Spotlight" type="Light2D" parent="."]
 light_mask = 3
@@ -423,7 +425,7 @@ amount = 4
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
-process_material = SubResource( 19 )
+process_material = SubResource( 32 )
 texture = ExtResource( 3 )
 script = ExtResource( 14 )
 
@@ -440,12 +442,18 @@ script = ExtResource( 16 )
 wait_time = 5.0
 one_shot = true
 
+[node name="SonarLight" type="Light2D" parent="Sonar/SonarParticle"]
+enabled = false
+texture = ExtResource( 5 )
+texture_scale = 0.1
+color = Color( 0, 1, 0.0392157, 1 )
+
 [node name="SonarActiveParticle" type="Particles2D" parent="Sonar"]
 position = Vector2( 0, 2 )
 emitting = false
 amount = 1
 lifetime = 0.2
-process_material = SubResource( 20 )
+process_material = SubResource( 33 )
 texture = ExtResource( 3 )
 
 [node name="SonarArc" type="Particles2D" parent="Sonar"]
@@ -468,7 +476,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sonar/SonarAggroArea"]
 position = Vector2( 0, -115 )
-shape = SubResource( 21 )
+shape = SubResource( 34 )
 
 [node name="SonarAggroTimer" type="Timer" parent="Sonar/SonarAggroArea"]
 wait_time = 0.5
@@ -489,15 +497,9 @@ emitting = false
 amount = 32
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 26 )
+process_material = SubResource( 39 )
 texture = ExtResource( 20 )
 script = ExtResource( 21 )
-
-[node name="LightClickPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 18 )
-volume_db = -3.0
-bus = "Sumarine"
-script = ExtResource( 17 )
 
 [node name="BallastBubblesLeft" type="Particles2D" parent="."]
 light_mask = 0
@@ -508,7 +510,7 @@ amount = 32
 one_shot = true
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 26 )
+process_material = SubResource( 39 )
 texture = ExtResource( 20 )
 script = ExtResource( 23 )
 
@@ -521,9 +523,32 @@ amount = 32
 one_shot = true
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 26 )
+process_material = SubResource( 39 )
 texture = ExtResource( 20 )
 script = ExtResource( 23 )
+
+[node name="DamageParticle" type="Particles2D" parent="."]
+light_mask = 0
+emitting = false
+amount = 4
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource( 40 )
+texture = ExtResource( 32 )
+script = ExtResource( 33 )
+
+[node name="PlayerSoundArea" type="Area2D" parent="."]
+
+[node name="Circle" type="CollisionShape2D" parent="PlayerSoundArea"]
+shape = SubResource( 41 )
+
+[node name="LightClickPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+volume_db = -3.0
+bus = "Sumarine"
+script = ExtResource( 17 )
 
 [node name="BallastBubblesPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )
@@ -559,23 +584,6 @@ script = ExtResource( 29 )
 [node name="Timer" type="Timer" parent="BigDamagePlayer"]
 wait_time = 1.5
 
-[node name="DamageParticle" type="Particles2D" parent="."]
-light_mask = 0
-emitting = false
-amount = 4
-lifetime = 0.2
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-process_material = SubResource( 27 )
-texture = ExtResource( 32 )
-script = ExtResource( 33 )
-
-[node name="PlayerSoundArea" type="Area2D" parent="."]
-
-[node name="Circle" type="CollisionShape2D" parent="PlayerSoundArea"]
-shape = SubResource( 28 )
-
 [node name="WaterBreachPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 34 )
 volume_db = -5.0
@@ -595,13 +603,13 @@ bus = "Sumarine"
 [connection signal="astern" from="." to="PropAnchor/EngineBubbles" method="_on_Player_astern"]
 [connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
 [connection signal="big_damage" from="." to="BigDamagePlayer" method="_on_Player_big_damage"]
-[connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
 [connection signal="buoyancy_down" from="." to="BallastBubblesLeft" method="_on_Player_buoyancy_down"]
+[connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
 [connection signal="light_toggle" from="." to="LightClickPlayer" method="_on_Player_light_toggle"]
 [connection signal="little_damage" from="." to="LittleDamagePlayer" method="_on_Player_little_damage"]
-[connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
+[connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
 [connection signal="show_damage" from="." to="BallastBubblesLeft" method="_on_Player_show_damage"]
 [connection signal="sonar_toggle" from="." to="Sonar" method="_on_Player_sonar_toggle"]
 [connection signal="stop" from="." to="PropAnchor/EngineBubbles" method="_on_Player_stop"]
@@ -609,10 +617,10 @@ bus = "Sumarine"
 [connection signal="terrain_damage" from="." to="TerrainDamagePlayer" method="_on_Player_terrain_damage"]
 [connection signal="zoom_in" from="." to="Camera" method="_on_Player_zoom_in"]
 [connection signal="zoom_out" from="." to="Camera" method="_on_Player_zoom_out"]
+[connection signal="animation_finished" from="Camera/FadeToBlackLayer/ColorRect/FadeToBlackAnimationPlayer" to="." method="_on_FadeToBlackAnimationPlayer_animation_finished"]
 [connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
 [connection signal="body_exited" from="CollisionDetector" to="." method="_on_CollisionDetector_body_exited"]
 [connection signal="animation_finished" from="SpritePosition/AnimatedSprite" to="SpritePosition/AnimatedSprite" method="_on_AnimatedSprite_animation_finished"]
-[connection signal="animation_finished" from="Camera/FadeToBlackLayer/ColorRect/FadeToBlackAnimationPlayer" to="." method="_on_FadeToBlackAnimationPlayer_animation_finished"]
 [connection signal="timeout" from="Sonar/SonarCooldown" to="Sonar" method="_on_SonarCooldown_timeout"]
 [connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle/PingEchoPlayer" method="_on_Timer_timeout"]

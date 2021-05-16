@@ -1,9 +1,8 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://ui/TitleScreen.gd" type="Script" id=1]
 [ext_resource path="res://assets/ui/fonts/DNPixel-Regular.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://entities/environment/Water.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/environment/sky/Sky_Gradient.tres" type="Texture" id=4]
 [ext_resource path="res://assets/sounds/Bubbles 4 Master.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/circle.png" type="Texture" id=6]
 [ext_resource path="res://assets/environment/water/uifade.tres" type="Animation" id=7]
@@ -17,17 +16,15 @@
 [ext_resource path="res://ui/FullscreenCheckBox.gd" type="Script" id=15]
 [ext_resource path="res://assets/sounds/06 Bloop.wav" type="AudioStream" id=16]
 
-[sub_resource type="DynamicFont" id=1]
-size = 90
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 2 )
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 0.43985, 0.792969, 1, 0, 0.309804, 0.431373, 1 )
 
-[sub_resource type="Theme" id=2]
-default_font = SubResource( 1 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 1024
 
 [sub_resource type="DynamicFont" id=3]
-size = 60
+size = 90
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
@@ -35,14 +32,23 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=4]
 default_font = SubResource( 3 )
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="DynamicFont" id=5]
+size = 60
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
+
+[sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0, 0.451264, 1 )
 colors = PoolColorArray( 0.289658, 0.222816, 0.966797, 1, 0.565934, 0.981456, 0.849982, 1, 0.984614, 0.983166, 0.999281, 1 )
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=9]
 emission_shape = 2
 emission_box_extents = Vector3( 960, 1, 1 )
 flag_disable_z = true
@@ -54,7 +60,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 3.0
 scale_random = 1.0
-color_ramp = SubResource( 6 )
+color_ramp = SubResource( 8 )
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource( 1 )
@@ -74,7 +80,7 @@ modulate = Color( 1, 1, 1, 0 )
 position = Vector2( -120, 4096 )
 rotation = -1.5708
 scale = Vector2( 8, 1920 )
-texture = ExtResource( 4 )
+texture = SubResource( 2 )
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraRig/Sky"]
@@ -89,7 +95,7 @@ margin_left = -270.0
 margin_top = 49.0
 margin_right = 270.0
 margin_bottom = 149.0
-theme = SubResource( 2 )
+theme = SubResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=12 freq=4]Sublunker[/wave]"
 text = "Sublunker"
@@ -318,7 +324,7 @@ margin_top = -175.335
 margin_right = 65.0
 margin_bottom = -107.335
 focus_mode = 0
-theme = SubResource( 4 )
+theme = SubResource( 6 )
 custom_icons/checked = ExtResource( 9 )
 custom_icons/unchecked = ExtResource( 10 )
 disabled = true
@@ -524,7 +530,7 @@ __meta__ = {
 emitting = false
 amount = 1000
 lifetime = 15.0
-process_material = SubResource( 7 )
+process_material = SubResource( 9 )
 texture = ExtResource( 6 )
 
 [node name="BubblesSound" type="AudioStreamPlayer" parent="UI/Bubbles"]

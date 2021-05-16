@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://entities/physics_entity/PhysicsEntity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sub/bubbles_texture.tres" type="Texture" id=2]
+[ext_resource path="res://assets/flare/flare.png" type="Texture" id=3]
+[ext_resource path="res://assets/flare/flare_normals.png" type="Texture" id=4]
+[ext_resource path="res://assets/sub/sub_light.png" type="Texture" id=5]
+
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 3.13596
+height = 4.27194
+
+[sub_resource type="Gradient" id=9]
+colors = PoolColorArray( 0.580948, 0.716799, 0.758789, 1, 0.25098, 0.466667, 0.533333, 0 )
+
+[sub_resource type="GradientTexture" id=10]
+gradient = SubResource( 9 )
+
+[sub_resource type="Curve" id=11]
+max_value = 2.0
+_data = [ Vector2( 0, 0.486364 ), 0.0, 0.940909, 0, 1, Vector2( 1, 1.42727 ), 0.940909, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=13]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 0.25
+flag_disable_z = true
+gravity = Vector3( 0, -20, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 12 )
+color_ramp = SubResource( 10 )
+anim_speed_random = 1.0
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[node name="Flare" instance=ExtResource( 1 )]
+angular_velocity = 10.0
+volume = 0.001
+auto_neutral_buoyancy = false
+
+[node name="FlareCollision" type="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+normal_map = ExtResource( 4 )
+
+[node name="Bubbles" type="Particles2D" parent="." index="2"]
+light_mask = 0
+position = Vector2( 0, -4 )
+amount = 32
+lifetime = 2.0
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 13 )
+texture = ExtResource( 2 )
+
+[node name="Flare" type="Particles2D" parent="." index="3"]
+light_mask = 0
+position = Vector2( 0, -4 )
+amount = 4
+lifetime = 0.1
+process_material = SubResource( 7 )
+
+[node name="Glow" type="Light2D" parent="." index="4"]
+visible = false
+light_mask = 3
+texture = ExtResource( 5 )
+texture_scale = 5.0
+color = Color( 1, 0.945098, 0.694118, 1 )
+energy = 1.25
+range_height = 10.0
+range_layer_min = -120
+range_layer_max = 25
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_gradient_length = 10.0
+shadow_filter = 1
+shadow_item_cull_mask = 3
