@@ -2,33 +2,26 @@ extends "res://entities/enemies/states/State.gd"
 
 onready var timer = $Timer
 var done = false
-var saved_buoyancy
 
-func _ready():
-	pass
+func state_name():
+	return 'rest'
 
 func enter(brain):
 	.enter(brain)
+	brain.swim_controller.target = null
 	timer.start()
-	self.saved_buoyancy = brain.body.buoyancy
-	brain.rest = false
+	brain.body.set_mass(brain.body.mass * 1.25)
 	done = false
-	
 
 func exit(brain):
+	.exit(brain)
 	timer.stop()
-	brain.body.buoyancy = self.saved_buoyancy
-
-func _on_Timer_timeout():
-	self.done = true
+	brain.body.mass = brain.body.default_mass
 
 func update(delta):
 	if done:
 		return 'attack'
-	brain.body.buoyancy = 1.1
-	brain.control_vector = Vector2(0, 0)
-	brain.stop_moving()
-	
 
-func get_class():
-	return 'rest'
+func _on_Timer_timeout():
+	self.done = true
+

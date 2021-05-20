@@ -1,0 +1,108 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://entities/enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/squid/squid.png" type="Texture" id=2]
+[ext_resource path="res://assets/sounds/Squid Mad 1 Master.wav" type="AudioStream" id=3]
+[ext_resource path="res://entities/enemies/beach/SquidAnimations.gd" type="Script" id=4]
+
+[sub_resource type="PhysicsMaterial" id=9]
+friction = 0.75
+bounce = 0.95
+
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 10.209
+height = 28.5654
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 112 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 112 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 112 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 112 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 64, 112 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 448, 0, 64, 112 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 64, 112 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 0, 64, 112 )
+
+[sub_resource type="SpriteFrames" id=17]
+animations = [ {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "swim",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 15 ), SubResource( 16 ) ],
+"loop": true,
+"name": "start_swim",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=18]
+radius = 16.3037
+height = 23.5041
+
+[sub_resource type="CircleShape2D" id=19]
+radius = 11.7259
+
+[node name="Squid" instance=ExtResource( 1 )]
+light_sensitive = true
+no_patrol = true
+damage = 10
+attack_leash_range = 750.0
+rest_time = 1.4
+normal_patrol_time = 5.0
+
+[node name="PhysicsEntity" parent="." index="0"]
+physics_material_override = SubResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsEntity" index="1"]
+shape = SubResource( 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="PhysicsSmoothing" index="0"]
+light_mask = 9
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+frames = SubResource( 17 )
+animation = "idle"
+playing = true
+script = ExtResource( 4 )
+
+[node name="AngryFishNoise" parent="PhysicsSmoothing" index="2"]
+stream = ExtResource( 3 )
+volume_db = -5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsSmoothing/HurtBox" index="0"]
+shape = SubResource( 18 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsSmoothing/HitBox" index="0"]
+position = Vector2( 0, 16 )
+shape = SubResource( 19 )
+
+[connection signal="animation_finished" from="PhysicsSmoothing/AnimatedSprite" to="PhysicsSmoothing/AnimatedSprite" method="_on_AnimatedSprite_animation_finished"]
+[connection signal="state_changed" from="PhysicsSmoothing/Brain" to="PhysicsSmoothing/AnimatedSprite" method="_on_Brain_state_changed"]

@@ -1,14 +1,16 @@
 extends Node
 
-var brain = null
+onready var brain = $"../.."
+var active = false
 
-signal finished(next_state_name)
+func state_name():
+	return '?'
 
 func enter(brain):
-	self.brain = brain
+	active = true
 
 func exit(brain):
-	self.brain = null
+	active = false
 
 func update(delta):
-	return
+	pass

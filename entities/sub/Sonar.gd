@@ -1,5 +1,10 @@
 extends Node2D
 
+onready var player = $"../../.."
+onready var player_controller = player.get_node("PlayerController")
+onready var player_position   = player.get_node("PhysicsSmoothing")
+onready var body              = player.get_node("PhysicsEntity")
+onready var world = $"/root/World"
 
 onready var particle_template = $SonarParticle
 onready var sonar_cooldown_timer = $SonarCooldown
@@ -8,26 +13,24 @@ onready var sonar_ping_player = $"SonarPingPlayer"
 onready var sonar_active_particle = $"SonarActiveParticle"
 onready var sonar_aggro_area = $"SonarAggroArea"
 onready var sonar_aggro_timer = $"SonarAggroArea/SonarAggroTimer"
-onready var parent = $".."
-onready var world = $"../.."
 
 var sonar_available = true
 var sonar_range = 1000
 var request_sonar = false
 
 func _process(delta):
-	sonar_active_particle.emitting = self.request_sonar and !parent.rolling
+	sonar_active_particle.emitting = self.request_sonar and !player_controller.rolling
 
 func _physics_process(delta):
-	if sonar_available and request_sonar and !parent.rolling:
+	if sonar_available and request_sonar and !player_controller.rolling:
 		do_sonar()
 
 func get_normalized_ray_vector(rot, angle_delta):
-	return parent.current_facing.rotated(rot + angle_delta).normalized()
+	return Vector2.RIGHT.rotated(player_position.rotation + rot + angle_delta).normalized()
 	
 func do_sonar():
 	var arc_material = sonar_arc.process_material
-	if parent.inverted:
+	if player_controller.inverted:
 		arc_material.angle = -self.global_rotation_degrees + 180
 	else:
 		arc_material.angle = -self.global_rotation_degrees
@@ -37,7 +40,7 @@ func do_sonar():
 	for i in range(-64, 64):
 		var angle_delta = PI/256 * i
 		var rot = -PI/2
-		if parent.inverted:
+		if player_controller.inverted:
 			rot = -rot
 		var result = space_state.intersect_ray(self.global_position, self.global_position + get_normalized_ray_vector(rot, angle_delta) * sonar_range, [self])
 		if 'position' in result:
@@ -81,6 +84,5 @@ func aggro_sonar_sensitive_enemies():
 func _on_SonarAggroTimer_timeout():
 	# Aggro all sonar sensitive enemies in sonar_threats
 	for brain in heard_sonar:
-		brain.heard_sonar(parent)
+		brain.heard_sonar(body)
 	heard_sonar = {}
-

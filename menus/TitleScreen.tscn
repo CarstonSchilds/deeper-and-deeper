@@ -1,0 +1,554 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://menus/TitleScreen.gd" type="Script" id=1]
+[ext_resource path="res://assets/ui/fonts/DNPixel-Regular.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://entities/environment/Water.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sounds/Bubbles 4 Master.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/circle.png" type="Texture" id=6]
+[ext_resource path="res://assets/environment/water/uifade.tres" type="Animation" id=7]
+[ext_resource path="res://assets/ui/ui_theme.tres" type="Theme" id=8]
+[ext_resource path="res://assets/ui/checked_box.tres" type="Texture" id=9]
+[ext_resource path="res://assets/ui/unchecked_box.tres" type="Texture" id=10]
+[ext_resource path="res://assets/ui/ui_theme_small.tres" type="Theme" id=11]
+[ext_resource path="res://assets/ui/slider_grabber.png" type="Texture" id=12]
+[ext_resource path="res://assets/ui/slider_style_box.tres" type="StyleBox" id=13]
+[ext_resource path="res://assets/ui/grabber_area_style_box.tres" type="StyleBox" id=14]
+[ext_resource path="res://menus/FullscreenCheckBox.gd" type="Script" id=15]
+[ext_resource path="res://assets/sounds/06 Bloop.wav" type="AudioStream" id=16]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 0.43985, 0.792969, 1, 0, 0.309804, 0.431373, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 1024
+
+[sub_resource type="DynamicFont" id=3]
+size = 90
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 60
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
+
+[sub_resource type="Gradient" id=7]
+offsets = PoolRealArray( 0, 0.451264, 1 )
+colors = PoolColorArray( 0.289658, 0.222816, 0.966797, 1, 0.565934, 0.981456, 0.849982, 1, 0.984614, 0.983166, 0.999281, 1 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+emission_shape = 2
+emission_box_extents = Vector3( 960, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+gravity = Vector3( 0, -60, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+scale_random = 1.0
+color_ramp = SubResource( 8 )
+
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Water" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 3, 3 )
+transform = Transform2D( 3, 0, 0, 3, 0, 0 )
+
+[node name="CameraRig" type="Position2D" parent="."]
+
+[node name="Camera" type="Camera2D" parent="CameraRig"]
+anchor_mode = 0
+current = true
+
+[node name="Sky" type="Sprite" parent="CameraRig"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -120, 4096 )
+rotation = -1.5708
+scale = Vector2( 8, 1920 )
+texture = SubResource( 2 )
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraRig/Sky"]
+anims/fade = ExtResource( 7 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Title" type="RichTextLabel" parent="UI"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -270.0
+margin_top = 49.0
+margin_right = 270.0
+margin_bottom = 149.0
+theme = SubResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=12 freq=4]Sublunker[/wave]"
+text = "Sublunker"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" type="Control" parent="UI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -840.0
+margin_top = -360.0
+margin_right = 840.0
+margin_bottom = 360.0
+theme = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="Button" parent="UI/MainMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -91.1892
+margin_top = -57.0
+margin_right = 88.8108
+margin_bottom = 9.0
+focus_mode = 0
+theme = ExtResource( 8 )
+custom_colors/font_color_hover = Color( 0.898039, 0.901961, 0.470588, 1 )
+custom_colors/font_color_pressed = Color( 0.54902, 1, 0.47451, 1 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "Play"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Button" parent="UI/MainMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.189
+margin_top = 31.0
+margin_right = 157.811
+margin_bottom = 97.0
+focus_mode = 0
+theme = ExtResource( 8 )
+custom_colors/font_color_hover = Color( 0.898039, 0.901961, 0.470588, 1 )
+custom_colors/font_color_pressed = Color( 0.54902, 1, 0.47451, 1 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "Controls"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="Button" parent="UI/MainMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -142.189
+margin_top = 121.0
+margin_right = 139.811
+margin_bottom = 187.0
+focus_mode = 0
+theme = ExtResource( 8 )
+custom_colors/font_color_hover = Color( 0.898039, 0.901961, 0.470588, 1 )
+custom_colors/font_color_pressed = Color( 0.54902, 1, 0.47451, 1 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "Options"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="Button" parent="UI/MainMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -139.189
+margin_top = 212.0
+margin_right = 136.811
+margin_bottom = 278.0
+focus_mode = 0
+theme = ExtResource( 8 )
+custom_colors/font_color_hover = Color( 0.898039, 0.901961, 0.470588, 1 )
+custom_colors/font_color_pressed = Color( 0.54902, 1, 0.47451, 1 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "Credits"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Control" parent="UI"]
+visible = false
+margin_right = 1680.0
+margin_bottom = 720.0
+theme = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="UI/Controls"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -153.0
+margin_top = -134.0
+margin_right = 153.0
+margin_bottom = -74.0
+theme = ExtResource( 8 )
+text = "Controls:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="UI/Controls"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -324.0
+margin_top = -399.0
+margin_right = 804.0
+margin_bottom = -24.0
+theme = ExtResource( 8 )
+text = "W, S     - Throttle Control
+A, D      - Rotate Sub
+R, F      - Buoyancy Control
+E           - Toggle Spotlight
+Space  - Sonar
+Mouse Scroll  - Zoom"
+valign = 1
+
+[node name="Back2" type="Button" parent="UI/Controls"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -126.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = 59.0
+focus_mode = 0
+theme = ExtResource( 11 )
+custom_colors/font_color_hover = Color( 0.898039, 0.901961, 0.470588, 1 )
+custom_colors/font_color_pressed = Color( 0.54902, 1, 0.47451, 1 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "Back"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="Control" parent="UI"]
+visible = false
+margin_right = 1680.0
+margin_bottom = 720.0
+theme = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back3" type="Button" parent="UI/Options"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -126.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = 66.0
+focus_mode = 0
+theme = ExtResource( 11 )
+custom_colors/font_color_hover = Color( 0.898039, 0.901961, 0.470588, 1 )
+custom_colors/font_color_pressed = Color( 0.54902, 1, 0.47451, 1 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "Back"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fullscreen" type="Button" parent="UI/Options"]
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+margin_left = -402.0
+margin_top = -175.335
+margin_right = -43.0
+margin_bottom = -107.335
+focus_mode = 0
+theme = ExtResource( 8 )
+custom_colors/font_color_hover = Color( 0.898039, 0.901961, 0.470588, 1 )
+custom_colors/font_color_pressed = Color( 0.54902, 1, 0.47451, 1 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "Fullscreen - F11"
+flat = true
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="UI/Options"]
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+margin_left = 25.0
+margin_top = -175.335
+margin_right = 65.0
+margin_bottom = -107.335
+focus_mode = 0
+theme = SubResource( 6 )
+custom_icons/checked = ExtResource( 9 )
+custom_icons/unchecked = ExtResource( 10 )
+disabled = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+flat = true
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Master" type="Label" parent="UI/Options"]
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+margin_left = -402.0
+margin_top = -76.0
+margin_right = -43.0
+margin_bottom = -33.0
+theme = ExtResource( 8 )
+text = "Master Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MasterVolumeSlider" type="HSlider" parent="UI/Options"]
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+margin_left = 25.0
+margin_top = -78.0
+margin_right = 537.0
+margin_bottom = -30.0
+custom_icons/grabber_disabled = ExtResource( 12 )
+custom_icons/grabber_highlight = ExtResource( 12 )
+custom_icons/grabber = ExtResource( 12 )
+custom_styles/slider = ExtResource( 13 )
+custom_styles/grabber_area_highlight = ExtResource( 14 )
+custom_styles/grabber_area = ExtResource( 14 )
+value = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music" type="Label" parent="UI/Options"]
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+margin_left = -402.0
+margin_top = -12.0
+margin_right = -43.0
+margin_bottom = 31.0
+theme = ExtResource( 8 )
+text = "Music Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicVolumeSlider" type="HSlider" parent="UI/Options"]
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+margin_left = 25.0
+margin_top = -14.0
+margin_right = 537.0
+margin_bottom = 34.0
+custom_icons/grabber_disabled = ExtResource( 12 )
+custom_icons/grabber_highlight = ExtResource( 12 )
+custom_icons/grabber = ExtResource( 12 )
+custom_styles/slider = ExtResource( 13 )
+custom_styles/grabber_area_highlight = ExtResource( 14 )
+custom_styles/grabber_area = ExtResource( 14 )
+value = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sound Effects" type="Label" parent="UI/Options"]
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+margin_left = -402.0
+margin_top = 56.0
+margin_right = -43.0
+margin_bottom = 99.0
+theme = ExtResource( 8 )
+text = "SFX Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SfxVolumeSlider" type="HSlider" parent="UI/Options"]
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+margin_left = 25.0
+margin_top = 54.0
+margin_right = 537.0
+margin_bottom = 102.0
+custom_icons/grabber_disabled = ExtResource( 12 )
+custom_icons/grabber_highlight = ExtResource( 12 )
+custom_icons/grabber = ExtResource( 12 )
+custom_styles/slider = ExtResource( 13 )
+custom_styles/grabber_area_highlight = ExtResource( 14 )
+custom_styles/grabber_area = ExtResource( 14 )
+value = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BloopPlayer" type="AudioStreamPlayer" parent="UI/Options/SfxVolumeSlider"]
+stream = ExtResource( 16 )
+bus = "Sound Effects"
+
+[node name="Timer" type="Timer" parent="UI/Options/SfxVolumeSlider/BloopPlayer"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Credits" type="Control" parent="UI"]
+visible = false
+margin_left = 2.24463
+margin_right = 1682.24
+margin_bottom = 720.0
+theme = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="UI/Credits"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -126.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = 59.0
+focus_mode = 0
+theme = ExtResource( 11 )
+custom_colors/font_color_hover = Color( 0.898039, 0.901961, 0.470588, 1 )
+custom_colors/font_color_pressed = Color( 0.54902, 1, 0.47451, 1 )
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+text = "Back"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Credits"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -132.0
+margin_top = -166.0
+margin_right = 132.0
+margin_bottom = -106.0
+theme = ExtResource( 8 )
+text = "Credits:"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="UI/Credits"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -564.0
+margin_top = -491.0
+margin_right = 564.0
+margin_bottom = 10.0
+theme = ExtResource( 11 )
+text = "Programmers
+Colin Heathman, Carston Schilds
+
+Artist
+Colin Heathman
+
+Sound Design and Music
+Cam Heathman"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bubbles" type="Control" parent="UI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+theme = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BubblesParticle" type="Particles2D" parent="UI/Bubbles"]
+emitting = false
+amount = 1000
+lifetime = 15.0
+process_material = SubResource( 9 )
+texture = ExtResource( 6 )
+
+[node name="BubblesSound" type="AudioStreamPlayer" parent="UI/Bubbles"]
+stream = ExtResource( 5 )
+
+[connection signal="animation_finished" from="CameraRig/Sky/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="button_up" from="UI/MainMenu/Play" to="." method="_on_Play_button_up"]
+[connection signal="button_up" from="UI/MainMenu/Controls" to="." method="_on_Controls_button_up"]
+[connection signal="button_up" from="UI/MainMenu/Options" to="." method="_on_Options_button_up"]
+[connection signal="button_up" from="UI/MainMenu/Credits" to="." method="_on_Credits_button_up"]
+[connection signal="button_up" from="UI/Controls/Back2" to="." method="_on_Back2_button_up"]
+[connection signal="button_up" from="UI/Options/Back3" to="." method="_on_Back3_button_up"]
+[connection signal="button_up" from="UI/Options/Fullscreen" to="UI/Options/FullscreenCheckBox" method="_on_Fullscreen_button_up"]
+[connection signal="gui_input" from="UI/Options/FullscreenCheckBox" to="UI/Options/FullscreenCheckBox" method="_on_FullscreenCheckBox_gui_input"]
+[connection signal="mouse_entered" from="UI/Options/FullscreenCheckBox" to="UI/Options/FullscreenCheckBox" method="_on_FullscreenCheckBox_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Options/FullscreenCheckBox" to="UI/Options/FullscreenCheckBox" method="_on_FullscreenCheckBox_mouse_exited"]
+[connection signal="value_changed" from="UI/Options/MasterVolumeSlider" to="." method="_on_MasterVolumeSlider_value_changed"]
+[connection signal="value_changed" from="UI/Options/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_value_changed"]
+[connection signal="gui_input" from="UI/Options/SfxVolumeSlider" to="." method="_on_SfxVolumeSlider_gui_input"]
+[connection signal="value_changed" from="UI/Options/SfxVolumeSlider" to="." method="_on_SfxVolumeSlider_value_changed"]
+[connection signal="button_up" from="UI/Credits/Back" to="." method="_on_Back_button_up"]

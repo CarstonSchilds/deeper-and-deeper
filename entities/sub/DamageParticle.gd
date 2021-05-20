@@ -1,5 +1,4 @@
 extends Particles2D
 
-
-func _on_Player_show_damage():
+func _on_HealthController_damage(amount):
 	self.emitting = true

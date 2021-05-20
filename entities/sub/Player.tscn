@@ -1,42 +1,61 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=91 format=2]
 
-[ext_resource path="res://entities/sub/Player.gd" type="Script" id=1]
+[ext_resource path="res://entities/PhysicsEntity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sub/sub.png" type="Texture" id=2]
-[ext_resource path="res://assets/sub/sonar_particle_texture.tres" type="Texture" id=3]
+[ext_resource path="res://entities/sub/AnimatedSprite.gd" type="Script" id=3]
 [ext_resource path="res://assets/sub/spotlight.png" type="Texture" id=4]
 [ext_resource path="res://assets/sub/sub_light.png" type="Texture" id=5]
-[ext_resource path="res://assets/ui/ui_theme_small.tres" type="Theme" id=6]
-[ext_resource path="res://entities/sub/AnimatedSprite.gd" type="Script" id=7]
-[ext_resource path="res://assets/sounds/Submarine Prop Master.wav" type="AudioStream" id=8]
-[ext_resource path="res://entities/sub/sound_players/EngineSound.gd" type="Script" id=9]
-[ext_resource path="res://assets/sub/bubble1.png" type="Texture" id=10]
-[ext_resource path="res://entities/sub/Sonar.gd" type="Script" id=11]
-[ext_resource path="res://assets/sub/sonar_arc.png" type="Texture" id=12]
+[ext_resource path="res://assets/sub/sub2.png" type="Texture" id=6]
+[ext_resource path="res://entities/sub/DamageParticle.gd" type="Script" id=7]
+[ext_resource path="res://assets/sub/bubbles_texture.tres" type="Texture" id=8]
+[ext_resource path="res://entities/sub/BallastBubbles.gd" type="Script" id=9]
+[ext_resource path="res://assets/sounds/Submarine Prop Master.wav" type="AudioStream" id=10]
+[ext_resource path="res://entities/sub/EngineBubbles.gd" type="Script" id=11]
+[ext_resource path="res://entities/sub/sound_players/EngineSound.gd" type="Script" id=12]
 [ext_resource path="res://assets/sounds/14 SonarPing_BW.59099.wav" type="AudioStream" id=13]
-[ext_resource path="res://entities/sub/SonarParticle.gd" type="Script" id=14]
+[ext_resource path="res://assets/sub/sonar_arc.png" type="Texture" id=14]
 [ext_resource path="res://assets/sounds/15 SonarPing_BW.59100.wav" type="AudioStream" id=15]
-[ext_resource path="res://entities/sub/sound_players/PingEchoPlayer.gd" type="Script" id=16]
-[ext_resource path="res://entities/sub/sound_players/LightClickPlayer.gd" type="Script" id=17]
-[ext_resource path="res://assets/sounds/12 Light switch.wav" type="AudioStream" id=18]
-[ext_resource path="res://entities/sub/Camera.gd" type="Script" id=19]
-[ext_resource path="res://assets/sub/bubbles_texture.tres" type="Texture" id=20]
-[ext_resource path="res://entities/sub/EngineBubbles.gd" type="Script" id=21]
-[ext_resource path="res://assets/sub/SonarArcMaterial.tres" type="Material" id=22]
-[ext_resource path="res://entities/sub/BallastBubbles.gd" type="Script" id=23]
-[ext_resource path="res://entities/sub/sound_players/BallastBubblesPlayer.gd" type="Script" id=24]
-[ext_resource path="res://assets/sounds/Bubbles 3 Master.wav" type="AudioStream" id=25]
-[ext_resource path="res://assets/sounds/Damage Gravel 2 Master.wav" type="AudioStream" id=26]
-[ext_resource path="res://entities/sub/sound_players/TerrainDamagePlayer.gd" type="Script" id=27]
-[ext_resource path="res://entities/sub/sound_players/LittleDamagePlayer.gd" type="Script" id=28]
-[ext_resource path="res://entities/sub/sound_players/BigDamagePlayer.gd" type="Script" id=29]
-[ext_resource path="res://assets/sounds/Damage 2 Master.wav" type="AudioStream" id=30]
-[ext_resource path="res://assets/sounds/Damage 1 Master.wav" type="AudioStream" id=31]
-[ext_resource path="res://assets/sub/sub2.png" type="Texture" id=32]
-[ext_resource path="res://entities/sub/DamageParticle.gd" type="Script" id=33]
-[ext_resource path="res://assets/sounds/Breach Master.wav" type="AudioStream" id=34]
-[ext_resource path="res://assets/sounds/Alarm Fade Out.wav" type="AudioStream" id=35]
+[ext_resource path="res://assets/sub/sonar_particle_texture.tres" type="Texture" id=16]
+[ext_resource path="res://assets/sub/SonarArcMaterial.tres" type="Material" id=17]
+[ext_resource path="res://entities/sub/SonarParticle.gd" type="Script" id=18]
+[ext_resource path="res://entities/sub/sound_players/PingEchoPlayer.gd" type="Script" id=19]
+[ext_resource path="res://entities/sub/Sonar.gd" type="Script" id=20]
+[ext_resource path="res://assets/sub/bubble1.png" type="Texture" id=21]
+[ext_resource path="res://entities/controllers/Camera.gd" type="Script" id=22]
+[ext_resource path="res://entities/controllers/DriveController.gd" type="Script" id=23]
+[ext_resource path="res://entities/sub/PlayerController.gd" type="Script" id=24]
+[ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=25]
+[ext_resource path="res://assets/ui/ui_theme_small.tres" type="Theme" id=26]
+[ext_resource path="res://assets/sounds/Alarm Fade Out.wav" type="AudioStream" id=27]
+[ext_resource path="res://assets/sounds/Damage Gravel 2 Master.wav" type="AudioStream" id=28]
+[ext_resource path="res://assets/sounds/Bubbles 3 Master.wav" type="AudioStream" id=29]
+[ext_resource path="res://assets/sounds/12 Light switch.wav" type="AudioStream" id=30]
+[ext_resource path="res://entities/sub/sound_players/TerrainDamagePlayer.gd" type="Script" id=31]
+[ext_resource path="res://entities/sub/sound_players/LittleDamagePlayer.gd" type="Script" id=32]
+[ext_resource path="res://entities/sub/sound_players/BigDamagePlayer.gd" type="Script" id=33]
+[ext_resource path="res://entities/sub/sound_players/BallastBubblesPlayer.gd" type="Script" id=34]
+[ext_resource path="res://entities/sub/sound_players/LightClickPlayer.gd" type="Script" id=35]
+[ext_resource path="res://assets/sounds/Damage 1 Master.wav" type="AudioStream" id=36]
+[ext_resource path="res://assets/sounds/Breach Master.wav" type="AudioStream" id=37]
+[ext_resource path="res://assets/sounds/Damage 2 Master.wav" type="AudioStream" id=38]
+[ext_resource path="res://entities/controllers/input_controller/ThrottleInputController.gd" type="Script" id=39]
+[ext_resource path="res://entities/controllers/input_controller/BuoyancyInputController.gd" type="Script" id=40]
+[ext_resource path="res://entities/sub/UI.gd" type="Script" id=41]
+[ext_resource path="res://entities/controllers/health_controller/HealthController.tscn" type="PackedScene" id=42]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="PhysicsMaterial" id=49]
+friction = 0.5
+bounce = 0.56
+
+[sub_resource type="CapsuleShape2D" id=50]
+radius = 6.15743
+height = 19.9959
+
+[sub_resource type="CapsuleShape2D" id=51]
+radius = 9.39685
+height = 23.5681
+
+[sub_resource type="Animation" id=52]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:color")
@@ -51,178 +70,140 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 9.39685
-height = 23.5681
-
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 6.15743
-height = 19.9959
-
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=53]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=54]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=55]
 atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=56]
 atlas = ExtResource( 2 )
 region = Rect2( 128, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=57]
 atlas = ExtResource( 2 )
 region = Rect2( 192, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=62]
 atlas = ExtResource( 2 )
 region = Rect2( 448, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=63]
 atlas = ExtResource( 2 )
 region = Rect2( 512, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=64]
 atlas = ExtResource( 2 )
 region = Rect2( 576, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=65]
 atlas = ExtResource( 2 )
 region = Rect2( 640, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 2 )
-region = Rect2( 256, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 2 )
-region = Rect2( 320, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 2 )
-region = Rect2( 384, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=66]
 atlas = ExtResource( 2 )
 region = Rect2( 448, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 2 )
+region = Rect2( 512, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 2 )
+region = Rect2( 576, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = ExtResource( 2 )
+region = Rect2( 640, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=70]
 atlas = ExtResource( 2 )
 region = Rect2( 192, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 2 )
-region = Rect2( 256, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 2 )
-region = Rect2( 320, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 2 )
-region = Rect2( 384, 0, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 2 )
-region = Rect2( 448, 0, 64, 32 )
+region = Rect2( 192, 0, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 2 )
-region = Rect2( 512, 0, 64, 32 )
+region = Rect2( 256, 0, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 2 )
-region = Rect2( 576, 0, 64, 32 )
+region = Rect2( 320, 0, 64, 32 )
 
 [sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 2 )
-region = Rect2( 640, 0, 64, 32 )
+region = Rect2( 384, 0, 64, 32 )
 
-[sub_resource type="SpriteFrames" id=27]
+[sub_resource type="AtlasTexture" id=71]
+atlas = ExtResource( 2 )
+region = Rect2( 448, 0, 64, 32 )
+
+[sub_resource type="SpriteFrames" id=72]
 animations = [ {
-"frames": [ SubResource( 4 ) ],
+"frames": [ SubResource( 53 ) ],
 "loop": true,
 "name": "idle",
 "speed": 4.0
 }, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ) ],
 "loop": true,
 "name": "move",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"frames": [ SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ) ],
+"loop": true,
+"name": "roll",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ) ],
 "loop": true,
 "name": "roll over",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 71 ) ],
 "loop": true,
 "name": "roll back",
 "speed": 5.0
-}, {
-"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
-"loop": true,
-"name": "roll",
-"speed": 5.0
 } ]
 
-[sub_resource type="Gradient" id=28]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=29]
-gradient = SubResource( 28 )
-
-[sub_resource type="Curve" id=30]
-max_value = 2.5
-_data = [ Vector2( 0, 0 ), 0.0, 2.5, 0, 1, Vector2( 1, 2.5 ), 2.5, 0.0, 1, 0 ]
-
-[sub_resource type="CurveTexture" id=31]
-curve = SubResource( 30 )
-
-[sub_resource type="ParticlesMaterial" id=32]
-lifetime_randomness = 0.5
-emission_shape = 1
-emission_sphere_radius = 2.0
-gravity = Vector3( 0, 0, 0 )
-scale_curve = SubResource( 31 )
-color_ramp = SubResource( 29 )
-
-[sub_resource type="ParticlesMaterial" id=33]
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-
-[sub_resource type="CircleShape2D" id=34]
-radius = 126.347
-
-[sub_resource type="Gradient" id=35]
+[sub_resource type="Gradient" id=73]
 colors = PoolColorArray( 0.25098, 0.466667, 0.533333, 1, 0.25098, 0.466667, 0.533333, 0 )
 
-[sub_resource type="GradientTexture" id=36]
-gradient = SubResource( 35 )
+[sub_resource type="GradientTexture" id=74]
+gradient = SubResource( 73 )
 
-[sub_resource type="Curve" id=37]
+[sub_resource type="Curve" id=75]
 max_value = 2.0
 _data = [ Vector2( 0, 0.486364 ), 0.0, 0.940909, 0, 1, Vector2( 1, 1.42727 ), 0.940909, 0.0, 1, 0 ]
 
-[sub_resource type="CurveTexture" id=38]
-curve = SubResource( 37 )
+[sub_resource type="CurveTexture" id=76]
+curve = SubResource( 75 )
 
-[sub_resource type="ParticlesMaterial" id=39]
+[sub_resource type="ParticlesMaterial" id=77]
 lifetime_randomness = 0.5
 emission_shape = 1
 emission_sphere_radius = 2.0
@@ -232,11 +213,11 @@ initial_velocity = 2.0
 initial_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 38 )
-color_ramp = SubResource( 36 )
+scale_curve = SubResource( 76 )
+color_ramp = SubResource( 74 )
 anim_speed_random = 1.0
 
-[sub_resource type="ParticlesMaterial" id=40]
+[sub_resource type="ParticlesMaterial" id=78]
 emission_shape = 1
 emission_sphere_radius = 0.2
 flag_disable_z = true
@@ -247,26 +228,123 @@ scale = 1.05
 scale_random = 0.04
 color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="CircleShape2D" id=41]
+[sub_resource type="Gradient" id=79]
+colors = PoolColorArray( 0.25098, 0.466667, 0.533333, 1, 0.25098, 0.466667, 0.533333, 0 )
+
+[sub_resource type="GradientTexture" id=80]
+gradient = SubResource( 79 )
+
+[sub_resource type="Curve" id=81]
+max_value = 2.0
+_data = [ Vector2( 0, 0.486364 ), 0.0, 0.940909, 0, 1, Vector2( 1, 1.42727 ), 0.940909, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=82]
+curve = SubResource( 81 )
+
+[sub_resource type="ParticlesMaterial" id=83]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+gravity = Vector3( 0, -20, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 82 )
+color_ramp = SubResource( 80 )
+anim_speed_random = 1.0
+
+[sub_resource type="CircleShape2D" id=84]
 radius = 22.6978
 
-[node name="Player" type="KinematicBody2D"]
-script = ExtResource( 1 )
+[sub_resource type="Gradient" id=85]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[node name="Camera" type="Camera2D" parent="."]
+[sub_resource type="GradientTexture" id=86]
+gradient = SubResource( 85 )
+
+[sub_resource type="Curve" id=87]
+max_value = 2.5
+_data = [ Vector2( 0, 0 ), 0.0, 2.5, 0, 1, Vector2( 1, 2.5 ), 2.5, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=88]
+curve = SubResource( 87 )
+
+[sub_resource type="ParticlesMaterial" id=89]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 2.0
+gravity = Vector3( 0, 0, 0 )
+scale_curve = SubResource( 88 )
+color_ramp = SubResource( 86 )
+
+[sub_resource type="ParticlesMaterial" id=90]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[sub_resource type="CircleShape2D" id=91]
+radius = 126.347
+
+[sub_resource type="CircleShape2D" id=48]
+radius = 22.6978
+
+[node name="Player" type="Node2D"]
+
+[node name="PhysicsEntity" parent="." instance=ExtResource( 1 )]
+physics_material_override = SubResource( 49 )
+drag_friction_amount = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsEntity"]
+rotation = 1.5708
+shape = SubResource( 50 )
+
+[node name="HurtBox" type="Area2D" parent="PhysicsEntity"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsEntity/HurtBox"]
+rotation = 1.5708
+shape = SubResource( 51 )
+
+[node name="DriveController" type="Node" parent="."]
+script = ExtResource( 23 )
+auto_max_speed = 50.0
+
+[node name="PlayerController" type="Node" parent="."]
+script = ExtResource( 24 )
+
+[node name="HealthController" parent="." instance=ExtResource( 42 )]
+
+[node name="ThrottleInputController" type="Node" parent="."]
+script = ExtResource( 39 )
+
+[node name="BuoyancyInputController" type="Node" parent="."]
+script = ExtResource( 40 )
+
+[node name="PhysicsSmoothing" type="Node2D" parent="."]
+script = ExtResource( 25 )
+target = NodePath("../PhysicsEntity")
+flags = 7
+
+[node name="Camera" type="Camera2D" parent="PhysicsSmoothing"]
 light_mask = 3
 current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
 smoothing_enabled = true
 drag_margin_left = 0.1
 drag_margin_top = 0.1
 drag_margin_right = 0.1
 drag_margin_bottom = 0.1
-script = ExtResource( 19 )
+script = ExtResource( 22 )
 
-[node name="FadeToBlackLayer" type="CanvasLayer" parent="Camera"]
+[node name="FadeToBlackLayer" type="CanvasLayer" parent="PhysicsSmoothing/Camera"]
 layer = 128
 
-[node name="ColorRect" type="ColorRect" parent="Camera/FadeToBlackLayer"]
+[node name="ColorRect" type="ColorRect" parent="PhysicsSmoothing/Camera/FadeToBlackLayer"]
 margin_left = -2048.0
 margin_top = -2048.0
 margin_right = 2048.0
@@ -276,59 +354,57 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FadeToBlackAnimationPlayer" type="AnimationPlayer" parent="Camera/FadeToBlackLayer/ColorRect"]
-anims/FadeOut = SubResource( 1 )
+[node name="FadeToBlackAnimationPlayer" type="AnimationPlayer" parent="PhysicsSmoothing/Camera/FadeToBlackLayer/ColorRect"]
+anims/FadeOut = SubResource( 52 )
 
-[node name="Sprite" type="Sprite" parent="Camera"]
-texture = ExtResource( 10 )
+[node name="Sprite" type="Sprite" parent="PhysicsSmoothing/Camera"]
+texture = ExtResource( 21 )
 
-[node name="CollisionDetector" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDetector"]
-rotation = 1.5708
-shape = SubResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
-shape = SubResource( 3 )
-
-[node name="SpritePosition" type="Position2D" parent="."]
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="SpritePosition"]
-frames = SubResource( 27 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="PhysicsSmoothing"]
+frames = SubResource( 72 )
 animation = "idle"
 playing = true
+script = ExtResource( 3 )
+
+[node name="BallastBubblesLeft" type="Particles2D" parent="PhysicsSmoothing"]
+light_mask = 0
+position = Vector2( -5, -0.0393734 )
+z_index = 1
+emitting = false
+amount = 32
+one_shot = true
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 77 )
+texture = ExtResource( 8 )
+script = ExtResource( 9 )
+
+[node name="BallastBubblesRight" type="Particles2D" parent="PhysicsSmoothing"]
+light_mask = 0
+position = Vector2( 5, 0 )
+z_index = 1
+emitting = false
+amount = 32
+one_shot = true
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 77 )
+texture = ExtResource( 8 )
+script = ExtResource( 9 )
+
+[node name="DamageParticle" type="Particles2D" parent="PhysicsSmoothing"]
+light_mask = 0
+emitting = false
+amount = 4
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource( 78 )
+texture = ExtResource( 6 )
 script = ExtResource( 7 )
 
-[node name="Spotlight" type="Light2D" parent="."]
-light_mask = 3
-z_index = -1
-texture = ExtResource( 4 )
-offset = Vector2( 0, 243 )
-color = Color( 1, 0.945098, 0.694118, 1 )
-range_height = 5.0
-range_layer_min = -120
-range_layer_max = 25
-range_item_cull_mask = 3
-shadow_enabled = true
-shadow_gradient_length = 10.0
-shadow_item_cull_mask = 3
-
-[node name="SpotlightArea" type="Area2D" parent="Spotlight"]
-position = Vector2( 0, -1.45908 )
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spotlight/SpotlightArea"]
-polygon = PoolVector2Array( 0, 9.603, -11.1443, 12.0976, -21.3896, 20.5612, -24.9532, 55.5289, -16.2191, 142.928, -4.24496, 226.755, 4.245, 226.755, 16.219, 142.928, 24.953, 55.529, 21.39, 20.561, 11.144, 12.098 )
-
-[node name="SpotlightSprite" type="Sprite" parent="Spotlight/SpotlightArea"]
-visible = false
-position = Vector2( 0, 102 )
-texture = ExtResource( 4 )
-offset = Vector2( 0, 141 )
-
-[node name="Glow" type="Light2D" parent="."]
+[node name="Glow" type="Light2D" parent="PhysicsSmoothing"]
 light_mask = 3
 texture = ExtResource( 5 )
 texture_scale = 2.0
@@ -342,8 +418,195 @@ shadow_gradient_length = 10.0
 shadow_filter = 1
 shadow_item_cull_mask = 3
 
+[node name="PropAnchor" type="Position2D" parent="PhysicsSmoothing"]
+position = Vector2( -20, 0 )
+
+[node name="EngineSoundPlayer" type="AudioStreamPlayer2D" parent="PhysicsSmoothing/PropAnchor"]
+position = Vector2( 20, 0 )
+stream = ExtResource( 10 )
+volume_db = -7.0
+script = ExtResource( 12 )
+
+[node name="EngineBubbles" type="Particles2D" parent="PhysicsSmoothing/PropAnchor"]
+light_mask = 0
+emitting = false
+amount = 32
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 83 )
+texture = ExtResource( 8 )
+script = ExtResource( 11 )
+
+[node name="PlayerSoundArea" type="Area2D" parent="PhysicsSmoothing/PropAnchor"]
+position = Vector2( 20, 0 )
+
+[node name="Circle" type="CollisionShape2D" parent="PhysicsSmoothing/PropAnchor/PlayerSoundArea"]
+shape = SubResource( 84 )
+
+[node name="TopAnchor" type="Position2D" parent="PhysicsSmoothing"]
+position = Vector2( 0, -8.1758 )
+
+[node name="Sonar" type="Node2D" parent="PhysicsSmoothing/TopAnchor"]
+position = Vector2( 0, -3.8242 )
+script = ExtResource( 20 )
+
+[node name="SonarCooldown" type="Timer" parent="PhysicsSmoothing/TopAnchor/Sonar"]
+wait_time = 2.0
+one_shot = true
+
+[node name="SonarParticle" type="Particles2D" parent="PhysicsSmoothing/TopAnchor/Sonar"]
+light_mask = -2147483647
+emitting = false
+amount = 4
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource( 89 )
+texture = ExtResource( 16 )
+script = ExtResource( 18 )
+
+[node name="Timer" type="Timer" parent="PhysicsSmoothing/TopAnchor/Sonar/SonarParticle"]
+one_shot = true
+
+[node name="PingEchoPlayer" type="AudioStreamPlayer2D" parent="PhysicsSmoothing/TopAnchor/Sonar/SonarParticle"]
+stream = ExtResource( 15 )
+volume_db = -25.0
+pitch_scale = 0.75
+script = ExtResource( 19 )
+
+[node name="GabageCollectTimer" type="Timer" parent="PhysicsSmoothing/TopAnchor/Sonar/SonarParticle"]
+wait_time = 5.0
+one_shot = true
+
+[node name="SonarActiveParticle" type="Particles2D" parent="PhysicsSmoothing/TopAnchor/Sonar"]
+position = Vector2( 0, 2 )
+emitting = false
+amount = 1
+lifetime = 0.2
+process_material = SubResource( 90 )
+texture = ExtResource( 16 )
+
+[node name="SonarArc" type="Particles2D" parent="PhysicsSmoothing/TopAnchor/Sonar"]
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+local_coords = false
+process_material = ExtResource( 17 )
+texture = ExtResource( 14 )
+
+[node name="SonarPingPlayer" type="AudioStreamPlayer" parent="PhysicsSmoothing/TopAnchor/Sonar"]
+stream = ExtResource( 13 )
+volume_db = -9.0
+
+[node name="SonarAggroArea" type="Area2D" parent="PhysicsSmoothing/TopAnchor/Sonar"]
+position = Vector2( 0, -1.45908 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsSmoothing/TopAnchor/Sonar/SonarAggroArea"]
+position = Vector2( 0, -115 )
+shape = SubResource( 91 )
+
+[node name="SonarAggroTimer" type="Timer" parent="PhysicsSmoothing/TopAnchor/Sonar/SonarAggroArea"]
+wait_time = 0.5
+one_shot = true
+
+[node name="BottomAnchor" type="Position2D" parent="PhysicsSmoothing"]
+position = Vector2( 0, 8.1758 )
+
+[node name="FrontAnchor" type="Position2D" parent="PhysicsSmoothing"]
+position = Vector2( 12.4867, 0 )
+
+[node name="Spotlight" type="Light2D" parent="PhysicsSmoothing/FrontAnchor"]
+light_mask = 3
+rotation = -1.5708
+scale = Vector2( 2.5, 1 )
+z_index = -1
+texture = ExtResource( 4 )
+offset = Vector2( 0, 233.649 )
+color = Color( 1, 0.945098, 0.694118, 1 )
+range_height = 5.0
+range_layer_min = -120
+range_layer_max = 25
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_gradient_length = 10.0
+shadow_item_cull_mask = 3
+
+[node name="SpotlightArea" type="Area2D" parent="PhysicsSmoothing/FrontAnchor/Spotlight"]
+position = Vector2( 0, -9.252 )
+scale = Vector2( 0.5, 1 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PhysicsSmoothing/FrontAnchor/Spotlight/SpotlightArea"]
+polygon = PoolVector2Array( 0, 9.603, -11.1443, 12.0976, -21.3896, 20.5612, -24.9532, 55.5289, -16.2191, 142.928, -4.24496, 226.755, 4.245, 226.755, 16.219, 142.928, 24.953, 55.529, 21.39, 20.561, 11.144, 12.098 )
+
+[node name="SpotlightSprite" type="Sprite" parent="PhysicsSmoothing/FrontAnchor/Spotlight/SpotlightArea"]
+visible = false
+position = Vector2( 0, 102 )
+texture = ExtResource( 4 )
+offset = Vector2( 0, 141 )
+
+[node name="PlayerSoundArea" type="Area2D" parent="PhysicsSmoothing"]
+
+[node name="Circle" type="CollisionShape2D" parent="PhysicsSmoothing/PlayerSoundArea"]
+shape = SubResource( 48 )
+
+[node name="LightClickPlayer" type="AudioStreamPlayer" parent="PhysicsSmoothing"]
+stream = ExtResource( 30 )
+volume_db = -3.0
+bus = "Sumarine"
+script = ExtResource( 35 )
+
+[node name="BallastBubblesPlayer" type="AudioStreamPlayer" parent="PhysicsSmoothing"]
+stream = ExtResource( 29 )
+volume_db = -8.0
+bus = "Sumarine"
+script = ExtResource( 34 )
+
+[node name="TerrainDamagePlayer" type="AudioStreamPlayer" parent="PhysicsSmoothing"]
+stream = ExtResource( 28 )
+volume_db = -8.0
+bus = "Sumarine"
+script = ExtResource( 31 )
+
+[node name="Timer" type="Timer" parent="PhysicsSmoothing/TerrainDamagePlayer"]
+wait_time = 1.5
+
+[node name="LittleDamagePlayer" type="AudioStreamPlayer" parent="PhysicsSmoothing"]
+stream = ExtResource( 38 )
+volume_db = -10.0
+bus = "Sumarine"
+script = ExtResource( 32 )
+
+[node name="Timer" type="Timer" parent="PhysicsSmoothing/LittleDamagePlayer"]
+wait_time = 0.5
+one_shot = true
+
+[node name="BigDamagePlayer" type="AudioStreamPlayer" parent="PhysicsSmoothing"]
+stream = ExtResource( 36 )
+volume_db = -5.0
+bus = "Sumarine"
+script = ExtResource( 33 )
+
+[node name="Timer" type="Timer" parent="PhysicsSmoothing/BigDamagePlayer"]
+wait_time = 1.5
+
+[node name="WaterBreachPlayer" type="AudioStreamPlayer" parent="PhysicsSmoothing"]
+stream = ExtResource( 37 )
+volume_db = -5.0
+bus = "Environment"
+
+[node name="AlarmPlayer" type="AudioStreamPlayer" parent="PhysicsSmoothing"]
+stream = ExtResource( 27 )
+volume_db = -9.0
+bus = "Sumarine"
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
+script = ExtResource( 41 )
 
 [node name="Depth" type="Label" parent="UI"]
 anchor_left = 1.0
@@ -355,7 +618,7 @@ margin_top = -226.0
 margin_right = -30.0
 margin_bottom = -22.0
 grow_horizontal = 0
-theme = ExtResource( 6 )
+theme = ExtResource( 26 )
 align = 2
 valign = 2
 __meta__ = {
@@ -370,7 +633,7 @@ margin_top = -73.0
 margin_right = 725.0
 margin_bottom = -28.0
 grow_horizontal = 0
-theme = ExtResource( 6 )
+theme = ExtResource( 26 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Throttle"
 valign = 2
@@ -386,7 +649,7 @@ margin_top = -123.0
 margin_right = 726.0
 margin_bottom = -76.0
 grow_horizontal = 0
-theme = ExtResource( 6 )
+theme = ExtResource( 26 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Buoyancy"
 valign = 2
@@ -402,7 +665,7 @@ margin_top = -172.0
 margin_right = 728.0
 margin_bottom = -122.0
 grow_horizontal = 0
-theme = ExtResource( 6 )
+theme = ExtResource( 26 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Hull"
 valign = 2
@@ -410,222 +673,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sonar" type="Node2D" parent="."]
-position = Vector2( 0, -12 )
-script = ExtResource( 11 )
-
-[node name="SonarCooldown" type="Timer" parent="Sonar"]
-wait_time = 2.0
-one_shot = true
-
-[node name="SonarParticle" type="Particles2D" parent="Sonar"]
-light_mask = -2147483647
-emitting = false
-amount = 4
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-process_material = SubResource( 32 )
-texture = ExtResource( 3 )
-script = ExtResource( 14 )
-
-[node name="Timer" type="Timer" parent="Sonar/SonarParticle"]
-one_shot = true
-
-[node name="PingEchoPlayer" type="AudioStreamPlayer2D" parent="Sonar/SonarParticle"]
-stream = ExtResource( 15 )
-volume_db = -25.0
-pitch_scale = 0.75
-script = ExtResource( 16 )
-
-[node name="GabageCollectTimer" type="Timer" parent="Sonar/SonarParticle"]
-wait_time = 5.0
-one_shot = true
-
-[node name="SonarLight" type="Light2D" parent="Sonar/SonarParticle"]
-enabled = false
-texture = ExtResource( 5 )
-texture_scale = 0.1
-color = Color( 0, 1, 0.0392157, 1 )
-
-[node name="SonarActiveParticle" type="Particles2D" parent="Sonar"]
-position = Vector2( 0, 2 )
-emitting = false
-amount = 1
-lifetime = 0.2
-process_material = SubResource( 33 )
-texture = ExtResource( 3 )
-
-[node name="SonarArc" type="Particles2D" parent="Sonar"]
-emitting = false
-amount = 1
-lifetime = 0.5
-one_shot = true
-local_coords = false
-process_material = ExtResource( 22 )
-texture = ExtResource( 12 )
-
-[node name="SonarPingPlayer" type="AudioStreamPlayer" parent="Sonar"]
-stream = ExtResource( 13 )
-volume_db = -9.0
-
-[node name="SonarAggroArea" type="Area2D" parent="Sonar"]
-position = Vector2( 0, -1.45908 )
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sonar/SonarAggroArea"]
-position = Vector2( 0, -115 )
-shape = SubResource( 34 )
-
-[node name="SonarAggroTimer" type="Timer" parent="Sonar/SonarAggroArea"]
-wait_time = 0.5
-one_shot = true
-
-[node name="PropAnchor" type="Position2D" parent="."]
-position = Vector2( -20, 0 )
-
-[node name="EngineSoundPlayer" type="AudioStreamPlayer2D" parent="PropAnchor"]
-position = Vector2( 20, 0 )
-stream = ExtResource( 8 )
-volume_db = -7.0
-script = ExtResource( 9 )
-
-[node name="EngineBubbles" type="Particles2D" parent="PropAnchor"]
-light_mask = 0
-emitting = false
-amount = 32
-randomness = 1.0
-local_coords = false
-process_material = SubResource( 39 )
-texture = ExtResource( 20 )
-script = ExtResource( 21 )
-
-[node name="BallastBubblesLeft" type="Particles2D" parent="."]
-light_mask = 0
-position = Vector2( -5, -0.0393734 )
-z_index = 1
-emitting = false
-amount = 32
-one_shot = true
-randomness = 1.0
-local_coords = false
-process_material = SubResource( 39 )
-texture = ExtResource( 20 )
-script = ExtResource( 23 )
-
-[node name="BallastBubblesRight" type="Particles2D" parent="."]
-light_mask = 0
-position = Vector2( 5, 0 )
-z_index = 1
-emitting = false
-amount = 32
-one_shot = true
-randomness = 1.0
-local_coords = false
-process_material = SubResource( 39 )
-texture = ExtResource( 20 )
-script = ExtResource( 23 )
-
-[node name="DamageParticle" type="Particles2D" parent="."]
-light_mask = 0
-emitting = false
-amount = 4
-lifetime = 0.2
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-process_material = SubResource( 40 )
-texture = ExtResource( 32 )
-script = ExtResource( 33 )
-
-[node name="PlayerSoundArea" type="Area2D" parent="."]
-
-[node name="Circle" type="CollisionShape2D" parent="PlayerSoundArea"]
-shape = SubResource( 41 )
-
-[node name="LightClickPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 18 )
-volume_db = -3.0
-bus = "Sumarine"
-script = ExtResource( 17 )
-
-[node name="BallastBubblesPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 25 )
-volume_db = -8.0
-bus = "Sumarine"
-script = ExtResource( 24 )
-
-[node name="TerrainDamagePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 26 )
-volume_db = -8.0
-bus = "Sumarine"
-script = ExtResource( 27 )
-
-[node name="Timer" type="Timer" parent="TerrainDamagePlayer"]
-wait_time = 1.5
-
-[node name="LittleDamagePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 30 )
-volume_db = -10.0
-bus = "Sumarine"
-script = ExtResource( 28 )
-
-[node name="Timer" type="Timer" parent="LittleDamagePlayer"]
-wait_time = 0.5
-one_shot = true
-
-[node name="BigDamagePlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 31 )
-volume_db = -5.0
-bus = "Sumarine"
-script = ExtResource( 29 )
-
-[node name="Timer" type="Timer" parent="BigDamagePlayer"]
-wait_time = 1.5
-
-[node name="WaterBreachPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 34 )
-volume_db = -5.0
-bus = "Environment"
-
-[node name="AlarmPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 35 )
-volume_db = -9.0
-bus = "Sumarine"
-
-[connection signal="ahead_fast" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_fast"]
-[connection signal="ahead_fast" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_fast"]
-[connection signal="ahead_flank" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_flank"]
-[connection signal="ahead_flank" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_flank"]
-[connection signal="ahead_slow" from="." to="PropAnchor/EngineBubbles" method="_on_Player_ahead_slow"]
-[connection signal="ahead_slow" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_ahead_slow"]
-[connection signal="astern" from="." to="PropAnchor/EngineBubbles" method="_on_Player_astern"]
-[connection signal="astern" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_astern"]
-[connection signal="big_damage" from="." to="BigDamagePlayer" method="_on_Player_big_damage"]
-[connection signal="buoyancy_down" from="." to="BallastBubblesRight" method="_on_Player_buoyancy_down"]
-[connection signal="buoyancy_down" from="." to="BallastBubblesLeft" method="_on_Player_buoyancy_down"]
-[connection signal="buoyancy_down" from="." to="BallastBubblesPlayer" method="_on_Player_buoyancy_down"]
-[connection signal="light_toggle" from="." to="LightClickPlayer" method="_on_Player_light_toggle"]
-[connection signal="little_damage" from="." to="LittleDamagePlayer" method="_on_Player_little_damage"]
-[connection signal="show_damage" from="." to="DamageParticle" method="_on_Player_show_damage"]
-[connection signal="show_damage" from="." to="BallastBubblesRight" method="_on_Player_show_damage"]
-[connection signal="show_damage" from="." to="BallastBubblesLeft" method="_on_Player_show_damage"]
-[connection signal="sonar_toggle" from="." to="Sonar" method="_on_Player_sonar_toggle"]
-[connection signal="stop" from="." to="PropAnchor/EngineBubbles" method="_on_Player_stop"]
-[connection signal="stop" from="." to="PropAnchor/EngineSoundPlayer" method="_on_Player_stop"]
-[connection signal="terrain_damage" from="." to="TerrainDamagePlayer" method="_on_Player_terrain_damage"]
-[connection signal="zoom_in" from="." to="Camera" method="_on_Player_zoom_in"]
-[connection signal="zoom_out" from="." to="Camera" method="_on_Player_zoom_out"]
-[connection signal="animation_finished" from="Camera/FadeToBlackLayer/ColorRect/FadeToBlackAnimationPlayer" to="." method="_on_FadeToBlackAnimationPlayer_animation_finished"]
-[connection signal="body_entered" from="CollisionDetector" to="." method="_on_CollisionDetector_body_entered"]
-[connection signal="body_exited" from="CollisionDetector" to="." method="_on_CollisionDetector_body_exited"]
-[connection signal="animation_finished" from="SpritePosition/AnimatedSprite" to="SpritePosition/AnimatedSprite" method="_on_AnimatedSprite_animation_finished"]
-[connection signal="timeout" from="Sonar/SonarCooldown" to="Sonar" method="_on_SonarCooldown_timeout"]
-[connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle" method="_on_Timer_timeout"]
-[connection signal="timeout" from="Sonar/SonarParticle/Timer" to="Sonar/SonarParticle/PingEchoPlayer" method="_on_Timer_timeout"]
-[connection signal="timeout" from="Sonar/SonarParticle/GabageCollectTimer" to="Sonar/SonarParticle" method="_on_GabageCollectTimer_timeout"]
-[connection signal="timeout" from="Sonar/SonarAggroArea/SonarAggroTimer" to="Sonar" method="_on_SonarAggroTimer_timeout"]
-[connection signal="timeout" from="TerrainDamagePlayer/Timer" to="TerrainDamagePlayer" method="_on_Timer_timeout"]
-[connection signal="timeout" from="LittleDamagePlayer/Timer" to="LittleDamagePlayer" method="_on_Timer_timeout"]
-[connection signal="timeout" from="BigDamagePlayer/Timer" to="BigDamagePlayer" method="_on_Timer_timeout"]
+[connection signal="light_toggle" from="PlayerController" to="PhysicsSmoothing/LightClickPlayer" method="_on_PlayerController_light_toggle"]
+[connection signal="sonar_toggle" from="PlayerController" to="PhysicsSmoothing/TopAnchor/Sonar" method="_on_Player_sonar_toggle"]
+[connection signal="damage" from="HealthController" to="PhysicsSmoothing/DamageParticle" method="_on_HealthController_damage"]
+[connection signal="damage" from="HealthController" to="PhysicsSmoothing/LittleDamagePlayer" method="_on_HealthController_damage"]
+[connection signal="damage" from="HealthController" to="PhysicsSmoothing/BigDamagePlayer" method="_on_HealthController_damage"]
+[connection signal="throttle_change" from="ThrottleInputController" to="PhysicsSmoothing/PropAnchor/EngineBubbles" method="_on_ThrottleInputController_throttle_change"]
+[connection signal="throttle_change" from="ThrottleInputController" to="PhysicsSmoothing/AnimatedSprite" method="_on_ThrottleInputController_throttle_change"]
+[connection signal="throttle_change" from="ThrottleInputController" to="PhysicsSmoothing/PropAnchor/EngineSoundPlayer" method="_on_ThrottleInputController_throttle_change"]
+[connection signal="buoyancy_down" from="BuoyancyInputController" to="PhysicsSmoothing/BallastBubblesLeft" method="_on_BuoyancyInputController_buoyancy_down"]
+[connection signal="buoyancy_down" from="BuoyancyInputController" to="PhysicsSmoothing/BallastBubblesRight" method="_on_BuoyancyInputController_buoyancy_down"]
+[connection signal="buoyancy_down" from="BuoyancyInputController" to="PhysicsSmoothing/BallastBubblesPlayer" method="_on_BuoyancyInputController_buoyancy_down"]
+[connection signal="animation_finished" from="PhysicsSmoothing/AnimatedSprite" to="PhysicsSmoothing/AnimatedSprite" method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="PhysicsSmoothing/TopAnchor/Sonar/SonarCooldown" to="PhysicsSmoothing/TopAnchor/Sonar" method="_on_SonarCooldown_timeout"]
+[connection signal="timeout" from="PhysicsSmoothing/TopAnchor/Sonar/SonarParticle/Timer" to="PhysicsSmoothing/TopAnchor/Sonar/SonarParticle" method="_on_Timer_timeout"]
+[connection signal="timeout" from="PhysicsSmoothing/TopAnchor/Sonar/SonarParticle/Timer" to="PhysicsSmoothing/TopAnchor/Sonar/SonarParticle/PingEchoPlayer" method="_on_Timer_timeout"]
+[connection signal="timeout" from="PhysicsSmoothing/TopAnchor/Sonar/SonarParticle/GabageCollectTimer" to="PhysicsSmoothing/TopAnchor/Sonar/SonarParticle" method="_on_GabageCollectTimer_timeout"]
+[connection signal="timeout" from="PhysicsSmoothing/TopAnchor/Sonar/SonarAggroArea/SonarAggroTimer" to="PhysicsSmoothing/TopAnchor/Sonar" method="_on_SonarAggroTimer_timeout"]
+[connection signal="timeout" from="PhysicsSmoothing/TerrainDamagePlayer/Timer" to="PhysicsSmoothing/TerrainDamagePlayer" method="_on_Timer_timeout"]
+[connection signal="timeout" from="PhysicsSmoothing/LittleDamagePlayer/Timer" to="PhysicsSmoothing/LittleDamagePlayer" method="_on_Timer_timeout"]
+[connection signal="timeout" from="PhysicsSmoothing/BigDamagePlayer/Timer" to="PhysicsSmoothing/BigDamagePlayer" method="_on_Timer_timeout"]

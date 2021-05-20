@@ -1,0 +1,82 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://entities/enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/shark/shark.png" type="Texture" id=2]
+[ext_resource path="res://assets/sounds/06 Bloop.wav" type="AudioStream" id=3]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.75
+bounce = 0.95
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 4.17498
+height = 20.8584
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 32, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 32, 16 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "swim",
+"speed": 4.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 6.35764
+height = 23.0075
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 5.78029
+
+[node name="LittleShark" instance=ExtResource( 1 )]
+sonar_sensitive = true
+damage = 4
+attack_leash_range = 400.0
+rest_time = 0.9
+normal_patrol_time = 2.0
+pursue_time = 3.5
+
+[node name="PhysicsEntity" parent="." index="0"]
+physics_material_override = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsEntity" index="1"]
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="PhysicsSmoothing" index="0"]
+light_mask = 9
+position = Vector2( 1, 0 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+frames = SubResource( 7 )
+animation = "swim"
+frame = 3
+playing = true
+
+[node name="AngryFishNoise" parent="PhysicsSmoothing" index="2"]
+stream = ExtResource( 3 )
+volume_db = -2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsSmoothing/HurtBox" index="0"]
+position = Vector2( 0.31441, 0 )
+rotation = 1.5708
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsSmoothing/HitBox" index="0"]
+position = Vector2( 10.4144, 0 )
+shape = SubResource( 9 )

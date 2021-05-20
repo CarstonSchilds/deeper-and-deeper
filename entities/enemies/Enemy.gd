@@ -1,15 +1,35 @@
-extends "res://entities/Entity.gd"
+extends Node2D
 
-onready var brain = $Brain
-var damage = 3
+export(bool) var sonar_sensitive = false
+export(bool) var light_sensitive = false
+export(bool) var no_patrol = false
 
-func _init():
-	self.animal = true
-	self.buoyancy = 0.9
-	self.weight = 1
+export(int) var damage = 5
+export(float) var attack_leash_range = 500.0
+
+export(float) var rest_time = 1.5
+export(float) var normal_patrol_time = 4.0
+export(float) var random_patrol_time = 0.5
+export(float) var pursue_time = 7.5
+export(float) var flee_time   = 5.0
+
+onready var brain  = $"PhysicsSmoothing/Brain"
+onready var hitbox = $"PhysicsSmoothing/HitBox"
+
+onready var rest_timer   = $"PhysicsSmoothing/Brain/States/Rest/Timer"
+onready var patrol_timer = $"PhysicsSmoothing/Brain/States/NaturalBehaviour/Timer"
+onready var natural_behaviour_state = $"PhysicsSmoothing/Brain/States/NaturalBehaviour"
+onready var pursue_timer = $"PhysicsSmoothing/Brain/States/Pursue/Timer"
+onready var flee_timer   = $"PhysicsSmoothing/Brain/States/Flee/Timer"
 
 func _ready():
-	self.sprite.animation = "idle"
+	brain.sonar_sensitive = sonar_sensitive
+	brain.light_sensitive = light_sensitive
+	brain.no_patrol = no_patrol
+	hitbox.damage_amount = damage
 
-func get_thrust_vector(delta):
-	return self.brain.think(delta)
+	rest_timer.wait_time = rest_time
+	patrol_timer.wait_time = normal_patrol_time
+	natural_behaviour_state.random_patrol_time = random_patrol_time
+	pursue_timer.wait_time = pursue_time
+	flee_timer.wait_time = flee_time

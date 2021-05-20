@@ -17,6 +17,7 @@ func do_damage(amount : int):
 	hit_points -= amount
 	emit_signal("damage", amount)
 	if hit_points <= 0:
+		hit_points = 0
 		emit_signal("death")
 
 func heal(amount : int):

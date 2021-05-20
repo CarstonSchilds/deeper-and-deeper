@@ -1,0 +1,82 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://entities/enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/pirannah/pirannah.png" type="Texture" id=2]
+[ext_resource path="res://assets/sounds/06 Bloop.wav" type="AudioStream" id=3]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.75
+bounce = 0.95
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 2.27097
+height = 6.23402
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "swim",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 4.05679
+height = 6.43248
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 3.07047
+
+[node name="Pirannah" instance=ExtResource( 1 )]
+position = Vector2( 0.0992126, -0.0992107 )
+damage = 1
+attack_leash_range = 400.0
+rest_time = 0.4
+normal_patrol_time = 2.0
+pursue_time = 5.0
+
+[node name="PhysicsEntity" parent="." index="0"]
+physics_material_override = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsEntity" index="1"]
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="PhysicsSmoothing" index="0"]
+light_mask = 9
+position = Vector2( 0, 1 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+frames = SubResource( 7 )
+animation = "swim"
+frame = 1
+playing = true
+
+[node name="AngryFishNoise" parent="PhysicsSmoothing" index="2"]
+stream = ExtResource( 3 )
+volume_db = -2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsSmoothing/HurtBox" index="0"]
+position = Vector2( -1, 0 )
+rotation = 1.5708
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhysicsSmoothing/HitBox" index="0"]
+position = Vector2( 3.4144, 0 )
+shape = SubResource( 9 )

@@ -1,12 +1,16 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://entities/sub/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/environment/Water.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/environment/Waves.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entities/environment/Sky.tscn" type="PackedScene" id=5]
-[ext_resource path="res://entities/levels/TestLevel.tscn" type="PackedScene" id=6]
-[ext_resource path="res://entities/Physics_Shark.tscn" type="PackedScene" id=8]
+[ext_resource path="res://levels/TestLevel.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/enemies/beach/LittleShark.tscn" type="PackedScene" id=7]
+[ext_resource path="res://entities/enemies/beach/BigShark.tscn" type="PackedScene" id=8]
+[ext_resource path="res://entities/enemies/beach/Pirannah.tscn" type="PackedScene" id=9]
+[ext_resource path="res://entities/enemies/beach/Squid.tscn" type="PackedScene" id=10]
+[ext_resource path="res://entities/enemies/beach/Wyrm.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.277228 )
@@ -15,7 +19,7 @@ offsets = PoolRealArray( 0, 0.277228 )
 gradient = SubResource( 1 )
 width = 8192
 
-[node name="Node2D" type="Node2D"]
+[node name="World" type="Node2D"]
 light_mask = 3
 script = ExtResource( 1 )
 
@@ -30,13 +34,7 @@ layer = -99
 [node name="SonarLayer" type="CanvasLayer" parent="."]
 follow_viewport_enable = true
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-show_behind_parent = true
-position = Vector2( -92.6014, 38.1241 )
-rotation = -1.5708
-
 [node name="Darkness" type="Light2D" parent="."]
-visible = false
 light_mask = 3
 position = Vector2( -1954.36, -1218.53 )
 rotation = 1.5708
@@ -53,6 +51,20 @@ position = Vector2( -90.603, -149.156 )
 
 [node name="TestLevel" parent="." instance=ExtResource( 6 )]
 
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( -238.749, 150.618 )
+
+[node name="Squid" parent="." instance=ExtResource( 10 )]
+position = Vector2( -309.712, 337.29 )
+
 [node name="BigShark" parent="." instance=ExtResource( 8 )]
-position = Vector2( -274.576, 102.884 )
-volume = 1.0
+position = Vector2( 262.551, 23.1832 )
+
+[node name="LittleShark" parent="." instance=ExtResource( 7 )]
+position = Vector2( 473.979, 137.392 )
+
+[node name="Wyrm" parent="." instance=ExtResource( 11 )]
+position = Vector2( -55.3531, 661.67 )
+
+[node name="Pirannah" parent="." instance=ExtResource( 9 )]
+position = Vector2( -23.3434, 151.451 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://entities/enemies/Brain.gd" type="Script" id=1]
 [ext_resource path="res://entities/enemies/states/NaturalBehaviour.gd" type="Script" id=2]
@@ -6,6 +6,11 @@
 [ext_resource path="res://entities/enemies/states/Pursue.gd" type="Script" id=4]
 [ext_resource path="res://entities/enemies/states/Rest.gd" type="Script" id=5]
 [ext_resource path="res://entities/enemies/states/Attack.gd" type="Script" id=6]
+[ext_resource path="res://assets/ui/ui_theme_tiny.tres" type="Theme" id=7]
+[ext_resource path="res://entities/controllers/debug/CanvasLayerTracksParent.tscn" type="PackedScene" id=8]
+[ext_resource path="res://entities/controllers/debug/DebugViewController.tscn" type="PackedScene" id=9]
+[ext_resource path="res://entities/enemies/DebugBrainState.gd" type="Script" id=10]
+[ext_resource path="res://entities/enemies/states/Flee.gd" type="Script" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 61.5641
@@ -21,12 +26,18 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="States/NaturalBehaviour"]
-wait_time = 2.0
+wait_time = 4.0
 
 [node name="Pursue" type="Node" parent="States"]
 script = ExtResource( 4 )
 
 [node name="Timer" type="Timer" parent="States/Pursue"]
+wait_time = 3.0
+
+[node name="Flee" type="Node" parent="States"]
+script = ExtResource( 11 )
+
+[node name="Timer" type="Timer" parent="States/Flee"]
 wait_time = 3.0
 
 [node name="Attack" type="Node" parent="States"]
@@ -39,7 +50,7 @@ script = ExtResource( 3 )
 script = ExtResource( 5 )
 
 [node name="Timer" type="Timer" parent="States/Rest"]
-wait_time = 0.5
+wait_time = 2.0
 
 [node name="ThreatRange" type="Area2D" parent="."]
 
@@ -53,9 +64,34 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LightDetection"]
 shape = SubResource( 2 )
 
+[node name="DebugBrainState" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
+script = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="DebugBrainState"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -860.0
+margin_top = -685.0
+margin_right = -820.0
+margin_bottom = -656.0
+theme = ExtResource( 7 )
+text = "State
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DebugViewController" parent="DebugBrainState/Label" instance=ExtResource( 9 )]
+
+[node name="CanvasLayerTracksParent" parent="DebugBrainState" instance=ExtResource( 8 )]
+
 [connection signal="timeout" from="States/NaturalBehaviour/Timer" to="States/NaturalBehaviour" method="_on_Timer_timeout"]
 [connection signal="timeout" from="States/Pursue/Timer" to="States/Pursue" method="_on_Timer_timeout"]
+[connection signal="timeout" from="States/Flee/Timer" to="States/Flee" method="_on_Timer_timeout"]
 [connection signal="timeout" from="States/Rest/Timer" to="States/Rest" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="ThreatRange" to="." method="_on_ThreatRange_area_entered"]
-[connection signal="area_exited" from="ThreatRange" to="." method="_on_ThreatRange_area_exited"]
 [connection signal="area_entered" from="LightDetection" to="." method="_on_LightDetection_area_entered"]
