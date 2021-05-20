@@ -16,6 +16,7 @@ var default_mass : float = self.mass
 export(float) var volume : float = 1  # m3
 
 export(bool) var auto_neutral_buoyancy : bool = true
+export(bool) var auto_scale_damp_with_mass   : bool = false
 export(bool) var auto_angular_dampen   : bool = true
 
 export(float) var drag_coefficient : float = 0.005
@@ -36,6 +37,10 @@ func _ready():
 	if auto_neutral_buoyancy:
 		self.mass = water_density * volume
 	self.default_mass = self.mass
+	if auto_scale_damp_with_mass:
+		self.set_linear_damp(self.linear_damp * self.mass)
+	else:
+		self.set_linear_damp(self.linear_damp)
 	if auto_angular_dampen:
 		water_angular_damp = water_angular_damp * perpendicular_drag_ratio
 		air_angular_damp = air_angular_damp * perpendicular_drag_ratio
